@@ -3,7 +3,9 @@ from django.db import models
 
 
 class Main(models.Model):
-    name = models.TextField()
+    name = models.CharField(max_length=50)
+    about = models.TextField()
+    about_page = models.TextField(default="")
 
     def __str__(self):
         return self.name
