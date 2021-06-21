@@ -3,5 +3,8 @@ from .models import Main
 
 
 def home(request):
+    return render(request, 'front/home.html')
 
-    return render(request, 'home.html')
+
+def about(request):
+    return render(request, 'front/about.html')
