@@ -9,5 +9,5 @@ class Main(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Général'
-        verbose_name_plural = 'Généraux'
+        verbose_name = 'Principal'
+        verbose_name_plural = 'Principal'
