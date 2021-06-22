@@ -11,6 +11,7 @@ class Main(models.Model):
     youtube = models.CharField(max_length=100, default="-")
     github = models.CharField(max_length=100, default="-")
     phone = models.CharField(max_length=100, default="-")
+    link_footer = models.CharField(max_length=100, default="-")
 
     set_name = models.CharField(max_length=20, default="-")
 
