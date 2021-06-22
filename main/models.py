@@ -6,6 +6,11 @@ class Main(models.Model):
 
     name = models.CharField(max_length=50)
     about = models.TextField()
+    linkedin = models.CharField(max_length=100, default="-")
+    twitter = models.CharField(max_length=100, default="-")
+    youtube = models.CharField(max_length=100, default="-")
+    github = models.CharField(max_length=100, default="-")
+    phone = models.CharField(max_length=100, default="-")
 
     # def __str__(self):
     #     return self.name
