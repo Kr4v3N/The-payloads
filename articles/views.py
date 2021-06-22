@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from .models import Articles
+from main.models import Main
 
 
 def article_detail(request, pk):
-
-    article = Articles.objects.filter(pk=pk)
+    site = Main.objects.get(pk=4)
+    articles = Articles.objects.filter(pk=pk)
 
     return render(request, 'front/article_detail.html',
-                  {'article': article
+                  {'articles': articles,
+                   'site': site,
                    })
