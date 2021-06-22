@@ -12,8 +12,10 @@ class Main(models.Model):
     github = models.CharField(max_length=100, default="-")
     phone = models.CharField(max_length=100, default="-")
 
-    # def __str__(self):
-    #     return self.name
+    set_name = models.CharField(max_length=20, default="-")
+
+    def __str__(self):
+        return self.set_name + " | " + str(self.pk)
 
     class Meta:
         verbose_name = 'Principal'
