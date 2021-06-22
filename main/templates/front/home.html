@@ -138,14 +138,14 @@
 							{% for article in articles %}
 							<!-- Item post -->
 							<div class="flex-wr-sb-s p-t-40 p-b-15 how-bor2">
-								<a href="{% url 'article_detail' pk=article.pk %}" class="size-w-8 wrap-pic-w hov1 trans-03 w-full-sr575 m-b-25">
+								<a href="{% url 'article_detail' word=article.name %}" class="size-w-8 wrap-pic-w hov1 trans-03 w-full-sr575 m-b-25">
 									<img src="{% static 'front/images/post-43.jpg' %}" alt="IMG">
 								</a>
 
 								<div class="size-w-9 w-full-sr575 m-b-25">
 									<h5 class="p-b-12">
-										<a href="{% url 'article_detail' pk=article.pk %}" class="f1-l-1 cl2 hov-cl10 trans-03 respon2">
-											{{ article.name}}
+										<a href="{% url 'article_detail' word=article.name %}" class="f1-l-1 cl2 hov-cl10 trans-03 respon2">
+											{{ article.name }}
 										</a>
 									</h5>
 
@@ -163,7 +163,7 @@
 										{{ article.short_txt }}
 									</p>
 
-									<a href="{% url 'article_detail' pk=article.pk %}" class="f1-s-1 cl9 hov-cl10 trans-03">
+									<a href="{% url 'article_detail' word=article.name %}" class="f1-s-1 cl9 hov-cl10 trans-03">
 										Lire la suite
 										<i class="m-l-2 fa fa-long-arrow-alt-right"></i>
 									</a>
