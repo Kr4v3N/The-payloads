@@ -14,4 +14,8 @@ def article_detail(request, word):
 
 
 def articles_list(request):
-    return render(request, 'back/articles_list.html')
+
+    articles = Articles.objects.all()
+    return render(request, 'back/articles_list.html', {
+        'articles': articles
+    })
