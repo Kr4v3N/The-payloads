@@ -4,7 +4,6 @@ from main.models import Main
 
 
 def article_detail(request, word):
-
     site = Main.objects.get(pk=4)
     articles = Articles.objects.filter(name=word)
 
@@ -12,3 +11,7 @@ def article_detail(request, word):
                   {'articles': articles,
                    'site': site,
                    })
+
+
+def articles_list(request):
+    return render(request, 'back/articles_list.html')
