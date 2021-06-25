@@ -19,3 +19,8 @@ def articles_list(request):
     return render(request, 'back/articles_list.html', {
         'articles': articles
     })
+
+
+def articles_add(request):
+
+    return render(request, 'back/articles_add.html')
