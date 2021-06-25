@@ -28,9 +28,6 @@
             <div class="block">
                 <!-- Basic Form Elements Title -->
                 <div class="block-title">
-                    <div class="block-options pull-right">
-                        <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="Toggles .form-bordered class">No Borders</a>
-                    </div>
                     <h2><strong>Ajouter un article :</strong></h2>
                 </div>
                 <!-- END Form Elements Title -->
@@ -42,8 +39,19 @@
                         <div class="col-md-6">
                             <input type="text" class="form-control" placeholder="Titre de l'article">
                         </div>
+
                         <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder=".col-md-6">
+
+                            <div class="col-md-6">
+                                <select id="example-chosen" name="example-chosen" class="select-chosen" data-placeholder="Choisissez une catégorie.." style="width: 250px;">
+                                    <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
+                                    <option value="United States">Réseaux</option>
+                                    <option value="United States">Systèmes</option>
+                                    <option value="United States">CTF</option>
+                                    <option value="United States">Linux</option>
+                                    <option value="United States">Windows</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
@@ -55,18 +63,21 @@
 
                     <div class="form-group">
                         <div class="col-md-12">
-                            <textarea type="text" rows="15" class="form-control" placeholder="Corps du texte"></textarea>
+                            <textarea type="text" rows="5" class="form-control" placeholder="Texte court"></textarea>
                         </div>
                     </div>
 
-                </form>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Soumettre</button>
+                        </div>
+                    </div>
+            </form>
                 <!-- END Basic Form Elements Content -->
             </div>
             <!-- END Basic Form Elements Block -->
         </div>
-
     </div>
-
 </div>
 
 {% endblock %}
