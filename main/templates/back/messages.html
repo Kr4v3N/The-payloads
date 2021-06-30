@@ -1,0 +1,43 @@
+{% extends 'back/base.html' %}
+<!--{% if messages %}-->
+
+<!--    {% for message in messages %}-->
+
+<!--        <div class="alert {{ message.tags }} m-2" id="msg" role="alert">-->
+<!--            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
+<!--            <span style="font-weight: 700;">{{ messages }}</span>-->
+<!--        </div>-->
+
+<!--    {% endfor %}-->
+
+<!--{% endif %}-->
+
+
+{% load static %}
+
+{% block mainblock %}
+
+
+<!-- Page content -->
+<div id="page-content">
+    <div class="block full">
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Erreur<br><small>{{ error }}</small>
+            </h1>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block footerblock %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function(){ TablesDatatables.init(); });</script>
+
+{% endblock%}
