@@ -157,6 +157,7 @@
 
                 <!-- Main Container -->
                 <div id="main-container">
+
                     <!-- Header -->
                     <!-- In the PHP version you can set the following options from inc/config file -->
                     <!--
@@ -197,9 +198,13 @@
                     <!-- Page content -->
                     <div id="page-content">
 
+                    {% include 'back/messages.html' %}
+
                     {% block mainblock %}
 
                     {% endblock %}
+
+
 
                     </div>
                     <!-- END Page Content -->

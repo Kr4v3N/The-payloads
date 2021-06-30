@@ -34,8 +34,8 @@ def articles_add(request):
                 or articletxtshort == "" \
                 or articletxt == "" \
                 or articlecategory == "":
-            error = "Tous les champs sont requis"
-            return render(request, 'back/messages.html', {'error': error})
+            messages.error(request, "Tous les champs sont requis")
+            return redirect('articles_add')
 
         try:
 
@@ -61,24 +61,25 @@ def articles_add(request):
                                  comments=0,
                                  show=0)
                     b.save()
-                    return redirect('articles_add')
+
+                    messages.success(request, "Votre article a été ajouté avec succès")
+                    return redirect('articles_list')
                 else:
                     fs = FileSystemStorage()
                     fs.delete(filename)
 
-                    error = "L'image ne doit pas dépasser 5 MB"
-                    return render(request, 'back/messages.html', {'error': error})
+                    messages.error(request, "L'image ne doit pas dépasser 5 MB")
+                    return redirect('articles_add')
 
             else:
                 fs = FileSystemStorage()
                 fs.delete(filename)
 
-                error = "Le format de votre fichier n'est pas supporté"
-                return render(request, 'back/messages.html', {'error': error})
+                messages.error(request, "Le format de votre fichier n'est pas supporté")
+                return redirect('articles_add')
 
         except:
-
-            error = "Vous devez ajouter une image"
-            return render(request, 'back/messages.html', {'error': error})
+            messages.error(request, "Vous devez ajouter une image")
+            return redirect('articles_add')
 
     return render(request, 'back/articles_add.html')
