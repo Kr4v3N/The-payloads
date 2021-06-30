@@ -44,20 +44,37 @@ def articles_add(request):
             filename = fs.save(myfile.name, myfile)
             url = fs.url(filename)
 
-            b = Articles(name=articletitle,
-                         short_txt=articletxtshort,
-                         body_txt=articletxt,
-                         date="2021",
-                         time="",
-                         pic_name=filename,
-                         pic_url=url,
-                         writer="test",
-                         category_name=articlecategory,
-                         category_id=0,
-                         comments=0,
-                         show=0)
-            b.save()
-            return redirect('articles_add')
+            if str(myfile.content_type).startswith("image"):
+
+                if myfile.size < 4000000:
+
+                    b = Articles(name=articletitle,
+                                 short_txt=articletxtshort,
+                                 body_txt=articletxt,
+                                 date="2021",
+                                 time="",
+                                 pic_name=filename,
+                                 pic_url=url,
+                                 writer="test",
+                                 category_name=articlecategory,
+                                 category_id=0,
+                                 comments=0,
+                                 show=0)
+                    b.save()
+                    return redirect('articles_add')
+                else:
+                    fs = FileSystemStorage()
+                    fs.delete(filename)
+
+                    error = "L'image ne doit pas dépasser 5 MB"
+                    return render(request, 'back/messages.html', {'error': error})
+
+            else:
+                fs = FileSystemStorage()
+                fs.delete(filename)
+
+                error = "Le format de votre fichier n'est pas supporté"
+                return render(request, 'back/messages.html', {'error': error})
 
         except:
 
