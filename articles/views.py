@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import Articles
 from main.models import Main
-
+from django.core.files.storage import FileSystemStorage
 
 def articles_list(request):
     articles = Articles.objects.all()
@@ -37,18 +37,24 @@ def articles_add(request):
             error = "Tous les champs sont requis"
             return render(request, 'back/messages.html', {'error': error})
 
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        url = fs.url(filename)
+
         b = Articles(name=articletitle,
                      short_txt=articletxtshort,
                      body_txt=articletxt,
                      date="12_octobre_2021",
                      time="",
                      pic_name="-",
-                     pic_url="-",
+                     pic_url=url,
                      writer="test",
                      category_name=articlecategory,
                      category_id=0,
                      comments=0,
                      show=0)
         b.save()
+        return redirect('articles_add')
 
     return render(request, 'back/articles_add.html')
