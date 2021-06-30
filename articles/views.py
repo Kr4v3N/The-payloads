@@ -4,6 +4,7 @@ from .models import Articles
 from main.models import Main
 from django.core.files.storage import FileSystemStorage
 
+
 def articles_list(request):
     articles = Articles.objects.all()
     return render(request, 'back/articles_list.html', {
@@ -22,7 +23,6 @@ def article_detail(request, word):
 
 
 def articles_add(request):
-
     if request.method == 'POST':
 
         articletitle = request.POST.get('articletitle')
@@ -37,24 +37,31 @@ def articles_add(request):
             error = "Tous les champs sont requis"
             return render(request, 'back/messages.html', {'error': error})
 
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        url = fs.url(filename)
+        try:
 
-        b = Articles(name=articletitle,
-                     short_txt=articletxtshort,
-                     body_txt=articletxt,
-                     date="2021",
-                     time="",
-                     pic_name=filename,
-                     pic_url=url,
-                     writer="test",
-                     category_name=articlecategory,
-                     category_id=0,
-                     comments=0,
-                     show=0)
-        b.save()
-        return redirect('articles_add')
+            myfile = request.FILES['myfile']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            url = fs.url(filename)
+
+            b = Articles(name=articletitle,
+                         short_txt=articletxtshort,
+                         body_txt=articletxt,
+                         date="2021",
+                         time="",
+                         pic_name=filename,
+                         pic_url=url,
+                         writer="test",
+                         category_name=articlecategory,
+                         category_id=0,
+                         comments=0,
+                         show=0)
+            b.save()
+            return redirect('articles_add')
+
+        except:
+
+            error = "Vous devez ajouter une image"
+            return render(request, 'back/messages.html', {'error': error})
 
     return render(request, 'back/articles_add.html')
