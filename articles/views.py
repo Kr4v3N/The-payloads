@@ -37,4 +37,18 @@ def articles_add(request):
             error = "Tous les champs sont requis"
             return render(request, 'back/messages.html', {'error': error})
 
+        b = Articles(name=articletitle,
+                     short_txt=articletxtshort,
+                     body_txt=articletxt,
+                     date="12_octobre_2021",
+                     time="",
+                     pic_name="-",
+                     pic_url="-",
+                     writer="test",
+                     category_name=articlecategory,
+                     category_id=0,
+                     comments=0,
+                     show=0)
+        b.save()
+
     return render(request, 'back/articles_add.html')

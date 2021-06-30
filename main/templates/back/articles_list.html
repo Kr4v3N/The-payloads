@@ -45,10 +45,10 @@
                         <td class="text-center"><img src="{% static 'back/img/placeholders/avatars/avatar3.jpg' %}" alt="avatar" class="img-circle"></td>
                         <td class="text-center"> {{ cc.name }} </td>
                         <td class="text-center"> {{ cc.date }}</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center"> {{ cc.writer }}</td>
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
+                        <td class="text-center">{{ cc.category_name }}</td>
+                        <td class="text-center">{{ cc.writer }}</td>
+                        <td class="text-center">{{ cc.show }}</td>
+                        <td class="text-center">{{ cc.comments }}</td>
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Éditer</i></a>
