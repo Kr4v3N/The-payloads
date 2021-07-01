@@ -108,7 +108,18 @@ def articles_add(request):
 
 def articles_delete(request, pk):
 
-    b = Articles.objects.filter(pk=pk)
-    b.delete()
+    try:
+        b = Articles.objects.get(pk=pk)
 
-    return redirect(articles_list)
+        fs = FileSystemStorage()
+        fs.delete(b.pic_name)
+
+        b.delete()
+
+        messages.success(request, "L'articles a bien été supprimé")
+        return redirect('articles_list')
+
+    except:
+
+        messages.error(request, "Quelque chose c'est mal passée")
+        return redirect('articles_list')
