@@ -26,17 +26,31 @@
         <div class="table-responsive">
             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                 <thead>
+                {% if articles|length <= 1 %}
                     <tr>
                         <th class="text-center">Identifiant</th>
                         <th class="text-center">Image</th>
                         <th class="text-center">Titre</th>
-                        <th class="text-center">Date</th>
+                        <th class="text-center">Date & Heure</th>
                         <th class="text-center">Catégorie</th>
                         <th class="text-center">Auteur</th>
-                        <th class="text-center">Vue</th>
+                        <th class="text-center">Vues</th>
                         <th class="text-center">Commentaire</th>
                         <th class="text-center">Actions</th>
                     </tr>
+                {% else %}
+                    <tr>
+                        <th class="text-center">Identifiants</th>
+                        <th class="text-center">Images</th>
+                        <th class="text-center">Titres</th>
+                        <th class="text-center">Dates & Heures</th>
+                        <th class="text-center">Catégories</th>
+                        <th class="text-center">Auteurs</th>
+                        <th class="text-center">Vues</th>
+                        <th class="text-center">Commentaires</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% endif %}
                 </thead>
                 <tbody>
                 {% for cc in articles %}
@@ -52,7 +66,7 @@
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Éditer</i></a>
-                                <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'articles_delete' pk=cc.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>

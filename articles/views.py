@@ -104,3 +104,11 @@ def articles_add(request):
             return redirect('articles_add')
 
     return render(request, 'back/articles_add.html')
+
+
+def articles_delete(request, pk):
+
+    b = Articles.objects.filter(pk=pk)
+    b.delete()
+
+    return redirect(articles_list)
