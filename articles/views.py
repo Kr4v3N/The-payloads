@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import Articles
@@ -23,6 +25,32 @@ def article_detail(request, word):
 
 
 def articles_add(request):
+
+    print("-------------------------------")
+
+    now = datetime.datetime.now()
+
+    year = now.year
+    month = now.month
+    day = now.day
+    hour = now.hour
+    minute = now.minute
+
+    if len(str(month)) == 1:
+        month = '0' + str(month)
+    if len(str(day)) == 1:
+        day = '0' + str(day)
+    if len(str(hour)) == 1:
+        hour = '0' + str(hour)
+    if len(str(minute)) == 1:
+        minute = '0' + str(minute)
+
+    print(day, month, year)
+    print("-------------------------------")
+
+
+
+
     if request.method == 'POST':
 
         articletitle = request.POST.get('articletitle')
