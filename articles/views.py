@@ -25,11 +25,7 @@ def article_detail(request, word):
 
 
 def articles_add(request):
-
-    print("-------------------------------")
-
     now = datetime.datetime.now()
-
     year = now.year
     month = now.month
     day = now.day
@@ -45,11 +41,8 @@ def articles_add(request):
     if len(str(minute)) == 1:
         minute = '0' + str(minute)
 
-    print(day, month, year)
-    print("-------------------------------")
-
-
-
+    today = str(day) + '/' + str(month) + '/' + str(year)
+    time = str(hour) + 'H' + str(minute)
 
     if request.method == 'POST':
 
@@ -79,8 +72,8 @@ def articles_add(request):
                     b = Articles(name=articletitle,
                                  short_txt=articletxtshort,
                                  body_txt=articletxt,
-                                 date="2021",
-                                 time="",
+                                 date=today,
+                                 time=time,
                                  pic_name=filename,
                                  pic_url=url,
                                  writer="test",
