@@ -51,11 +51,11 @@
                             <div class="col-md-6">
                                 <select id="articlecategory" name="articlecategory" class="select-chosen" data-placeholder="Choisissez une catégorie.." style="width: 250px;">
                                     <option></option><!-- for data-placeholder attribute to work with Chosen plugin -->
-                                    <option value="Réseaux">Réseaux</option>
-                                    <option value="Systèmes">Systèmes</option>
-                                    <option value="CTF">CTF</option>
-                                    <option value="Linux">Linux</option>
-                                    <option value="Windows">Windows</option>
+
+                                    {%  for i in cat %}
+                                        <option value="{{ i.pk }}">{{ i.name }}</option>
+                                    {%  endfor %}
+
                                 </select>
                             </div>
                         </div>
