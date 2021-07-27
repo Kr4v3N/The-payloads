@@ -32,6 +32,7 @@ def article_detail(request, word):
 
 def articles_add(request):
     now = datetime.datetime.now()
+
     year = now.year
     month = now.month
     day = now.day
@@ -50,7 +51,7 @@ def articles_add(request):
     today = str(day) + '/' + str(month) + '/' + str(year)
     time = str(hour) + 'H' + str(minute)
 
-    category = Category.objects.all()
+    cat = Category.objects.all()
 
     if request.method == 'POST':
 
@@ -58,6 +59,7 @@ def articles_add(request):
         articlecategory = request.POST.get('articlecategory')
         articletxtshort = request.POST.get('articletxtshort')
         articletxt = request.POST.get('articletxt')
+        categoryid = request.POST.get('category_id')
 
         if articletitle == "" \
                 or articletxtshort == "" \
@@ -86,7 +88,7 @@ def articles_add(request):
                                  pic_url=url,
                                  writer="test",
                                  category_name=articlecategory,
-                                 category_id=0,
+                                 category_id=categoryid,
                                  comments=0,
                                  show=0)
                     b.save()
@@ -106,15 +108,12 @@ def articles_add(request):
 
                 messages.error(request, "Le format de votre fichier n'est pas supporté")
                 return redirect('articles_add')
-
         except:
 
             messages.error(request, "Vous devez ajouter une image")
             return redirect('articles_add')
 
-    return render(request, 'back/articles_add.html', {
-        'category': category,
-    })
+    return render(request, 'back/articles_add.html', {'cat': cat})
 
 
 def articles_delete(request, pk):
@@ -137,7 +136,6 @@ def articles_delete(request, pk):
 
 
 def articles_edit(request, pk):
-
     articles = Articles.objects.get(pk=pk)
     category = Category.objects.all()
 
