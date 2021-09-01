@@ -133,6 +133,10 @@ def articles_delete(request, pk):
 
 def articles_edit(request, pk):
 
+    if len(Articles.objects.filter(pk=pk)) == 0:
+        messages.error(request, "Article non trouvée")
+        return redirect('articles_list')
+
     articles = Articles.objects.get(pk=pk)
     cat = Subcategory.objects.all()
 
