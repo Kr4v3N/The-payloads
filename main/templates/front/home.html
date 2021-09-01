@@ -136,39 +136,39 @@
                         <div class="m-t--40 p-b-40">
 
                             {% for article in articles %}
-                            <!-- Item post -->
-                            <div class="flex-wr-sb-s p-t-40 p-b-15 how-bor2">
-                                <a href="{% url 'article_detail' word=article.name %}" class="size-w-8 wrap-pic-w hov1 trans-03 w-full-sr575 m-b-25">
-                                    <img src="{{ article.pic_url }}" alt="IMG">
-                                </a>
+                                <!-- Item post -->
+                                <div class="flex-wr-sb-s p-t-40 p-b-15 how-bor2">
+                                    <a href="{% url 'article_detail' word=article.name %}" class="size-w-8 wrap-pic-w hov1 trans-03 w-full-sr575 m-b-25">
+                                        <img src="{{ article.pic_url }}" alt="IMG">
+                                    </a>
 
-                                <div class="size-w-9 w-full-sr575 m-b-25">
-                                    <h5 class="p-b-12">
-                                        <a href="{% url 'article_detail' word=article.name %}" class="f1-l-1 cl2 hov-cl10 trans-03 respon2">
-                                            {{ article.name }}
-                                        </a>
-                                    </h5>
+                                    <div class="size-w-9 w-full-sr575 m-b-25">
+                                        <h5 class="p-b-12">
+                                            <a href="{% url 'article_detail' word=article.name %}" class="f1-l-1 cl2 hov-cl10 trans-03 respon2">
+                                                {{ article.name }}
+                                            </a>
+                                        </h5>
 
-                                    <div class="cl8 p-b-18">
-                                        <span class="f1-s-4 cl8 hov-cl10 trans-03">
-                                            Posté le {{ article.date }}
-                                        </span>
+                                        <div class="cl8 p-b-18">
+                                            <span class="f1-s-4 cl8 hov-cl10 trans-03">
+                                                Posté le {{ article.date }}
+                                            </span>
 
-                                        <a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-                                            par {{ article.writer }}
+                                            <a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+                                                par {{ article.writer }}
+                                            </a>
+                                        </div>
+
+                                        <p class="f1-s-1 cl6 p-b-24">
+                                            {{ article.short_txt }}
+                                        </p>
+
+                                        <a href="{% url 'article_detail' word=article.name %}" class="f1-s-1 cl9 hov-cl10 trans-03">
+                                            Lire la suite
+                                            <i class="m-l-2 fa fa-long-arrow-alt-right"></i>
                                         </a>
                                     </div>
-
-                                    <p class="f1-s-1 cl6 p-b-24">
-                                        {{ article.short_txt }}
-                                    </p>
-
-                                    <a href="{% url 'article_detail' word=article.name %}" class="f1-s-1 cl9 hov-cl10 trans-03">
-                                        Lire la suite
-                                        <i class="m-l-2 fa fa-long-arrow-alt-right"></i>
-                                    </a>
                                 </div>
-                            </div>
                             {% endfor %}
 
                         </div>
@@ -215,16 +215,18 @@
                             </div>
 
                             {% for c in category %}
-                            <ul class="p-t-35">
-                                <li class="flex-wr-sb-s p-b-22">
-                                    <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                        {{ forloop.counter }}
-                                    </div>
 
-                                    <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                        {{ c.name }}
-                                    </a>
-                                </li>
+                                <ul class="p-t-35">
+                                    <li class="flex-wr-sb-s p-b-22">
+                                        <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                                            {{ forloop.counter }}
+                                        </div>
+
+                                        <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                            {{ c.name }}
+                                        </a>
+                                    </li>
+
                             {% endfor %}
 
                             </ul>
@@ -240,17 +242,14 @@
 
                             {% for ar in articles %}
 
-                            <ul class="p-t-35">
-                                <li class="flex-wr-sb-s p-b-22">
-                                    <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                        {{forloop.counter}}
-                                    </div>
-
-                                    <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                        {{ ar.name }}
-                                    </a>
-                                </li>
-                            </ul>
+                                <ul class="p-t-35">
+                                    <li class="flex-wr-sb-s p-b-22">
+                                        <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">{{forloop.counter}}</div>
+                                        <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                            {{ ar.name }}
+                                        </a>
+                                    </li>
+                                </ul>
 
                             {% endfor %}
 

@@ -12,11 +12,11 @@
 {% for article in articles %}}
 
 	<!-- Breadcrumb -->
-	<div class="container">
+	<div class="container" >
 		<div class="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
 			<div class="f2-s-1 p-r-30 m-tb-6">
 				<a href="/" class="breadcrumb-item f1-s-3 cl9">
-					Home
+					Acceuil
 				</a>
 
 				<a href="/" class="breadcrumb-item f1-s-3 cl9">
@@ -24,7 +24,7 @@
 				</a>
 
 				<span class="breadcrumb-item f1-s-3 cl9">
-					 {{ article.name }}
+					{{ article.name }}
 				</span>
 			</div>
 
@@ -50,13 +50,13 @@
 							</a>
 
 							<h3 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
-                                {{ article.name}}
+                                {{ article.name }}
 							</h3>
 
 							<div class="flex-wr-s-s p-b-40">
 								<span class="f1-s-3 cl8 m-r-15">
 									<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-										Par {{ article.writer}}
+										Par {{ article.writer }}
 									</a>
 
 									<span class="m-rl-3">-</span>
@@ -67,11 +67,11 @@
 								</span>
 
 								<span class="f1-s-3 cl8 m-r-15">
-									{{ article.show }} Vue
+									{{ article.show }} Vues
 								</span>
 
 								<a href="#" class="f1-s-3 cl8 hov-cl10 trans-03 m-r-15">
-									{{ article.comments }} commentaire
+									{{ article.comments }} commentaires
 								</a>
 							</div>
 
@@ -80,13 +80,14 @@
 							</div>
 
 							<p align="justify" class="f1-s-11 cl6 p-b-25">
-                                {{ article.body_txt}}							</p>
+                                {{ article.body_txt}}
+							</p>
 
 
 							<!-- Tag -->
 							<div class="flex-s-s p-t-12 p-b-15">
 								<span class="f1-s-12 cl5 m-r-8">
-									Étiquettes:
+									Tags:
 								</span>
 
 								<div class="flex-wr-s-s size-w-0">

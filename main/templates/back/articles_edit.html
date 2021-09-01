@@ -38,10 +38,9 @@
 
                 <!-- Basic Form Elements Content -->
                 <form action="{% url 'articles_edit' pk=pk %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
-
-                     {% csrf_token %}
-
+                    {% csrf_token %}
                     <div class="form-group">
+
                         <div class="col-md-6">
                             <input type="text" id="articletitle" value="{{ articles.name }}"  name="articletitle" class="form-control" placeholder="Titre de l'article">
                         </div>
@@ -50,12 +49,12 @@
 
                             <div class="col-md-6">
 
-                                <select id="articlecategory" name="articlecategory" class="select-chosen" data-placeholder="" style="width: 250px;">
+                                <select id="articlecat" name="articlecat" class="select-chosen" data-placeholder="" style="width: 250px;">
 
-                                <option value="{{ articles.category_id }}">{{ articles.category_name }}</option>
+                                <option value="{{ articles.catid }}">{{ articles.catname }}</option>
 
-                                    {% for cat in category %}
-                                        <option value="{{ cat.pk }}">{{ cat.name }}</option>
+                                    {% for i in cat %}
+                                        <option value="{{ i.pk }}">{{ i.catname}} | {{ i.name }}</option>
                                     {% endfor %}
 
                                 </select>

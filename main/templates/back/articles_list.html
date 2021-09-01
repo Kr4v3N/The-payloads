@@ -34,9 +34,9 @@
                         <th class="text-center">Date & Heure</th>
                         <th class="text-center">Catégorie</th>
                         <th class="text-center">Auteur</th>
-                        <th class="text-center">Vues</th>
+                        <th class="text-center">Vue</th>
                         <th class="text-center">Commentaire</th>
-                        <th class="text-center">Actions</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 {% else %}
                     <tr>
@@ -48,18 +48,18 @@
                         <th class="text-center">Auteurs</th>
                         <th class="text-center">Vues</th>
                         <th class="text-center">Commentaires</th>
-                        <th class="text-center">Actions</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 {% endif %}
                 </thead>
                 <tbody>
                 {% for cc in articles %}
                     <tr>
-                        <td class="text-center"> {{ cc.pk }}</td>
+                        <td class="text-center">{{ cc.pk }}</td>
                         <td class="text-center"><img style="display: inline-block; width: 50px; height: 50px" src="{{ cc.pic_url }}" alt="avatar" class="img-circle"></td>
-                        <td class="text-center"> {{ cc.name }} </td>
-                        <td class="text-center"> {{ cc.date }} à {{ cc.time }}</td>
-                        <td class="text-center">{{ cc.category_name}}</td>
+                        <td class="text-center">{{ cc.name }} </td>
+                        <td class="text-center">{{ cc.date }} à {{ cc.time }}</td>
+                        <td class="text-center">{{ cc.catname}}</td>
                         <td class="text-center">{{ cc.writer }}</td>
                         <td class="text-center">{{ cc.show }}</td>
                         <td class="text-center">{{ cc.comments }}</td>
