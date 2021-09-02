@@ -2,6 +2,12 @@
 
 {% load static %}
 
+{% block headblock %}
+    <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+    <script src="{% static 'ckeditor/translations/fr.js' %}"></script>
+<!--    <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>-->
+{% endblock %}
+
 {% block mainblock %}
 
 <!-- Page content -->
@@ -69,11 +75,28 @@
                         </div>
                     </div>
 
+                    <script>
+                        ClassicEditor
+                            .create( document.querySelector( '#articletxtshort' ) )
+                            .catch( error => {
+                                console.error( error );
+                            } );
+                    </script>
+
                     <div class="form-group">
                         <div class="col-md-12">
                             <textarea type="text" id="articletxt" name="articletxt" rows="5" class="form-control" placeholder="Corps de texte">{{ articles.body_txt }}</textarea>
                         </div>
                     </div>
+
+                    <script>
+                        ClassicEditor
+                            .create( document.querySelector( '#articletxt' ) )
+                            .catch( error => {
+                                console.error( error );
+                            } );
+                    </script>
+
 
                     <div class="form-group">
                         <div class="col-md-6">

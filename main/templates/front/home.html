@@ -145,7 +145,7 @@
                                     <div class="size-w-9 w-full-sr575 m-b-25">
                                         <h5 class="p-b-12">
                                             <a href="{% url 'article_detail' word=article.name %}" class="f1-l-1 cl2 hov-cl10 trans-03 respon2">
-                                                {{ article.name }}
+                                                {{ article.name | safe }}
                                             </a>
                                         </h5>
 
@@ -159,8 +159,8 @@
                                             </a>
                                         </div>
 
-                                        <p class="f1-s-1 cl6 p-b-24">
-                                            {{ article.short_txt }}
+                                        <p class="f1-s-1 cl8 p-b-24">
+                                            {{ article.short_txt | safe }}
                                         </p>
 
                                         <a href="{% url 'article_detail' word=article.name %}" class="f1-s-1 cl9 hov-cl10 trans-03">

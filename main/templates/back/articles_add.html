@@ -2,6 +2,12 @@
 
 {% load static %}
 
+{% block headblock %}
+    <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+    <script src="{% static 'ckeditor/translations/fr.js' %}"></script>
+<!--    <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>-->
+{% endblock %}
+
 {% block mainblock %}
 
 <!-- Page content -->
@@ -55,9 +61,7 @@
                                         {% for i in cat %}
                                             <option value="{{ i.pk }}">{{ i.catname }}|{{ i.name }}</option>
                                         {% endfor %}
-<!--                                            <option value="cat1">cat1</option>-->
-<!--                                            <option value="cat2">cat2</option>-->
-<!--                                            <option value="cat3">cat3</option>-->
+
                                 </select>
                             </div>
                         </div>
@@ -68,13 +72,30 @@
                             <textarea type="text" id="articletxtshort" name="articletxtshort" rows="5" class="form-control" placeholder="Texte court"></textarea>
                         </div>
                     </div>
+                    <script>
+                        ClassicEditor
+                            .create( document.querySelector( '#articletxtshort' ) )
+                            .catch( error => {
+                                console.error( error );
+                            } );
+                    </script>
+
 
                     <div class="form-group">
                         <div class="col-md-12">
-                            <textarea type="text" id="articletxt" name="articletxt" rows="5" class="form-control" placeholder="Corps de texte"></textarea>
+                            <textarea type="text" id="articletxt" name="articletxt" rows="35" class="form-control" placeholder="Corps de texte"></textarea>
                         </div>
                     </div>
 
+                    <script>
+                        ClassicEditor
+                            .create( document.querySelector('#articletxt'), {
+                                language: 'fr'
+                            } )
+                            .catch( error => {
+                                console.error( error );
+                            } );
+                    </script>
                     <div class="form-group">
                         <div class="col-md-12">
                             <input type="file" id="myfile" name="myfile" class="form-control"/>
@@ -103,4 +124,4 @@
     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
     <script>$(function(){ TablesDatatables.init(); });</script>
 
-{% endblock%}
+{% endblock %}

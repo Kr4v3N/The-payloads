@@ -45,8 +45,12 @@
 
         <!-- Modernizr (browser feature detection library) -->
         <script src="{% static 'back/js/vendor/modernizr.min.js' %}"></script>
+
+        {% block headblock %}
+        {% endblock %}
+
     </head>
-     <body>
+    <body>
         <!-- Page Wrapper -->
         <!-- In the PHP version you can set the following options from inc/config file -->
         <!--
