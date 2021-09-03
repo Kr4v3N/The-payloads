@@ -4,8 +4,7 @@
 
 {% block headblock %}
     <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
-    <script src="{% static 'ckeditor/translations/fr.js' %}"></script>
-<!--    <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>-->
+    <script src="{% static 'ckeditor/lang/fr.js' %}"></script>
 {% endblock %}
 
 {% block mainblock %}
@@ -59,7 +58,7 @@
                                     <option></option><!-- for data-placeholder attribute to work with Chosen plugin -->
 
                                         {% for i in cat %}
-                                            <option value="{{ i.pk }}">{{ i.catname }}|{{ i.name }}</option>
+                                            <option value="{{ i.pk }}">{{ i.catname }} | {{ i.name }}</option>
                                         {% endfor %}
 
                                 </select>
@@ -72,14 +71,13 @@
                             <textarea type="text" id="articletxtshort" name="articletxtshort" rows="5" class="form-control" placeholder="Texte court"></textarea>
                         </div>
                     </div>
-                    <script>
-                        ClassicEditor
-                            .create( document.querySelector( '#articletxtshort' ) )
-                            .catch( error => {
-                                console.error( error );
-                            } );
-                    </script>
 
+                    <script>
+                        CKEDITOR.replace('articletxtshort', {
+                            uiColor: '#9AB8F3',
+                            height: 100
+                        });
+                    </script>
 
                     <div class="form-group">
                         <div class="col-md-12">
@@ -88,14 +86,12 @@
                     </div>
 
                     <script>
-                        ClassicEditor
-                            .create( document.querySelector('#articletxt'), {
-                                language: 'fr'
-                            } )
-                            .catch( error => {
-                                console.error( error );
-                            } );
+                        CKEDITOR.replace('articletxt', {
+                            uiColor: '#9AB8F3',
+                            height: 450
+                        });
                     </script>
+
                     <div class="form-group">
                         <div class="col-md-12">
                             <input type="file" id="myfile" name="myfile" class="form-control"/>

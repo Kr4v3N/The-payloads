@@ -25,12 +25,15 @@ def article_detail(request, word):
 
 def articles_list(request):
     articles = Articles.objects.all()
+    subcat = Subcategory.objects.all()
     return render(request, 'back/articles_list.html', {
-        'articles': articles
+        'articles': articles,
+        'subcat': subcat
     })
 
 
 def articles_add(request):
+
     now = datetime.datetime.now()
 
     year = now.year
@@ -79,7 +82,7 @@ def articles_add(request):
 
                 if myfile.size < 3000000:
 
-                    articlename = Subcategory.objects.get(pk=articleid).name
+                    articlesname = Subcategory.objects.get(pk=articleid).name
 
                     b = Articles(name=articletitle,
                                  short_txt=articletxtshort,
@@ -89,7 +92,7 @@ def articles_add(request):
                                  pic_url=url,
                                  pic_name=filename,
                                  writer=request.user,
-                                 catname=articlename,
+                                 catname=articlesname,
                                  catid=articleid,
                                  comments=0,
                                  show=0)
@@ -134,6 +137,7 @@ def articles_delete(request, pk):
 def articles_edit(request, pk):
 
     if len(Articles.objects.filter(pk=pk)) == 0:
+
         messages.error(request, "Article non trouvée")
         return redirect('articles_list')
 
@@ -183,7 +187,7 @@ def articles_edit(request, pk):
 
                     b.save()
 
-                    messages.success(request, "Votre article a été ajouté avec succès")
+                    messages.success(request, "Votre article a été modifié avec succès")
                     return redirect('articles_list')
                 else:
                     fs = FileSystemStorage()
@@ -203,11 +207,9 @@ def articles_edit(request, pk):
 
             b = Articles.objects.get(pk=pk)
 
-            fss = FileSystemStorage()
-            fss.delete(b.pic_name)
-
             b.name = articletitle
             b.short_txt = articletxtshort
+            b.body_txt = articletxt
             b.catname = articlename
             b.catid = articleid
 
@@ -219,5 +221,5 @@ def articles_edit(request, pk):
     return render(request, 'back/articles_edit.html', {
         'pk': pk,
         'articles': articles,
-        'cat': cat
+        'cat': cat,
     })
