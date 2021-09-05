@@ -8,29 +8,39 @@
 
 {% block mainblock %}
 
-    <!-- Headline -->
-    <div class="container">
-        <div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-            <div class="f2-s-1 p-r-30 size-w-0 m-tb-6 flex-wr-s-c">
-                <span class="text-uppercase cl2 p-r-8">
-                </span>
-            </div>
 
-            <div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
-                <input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Recherche...">
-                <button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
-                    <i class="zmdi zmdi-search"></i>
-                </button>
-            </div>
+	<!-- Page heading -->
+<!--	<div class="container p-t-4 p-b-40">-->
+<!--		<h2 class="f1-l-1 cl2 p-t-30">-->
+<!--			Blog List-->
+<!--		</h2>-->
+<!--	</div>-->
+
+<!-- Headline -->
+<div class="container">
+    <div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
+        <div class="f2-s-1 p-r-30 size-w-0 m-tb-6 flex-wr-s-c">
+            <span class="text-uppercase cl2 p-r-8">
+                Payez-moi du café :
+            </span>
+        </div>
+
+        <div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
+            <input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Recherche...">
+            <button class="flex-c-c size-a-1 ab-t-r fs-20 cl8 hov-cl10 trans-03">
+                <i class="zmdi zmdi-search"></i>
+            </button>
         </div>
     </div>
+</div>
 
     <!-- Feature post -->
+
+<div class="container">
     <section class="bg0">
-        <div class="container">
             <div class="row m-rl--1">
                 <div class="col-md-6 p-rl-1 p-b-2">
-                    <div class="bg-img1 size-a-3 how1 pos-relative" style="background-image: url({%static 'front/images/post-01.jpg'%});">
+                    <div class="bg-img1 size-a-3 how1 pos-relative" style="background-image: url({% static 'front/images/post-01.jpg'%});">
                         <a href="#" class="dis-block how1-child1 trans-03"></a>
 
                         <div class="flex-col-e-s s-full p-rl-25 p-tb-20">
@@ -64,7 +74,7 @@
                 <div class="col-md-6 p-rl-1">
                     <div class="row m-rl--1">
                         <div class="col-12 p-rl-1 p-b-2">
-                            <div class="bg-img1 size-a-4 how1 pos-relative" style="background-image: url({%static 'front/images/post-02.jpg'%});">
+                            <div class="bg-img1 size-a-4 how1 pos-relative" style="background-image: url({% static 'front/images/post-02.jpg' %});">
                                 <a href="blog-detail-01.html" class="dis-block how1-child1 trans-03"></a>
 
                                 <div class="flex-col-e-s s-full p-rl-25 p-tb-24">
@@ -82,7 +92,7 @@
                         </div>
 
                         <div class="col-sm-6 p-rl-1 p-b-2">
-                            <div class="bg-img1 size-a-5 how1 pos-relative" style="background-image: url({%static 'front/images/post-03.jpg'%});">
+                            <div class="bg-img1 size-a-5 how1 pos-relative" style="background-image: url({% static 'front/images/post-03.jpg' %});">
                                 <a href="blog-detail-01.html" class="dis-block how1-child1 trans-03"></a>
 
                                 <div class="flex-col-e-s s-full p-rl-25 p-tb-20">
@@ -119,94 +129,67 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+	    </section>
+</div>
 
-    <!-- Post -->
-    <section class="bg0 p-t-70">
-        <div class="container">
-        <div class="row justify-content-center">
-    <!-- Post -->
-    <section class="bg0 p-b-55">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-10 col-lg-8 p-b-80">
-                    <div class="p-r-10 p-r-0-sr991">
+<div class="container p-t-50 ">
+	<!-- Post -->
+	<section class="bg0 p-b-55">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-10 col-lg-8 p-b-80">
+					<div class="p-r-10 p-r-0-sr991">
+						<div class="m-t--40 p-b-40">
+							{% for article in articles %}
+							<!-- Item post -->
+							<div class="flex-wr-sb-s p-t-40 p-b-15 how-bor2">
+								<a href="{% url 'article_detail' word=article.name %}" class="size-w-8 wrap-pic-w hov1 trans-03 w-full-sr575 m-b-25">
+									<img src="{{ article.pic_url }}" alt="{{ article.name }}">
+								</a>
 
-                        <div class="m-t--40 p-b-40">
+								<div class="size-w-9 w-full-sr575 m-b-25">
+									<h5 class="p-b-12">
+										<a href="{% url 'article_detail' word=article.name %}" class="f1-l-1 cl2 hov-cl10 trans-03 respon2">
+											{{ article.name }}
+										</a>
+									</h5>
 
-                            {% for article in articles %}
-                                <!-- Item post -->
-                                <div class="flex-wr-sb-s p-t-40 p-b-15 how-bor2">
-                                    <a href="{% url 'article_detail' word=article.name %}" class="size-w-8 wrap-pic-w hov1 trans-03 w-full-sr575 m-b-25">
-                                        <img src="{{ article.pic_url }}" alt="IMG">
-                                    </a>
+									<div class="cl8">
+										<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+											Par {{ article.writer }}
+										</a>
 
-                                    <div class="size-w-9 w-full-sr575 m-b-25">
-                                        <h5 class="p-b-12">
-                                            <a href="{% url 'article_detail' word=article.name %}" class="f1-l-1 cl2 hov-cl10 trans-03 respon2">
-                                                {{ article.name | safe }}
-                                            </a>
-                                        </h5>
+										<span class="f1-s-3 m-rl-3">
+											-
+										</span>
 
-                                        <div class="cl8 p-b-18">
-                                            <span class="f1-s-4 cl8 hov-cl10 trans-03">
-                                                Posté le {{ article.date }}
-                                            </span>
+										<span class="f1-s-3">
+											Posté le {{ article.date }}
+										</span>
+									</div>
 
-                                            <a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-                                                par {{ article.writer }}
-                                            </a>
-                                        </div>
+									<p class="f1-s-1 cl6 p-b-8">
+										{{ article.short_txt | safe }}
+									</p>
 
-                                        <p class="f1-s-1 cl8 p-b-24">
-                                            {{ article.short_txt | safe | truncatewords:20 }}y
-                                        </p>
+									<a href="{% url 'article_detail' word=article.name %}" class="f1-s-1 cl9 hov-cl10 trans-03">
+										Continuer la lecture
+										<i class="m-l-2 fa fa-long-arrow-alt-right"></i>
+									</a>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
 
-                                        <a href="{% url 'article_detail' word=article.name %}" class="f1-s-1 cl9 hov-cl10 trans-03">
-                                            Lire la suite
-                                            <i class="m-l-2 fa fa-long-arrow-alt-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            {% endfor %}
-
-                        </div>
-
-                        <a href="#" class="flex-c-c size-a-13 bo-all-1 bocl11 f1-m-6 cl6 hov-btn1 trans-03">
-                            Charger plus
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-md-10 col-lg-4 p-b-80">
-                    <div class="p-l-10 p-rl-0-sr991">
-
-                        <!-- Subscribe -->
-                        <div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-50">
-                            <h5 class="f1-m-5 cl0 p-b-10">
-                                S'abonner
-                            </h5>
-
-                            <p class="f1-s-1 cl0 p-b-25">
-<!--
-                                Recevez tous les derniers contenus par e-mail plusieurs fois par mois.
--->
-                                REJOIGNEZ NOTRE NEWSLETTER
-                                Rejoignez notre liste de diffusion pour obtenir le contenu publié directement dans votre boîte de réception.
-                            </p>
-
-                            <form class="size-a-9 pos-relative">
-
-                                <input class="s-full f1-m-6 cl6 plh9 p-l-20 p-r-55" type="text" name="email" placeholder="Email">
-
-                                <button class="size-a-10 flex-c-c ab-t-r fs-16 cl9 hov-cl10 trans-03">
-                                    <i class="fa fa-arrow-right"></i>
-                                </button>
-                            </form>
-                        </div>
-
-                        <!-- Categories -->
+						<a href="#" class="flex-c-c size-a-13 bo-all-1 bocl11 f1-m-6 cl6 hov-btn1 trans-03">
+							 Charger plus
+						</a>
+					</div>
+				</div>
+                <!--Sidebar-->
+				<div class="col-md-10 col-lg-4 p-b-80">
+					<div class="p-l-10 p-rl-0-sr991">
+						<!-- Categories -->
                         <div class="p-b-23">
                             <div class="how2 how2-cl4 flex-s-c">
                                 <h3 class="f1-m-2 cl3 tab01-title">
@@ -216,8 +199,8 @@
 
                             {% for c in category %}
 
-                                <ul class="p-t-35">
-                                    <li class="flex-wr-sb-s p-b-22">
+                                <ul class="p-t-20">
+                                    <li class="flex-wr-sb-s">
                                         <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
                                             {{ forloop.counter }}
                                         </div>
@@ -231,32 +214,91 @@
 
                             </ul>
                         </div>
+						<!-- S'abonner -->
+						<div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-50">
+							<h5 class="f1-m-5 cl0 p-b-10">
+								S'abonner
+							</h5>
 
-                        <!-- Most popular-->
-                        <div class="p-b-23">
-                            <div class="how2 how2-cl4 flex-s-c">
-                                <h3 class="f1-m-2 cl3 tab01-title">
-                                    Les articles les plus populaires
-                                </h3>
-                            </div>
+							<p class="f1-s-1 cl0 p-b-25">
+<!--
+                                Recevez tous les derniers contenus par e-mail plusieurs fois par mois.
+-->
+                                REJOIGNEZ NOTRE NEWSLETTER
+                                Rejoignez notre liste de diffusion pour obtenir le contenu publié directement dans votre boîte mail.
+							</p>
 
-                            {% for ar in articles %}
+							<form class="size-a-9 pos-relative">
+								<input class="s-full f1-m-6 cl6 plh9 p-l-20 p-r-55" type="text" name="email" placeholder="Email">
 
-                                <ul class="p-t-35">
-                                    <li class="flex-wr-sb-s p-b-22">
-                                        <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">{{forloop.counter}}</div>
-                                        <a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                            {{ ar.name }}
-                                        </a>
-                                    </li>
-                                </ul>
+								<button class="size-a-10 flex-c-c ab-t-r fs-16 cl9 hov-cl10 trans-03">
+									<i class="fa fa-arrow-right"></i>
+								</button>
+							</form>
+						</div>
+						<!-- Les plus populaire -->
+						<div class="p-b-23">
+							<div class="how2 how2-cl4 flex-s-c">
+								<h3 class="f1-m-2 cl3 tab01-title">
+									Les plus populaires
+								</h3>
+							</div>
+						{% for a in articles %}
+							<ul class="p-t-20">
+								<li class="flex-wr-sb-s">
+									<div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+										{{forloop.counter}}
+									</div>
+									<a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+										{{ a.name }}
+									</a>
+								</li>
 
-                            {% endfor %}
+							</ul>
+						{% endfor %}
+						</div>
+						<!-- Publicité -->
+<!--						<div class="flex-c-s p-b-50">-->
+<!--							<a href="#">-->
+<!--								<img class="max-w-full" src="{% static 'front/images/banner-02.jpg' %}" alt="IMG">-->
+<!--							</a>-->
+<!--						</div>-->
+						<!-- Tag -->
+						<div>
+							<div class="how2 how2-cl4 flex-s-c m-b-30">
+								<h3 class="f1-m-2 cl3 tab01-title">
+									Tags
+								</h3>
+							</div>
 
-                        </div>
+							<div class="flex-wr-s-s m-rl--5">
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									Fashion
+								</a>
 
-                        <!-- Archive -->
-                        <div class="p-b-37">
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									Lifestyle
+								</a>
+
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									Denim
+								</a>
+
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									Streetstyle
+								</a>
+
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									Crafts
+								</a>
+
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									Magazine
+								</a>
+							</div>
+						</div>
+						<!-- Archive -->
+                        <div class="p-t-37">
                             <div class="how2 how2-cl4 flex-s-c">
                                 <h3 class="f1-m-2 cl3 tab01-title">
                                     Archives
@@ -361,61 +403,11 @@
                                 </li>
                             </ul>
                         </div>
+					</div>
+				</div>
+			</div>
 
-<!--                        &lt;!&ndash; Publicité &ndash;&gt;
-                        <div class="flex-c-s p-b-50">
-                            <a href="#">
-                                <img class="max-w-full" src="{% static 'front/images/banner-02.jpg' %}" alt="IMG">
-                            </a>
-                        </div>-->
-
-                        <!-- Tags -->
-                        <div>
-                            <div class="how2 how2-cl4 flex-s-c m-b-30">
-                                <h3 class="f1-m-2 cl3 tab01-title">
-                                    Étiquettes
-                                </h3>
-                            </div>
-
-                            <div class="flex-wr-s-s m-rl--5">
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Fashion
-                                </a>
-
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Lifestyle
-                                </a>
-
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Denim
-                                </a>
-
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Streetstyle
-                                </a>
-
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Crafts
-                                </a>
-
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Magazine
-                                </a>
-
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    News
-                                </a>
-
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Blogs
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
     </section>
-    </section>
+</div>
+
 {% endblock %}

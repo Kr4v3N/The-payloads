@@ -7,7 +7,7 @@ from articles.models import Articles
 
 def home(request):
     site = Main.objects.get(pk=4)
-    articles = Articles.objects.all()
+    articles = Articles.objects.all().order_by('-pk')
     cat = Category.objects.all()
 
     return render(request, 'front/home.html', {
