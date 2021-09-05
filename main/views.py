@@ -9,11 +9,13 @@ def home(request):
     site = Main.objects.get(pk=4)
     articles = Articles.objects.all().order_by('-pk')
     cat = Category.objects.all()
+    lastarticles = Articles.objects.order_by('-pk')[:4]
 
     return render(request, 'front/home.html', {
         'site': site,
         'articles': articles,
         'category': cat,
+        'lastarticles': lastarticles,
     })
 
 

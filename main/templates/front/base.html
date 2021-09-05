@@ -246,7 +246,7 @@
 
                         <ul>
 
-							{% for art in articles %}
+							{% for art in lastarticles %}
                             <li class="flex-wr-sb-s p-b-20">
                                 <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
                                     <img src="{{ art.pic_url }}" alt="IMG">
@@ -281,7 +281,7 @@
                             {% for c in category %}
                             <li class="how-bor1 p-rl-5 p-tb-10">
                                 <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                    {{ c.name }} (22)
+                                    {{ c.name }} ({{ c.count }})
                                 </a>
                             </li>
                             {% endfor %}

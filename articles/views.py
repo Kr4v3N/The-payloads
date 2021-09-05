@@ -83,6 +83,7 @@ def articles_add(request):
                 if myfile.size < 3000000:
 
                     articlesname = Subcategory.objects.get(pk=articleid).name
+                    ocatid = Subcategory.objects.get(pk=articleid).catid
 
                     b = Articles(name=articletitle,
                                  short_txt=articletxtshort,
@@ -95,7 +96,16 @@ def articles_add(request):
                                  catname=articlesname,
                                  catid=articleid,
                                  comments=0,
-                                 show=0)
+                                 show=0,
+                                 ocatid=ocatid,
+                                 )
+
+                    b.save()
+
+                    count = len(Articles.objects.filter(ocatid=ocatid))
+
+                    b = Category.objects.get(pk=ocatid)
+                    b.count = count
                     b.save()
 
                     messages.success(request, "Votre article a été ajouté avec succès")
@@ -125,7 +135,17 @@ def articles_delete(request, pk):
         fs = FileSystemStorage()
         fs.delete(b.pic_name)
 
+        ocatid = Articles.objects.get(pk=pk).ocatid
+
         b.delete()
+
+        count = len(Articles.objects.filter(ocatid=ocatid))
+
+        m = Category.objects.get(pk=ocatid)
+        m.count = count
+
+        m.save()
+
         messages.success(request, "L'articles a bien été supprimé")
         return redirect('articles_list')
 

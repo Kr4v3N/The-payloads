@@ -14,6 +14,7 @@ class Articles(models.Model):
     writer = models.CharField(max_length=50)
     catname = models.CharField(max_length=50, default="-")
     catid = models.IntegerField(default=0)
+    ocatid = models.IntegerField(default=0)
     show = models.IntegerField(default=0)
     comments = models.IntegerField(default=0)
 
