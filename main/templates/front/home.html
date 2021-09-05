@@ -160,7 +160,7 @@
                                         </div>
 
                                         <p class="f1-s-1 cl8 p-b-24">
-                                            {{ article.short_txt | safe }}
+                                            {{ article.short_txt | safe | truncatewords:20 }}y
                                         </p>
 
                                         <a href="{% url 'article_detail' word=article.name %}" class="f1-s-1 cl9 hov-cl10 trans-03">
