@@ -6,12 +6,22 @@ from .models import Category
 
 def category_list(request):
 
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
     cat = Category.objects.all()
 
     return render(request, 'back/category_list.html', {'category': cat})
 
 
 def category_add(request):
+
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
 
     if request.method == 'POST':
         name = request.POST.get('name')

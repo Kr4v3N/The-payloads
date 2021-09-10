@@ -37,6 +37,11 @@ def about(request):
 
 
 def panel(request):
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
     return render(request, 'back/home.html')
 
 
@@ -48,9 +53,7 @@ def my_login(request):
         if user_txt != "" and pass_txt != "":
             user = authenticate(username=user_txt, password=pass_txt)
 
-            if user is not None:
-                login(request, user)
-                return redirect('panel')
+
 
     return render(request, 'front/login.html')
 

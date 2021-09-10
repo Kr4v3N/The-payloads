@@ -24,6 +24,12 @@ def article_detail(request, word):
 
 
 def articles_list(request):
+
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
     articles = Articles.objects.all()
     subcat = Subcategory.objects.all()
     return render(request, 'back/articles_list.html', {
@@ -33,6 +39,11 @@ def articles_list(request):
 
 
 def articles_add(request):
+
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
 
     now = datetime.datetime.now()
 
@@ -130,6 +141,12 @@ def articles_add(request):
 
 
 def articles_delete(request, pk):
+
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
     try:
         b = Articles.objects.get(pk=pk)
         fs = FileSystemStorage()
@@ -155,6 +172,11 @@ def articles_delete(request, pk):
 
 
 def articles_edit(request, pk):
+
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
 
     if len(Articles.objects.filter(pk=pk)) == 0:
 

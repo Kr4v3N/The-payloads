@@ -6,12 +6,22 @@ from category.models import Category
 
 def subcategory_list(request):
 
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
     subcat = Subcategory.objects.all()
 
     return render(request, 'back/subcategory_list.html', {'subcat': subcat})
 
 
 def subcategory_add(request):
+
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
 
     cat = Category.objects.all()
 
