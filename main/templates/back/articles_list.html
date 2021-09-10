@@ -66,8 +66,9 @@
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="{% url 'articles_edit' pk=cc.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Éditer</i></a>
-                                <a href="{% url 'articles_delete' pk=cc.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
-                            </div>
+                                <a href="{% url 'articles_delete' pk=cc.pk %}"
+                                   data-confirm="Etes-vous certain de vouloir supprimer l'article {{ articles.pk }} ?"
+                                   data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>                            </div>
                         </td>
                     </tr>
                 {% endfor %}
@@ -82,5 +83,12 @@
 {% block footerblock %}
 <!-- Load and execute javascript code used only in this page -->
 <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
-<script>$(function(){ TablesDatatables.init(); });</script>
+<script>$(function(){ TablesDatatables.init(); });</script>        <script>
+    setTimeout(function(){
+        $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+        $(this).remove();
+            });
+        }, 4000)
+</script>
+
 {% endblock %}

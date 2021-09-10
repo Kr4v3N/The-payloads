@@ -1,9 +1,11 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, get_object_or_404, redirect
 
 from category.models import Category
 from .models import Main
 from articles.models import Articles
 from subcategory.models import Subcategory
+
 
 def home(request):
     site = Main.objects.get(pk=4)
@@ -36,3 +38,19 @@ def about(request):
 
 def panel(request):
     return render(request, 'back/home.html')
+
+
+def my_login(request):
+    if request.method == 'POST':
+        user_txt = request.POST.get('username')
+        pass_txt = request.POST.get('password')
+
+        if user_txt != "" and pass_txt != "":
+            user = authenticate(username=user_txt, password=pass_txt)
+
+            if user is not None:
+                login(request, user)
+                return redirect('panel')
+
+    return render(request, 'front/login.html')
+

@@ -47,7 +47,9 @@
                         <td class="text-center"> {{ cc.name }} </td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'articles_delete' pk=cc.pk %}"
+                                   data-confirm="Etes-vous certain de vouloir supprimer l'article {{ articles.pk }} ?"
+                                   data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>
@@ -64,4 +66,11 @@
 <!-- Load and execute javascript code used only in this page -->
 <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
 <script>$(function(){ TablesDatatables.init(); });</script>
+<script>$(function(){ TablesDatatables.init(); });</script>        <script>
+    setTimeout(function(){
+        $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+        $(this).remove();
+            });
+        }, 4000)
+</script>
 {% endblock %}
