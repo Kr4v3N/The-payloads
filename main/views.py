@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, get_object_or_404, redirect
 
 from category.models import Category
@@ -53,7 +53,9 @@ def my_login(request):
         if user_txt != "" and pass_txt != "":
             user = authenticate(username=user_txt, password=pass_txt)
 
-
+            if user is not None:
+                login(request, user)
+                return redirect('panel')
 
     return render(request, 'front/login.html')
 
