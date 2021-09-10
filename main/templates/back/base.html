@@ -4,6 +4,8 @@
 
 {% load static %}
 
+{% if user.is_authenticated %}
+
     <head>
         <meta charset="utf-8">
 
@@ -266,3 +268,9 @@
 
     </body>
 </html>
+
+{% else %}
+
+Connectez-vous
+
+{% endif %}
