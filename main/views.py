@@ -39,7 +39,7 @@ def about(request):
 def panel(request):
     # Login check start
     if not request.user.is_authenticated:
-        return redirect('login')
+        return redirect('my_login')
     # Login check end
 
     return render(request, 'back/home.html')
@@ -59,3 +59,8 @@ def my_login(request):
 
     return render(request, 'front/login.html')
 
+
+def my_logout(request):
+    logout(request)
+
+    return redirect('my_login')
