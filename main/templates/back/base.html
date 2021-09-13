@@ -17,7 +17,7 @@
 
         <!-- Icons -->
         <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-        <link rel="shortcut icon" href="{% static 'back/back/img/favicon.png' %}">
+        <link rel="shortcut icon" href="{% static 'back/back/img/favicon11.png' %}">
         <link rel="apple-touch-icon" href="{% static 'back/img/icon57.png' %}" sizes="57x57">
         <link rel="apple-touch-icon" href="{% static 'back/img/icon72.png' %}" sizes="72x72">
         <link rel="apple-touch-icon" href="{% static 'back/img/icon76.png' %}" sizes="76x76">
@@ -129,7 +129,7 @@
                                     <a href="page_ready_user_profile.html" data-toggle="tooltip" data-placement="bottom" title="Profile"><i class="gi gi-user"></i></a>
                                     <a href="page_ready_inbox.html" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="gi gi-envelope"></i></a>
                                     <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
-                                    <a href="javascript:void(0)" class="enable-tooltip" data-placement="bottom" title="Settings" onclick="$('#modal-user-settings').modal('show');"><i class="gi gi-cogwheel"></i></a>
+                                    <a href="/panel/setting/" data-placement="bottom" title="Settings" onclick="$('#modal-user-settings').modal('show');"><i class="gi gi-cogwheel"></i></a>
                                     <a href="/logout" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
                                 </div>
                             </div>
@@ -144,6 +144,16 @@
                                     <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
                                     <span class="sidebar-header-title">Paramètres du site</span>
                                 </li>
+
+                                <li>
+                                    <a href="/panel/setting/" class=" "><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Configuration</span></a>
+                                </li>
+
+                                  <li class="sidebar-header">
+                                    <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
+                                    <span class="sidebar-header-title">News section</span>
+                                </li>
+
 
                                 <li>
                                     <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Catégorie  </span></a>
