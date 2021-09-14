@@ -217,7 +217,7 @@
 
                         <div>
                             <p class="f1-s-1 cl11 p-b-16">
-                                {{ site.about }}
+                                {{ site.about | safe }}
                             </p>
 
                             <p class="f1-s-1 cl11 p-b-16">
@@ -253,8 +253,7 @@
                         </div>
 
                         <ul>
-
-							{% for art in lastarticles %}
+							{% for art in poparticles %}
                             <li class="flex-wr-sb-s p-b-20">
                                 <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
                                     <img src="{{ art.pic_url }}" alt="IMG">
@@ -286,14 +285,14 @@
 
                         <ul class="m-t--12">
 
-                            {% for c in category %}
-                            {% if c.count != 0 %}
-                            <li class="how-bor1 p-rl-5 p-tb-10">
-                                <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                    {{ c.name }} ({{ c.count }})
-                                </a>
-                            </li>
-                            {% endif %}
+                            {% for c in cat %}
+                                {% if c.count != 0 %}
+                                    <li class="how-bor1 p-rl-5 p-tb-10">
+                                        <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                                            {{ c.name }} ({{ c.count }})
+                                        </a>
+                                    </li>
+                                {% endif %}
                             {% endfor %}
 
                         </ul>

@@ -285,15 +285,15 @@
 						<div class="p-b-30">
 							<div class="how2 how2-cl4 flex-s-c">
 								<h3 class="f1-m-2 cl3 tab01-title">
-									Articles les plus populaires
-								</h3>
+								Articles les plus populaires
+									</h3>
 							</div>
 
 							<ul class="p-t-35">
 							{% for a in poparticles %}
 								<li class="flex-wr-sb-s p-b-30">
-									<a href="#" class="size-w-10 wrap-pic-w hov1 trans-03">
-										<img src="{{ a.pic_url }}" alt="IMG">
+									<a href="{% url 'article_detail' word=a.name %}" class="size-w-10 wrap-pic-w hov1 trans-03">
+										<img src="{{ a.pic_url }}" alt="{{ a.pic_name }">
 									</a>
 
 									<div class="size-w-11">
@@ -330,27 +330,13 @@
 								</h3>
 							</div>
 							<div class="flex-wr-s-s m-rl--5">
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Fashion
-								</a>
 
+								{% for tagname in tag %}
 								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Lifestyle
+									{{ tagname }}
 								</a>
+								{% endfor %}
 
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Denim
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Streetstyle
-								</a>
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									DenimO
-								</a>
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Street
-								</a>
 							</div>
 						</div>
 					</div>

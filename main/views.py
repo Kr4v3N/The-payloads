@@ -16,7 +16,7 @@ def home(request):
     lastarticles = Articles.objects.order_by('-pk')[:3]
     lastarticles2 = Articles.objects.order_by('-pk')[:4]
     subcat = Subcategory.objects.all()
-    poparticles = Articles.objects.order_by('-show')[:5]
+    poparticles = Articles.objects.order_by('-show')[:4]
 
     return render(request, 'front/home.html', {
         'site': site,
@@ -25,7 +25,7 @@ def home(request):
         'lastarticles': lastarticles,
         'lastarticles2': lastarticles2,
         'subcat': subcat,
-        'poparticles': poparticles
+        'poparticles': poparticles,
     })
 
 
@@ -34,6 +34,7 @@ def about(request):
     site = Main.objects.get(pk=4)
     articles = Articles.objects.all()
     cat = Category.objects.all()
+
     return render(request, 'front/about.html', {
         'site': site,
         'articles': articles,
@@ -136,6 +137,7 @@ def site_setting(request):
         b.linkedin = linkedin
         b.youtube = youtube
         b.link = link
+        b.about = about
         if pic_url != "-": b.pic_url = pic_url
         if pic_name != "-": b.pic_name = pic_name
         if pic_url_footer != "-": b.pic_url_footer = pic_url_footer

@@ -10,7 +10,6 @@ from django.core.files.storage import FileSystemStorage
 
 
 def article_detail(request, word):
-
     site = Main.objects.get(pk=4)
     articles = Articles.objects.all().order_by('-pk')
     cat = Category.objects.all()
@@ -18,8 +17,10 @@ def article_detail(request, word):
     lastarticles = Articles.objects.all().order_by('-pk')[:3]
     poparticles = Articles.objects.order_by('-show')[:4]
 
-
     showarticles = Articles.objects.filter(name=word)
+
+    tagname = Articles.objects.get(name=word).tag
+    tag = tagname.split(',')
 
     try:
         mynews = Articles.objects.get(name=word)
@@ -36,12 +37,12 @@ def article_detail(request, word):
         'lastarticles': lastarticles,
         'subcat': subcat,
         'showarticles': showarticles,
-        'poparticles': poparticles
+        'poparticles': poparticles,
+        'tag': tag
     })
 
 
 def articles_list(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -56,7 +57,6 @@ def articles_list(request):
 
 
 def articles_add(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -91,6 +91,7 @@ def articles_add(request):
         articletxtshort = request.POST.get('articletxtshort')
         articletxt = request.POST.get('articletxt')
         articleid = request.POST.get('articlecat')
+        tag = request.POST.get('tag')
 
         if articletitle == "" \
                 or articlecat == "" \
@@ -126,6 +127,7 @@ def articles_add(request):
                                  comments=0,
                                  show=0,
                                  ocatid=ocatid,
+                                 tag=tag
                                  )
 
                     b.save()
@@ -158,7 +160,6 @@ def articles_add(request):
 
 
 def articles_delete(request, pk):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -189,14 +190,12 @@ def articles_delete(request, pk):
 
 
 def articles_edit(request, pk):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
     # Login check end
 
     if len(Articles.objects.filter(pk=pk)) == 0:
-
         messages.error(request, "Article non trouvée")
         return redirect('articles_list')
 
@@ -210,6 +209,7 @@ def articles_edit(request, pk):
         articletxtshort = request.POST.get('articletxtshort')
         articletxt = request.POST.get('articletxt')
         articleid = request.POST.get('articlecat')
+        tag = request.POST.get('tag')
 
         if articletitle == "" \
                 or articlecat == "" \
@@ -243,6 +243,7 @@ def articles_edit(request, pk):
                     b.pic_url = url
                     b.catname = articlename
                     b.catid = articleid
+                    b.tag = tag
 
                     b.save()
 
@@ -271,6 +272,7 @@ def articles_edit(request, pk):
             b.body_txt = articletxt
             b.catname = articlename
             b.catid = articleid
+            b.tag = tag
 
             b.save()
 
