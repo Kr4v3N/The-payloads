@@ -1,6 +1,8 @@
 import csv
 from django.contrib import messages
 from django.shortcuts import render, redirect
+
+import category
 from .models import Category
 
 
@@ -43,3 +45,12 @@ def category_add(request):
             return redirect('category_list')
 
     return render(request, 'back/category_add.html')
+
+
+def category_delete(request, pk):
+
+    b = Category.objects.filter(pk=pk)
+    b.delete()
+
+    messages.success(request, "La catégorie a été supprimée avec succès ")
+    return redirect('category_list')

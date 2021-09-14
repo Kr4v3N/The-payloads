@@ -97,7 +97,7 @@ def site_setting(request):
 
         if name == "" or phone == "" or about == "":
             messages.error(request, "Tous les champs doivent être renseignés")
-            return redirect('site_settings')
+            return redirect('site_setting')
         try:
             myfile = request.FILES['myfile']
             fs = FileSystemStorage()
@@ -106,6 +106,7 @@ def site_setting(request):
 
             pic_url = url
             pic_name = filename
+
 
         except:
             pic_url = "-"
@@ -139,6 +140,8 @@ def site_setting(request):
         if pic_name_footer != "-": b.pic_name_footer = pic_name_footer
 
         b.save()
+        messages.success(request, "Votre ou vos paramètres ont été modifiés avec succès")
+        return redirect('site_setting')
 
     site = Main.objects.get(pk=4)
 

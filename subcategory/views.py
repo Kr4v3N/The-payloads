@@ -46,3 +46,12 @@ def subcategory_add(request):
         return redirect('subcategory_list')
 
     return render(request, 'back/subcategory_add.html', {'cat': cat})
+
+
+def subcategory_delete(request, pk):
+
+    b = Subcategory.objects.filter(pk=pk)
+    b.delete()
+
+    messages.success(request, "La sous-catégorie a été supprimée avec succès ")
+    return redirect('subcategory_list')

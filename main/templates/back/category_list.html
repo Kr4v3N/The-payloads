@@ -41,15 +41,16 @@
                 {% endif %}
                 </thead>
                 <tbody>
-                {% for cc in category %}
+                {% for cat in category %}
                     <tr>
-                        <td class="text-center"> {{ cc.pk }}</td>
-                        <td class="text-center"> {{ cc.name }} </td>
+                        <td>{{ cat.pk }}</td>
+                        <td>{{ cat.name }}</td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="{% url 'articles_delete' pk=cc.pk %}"
-                                   data-confirm="Etes-vous certain de vouloir supprimer l'article {{ articles.pk }} ?"
-                                   data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
+                                <a href="{% url 'category_delete' pk=cat.pk %}"
+                                   data-confirm="Etes-vous certain de vouloir supprimer la catégorie {{ cat.name }} ?"
+                                   data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i
+                                        class="fa fa-times"> Supprimer</i></a>
                             </div>
                         </td>
                     </tr>

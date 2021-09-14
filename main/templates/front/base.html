@@ -101,7 +101,7 @@
             <div class="wrap-header-mobile">
                 <!-- Logo moblie -->
                 <div class="logo-mobile">
-                    <a href="/"><img src="{{ site.pic_url }}" alt="IMG-LOGO"></a>
+                    <a href="/"><img style="width: 200px; height: 100px;" src="{{ site.pic_url }}" alt="Logo_{{ site.pic_name }}_Mobile"></a>
                 </div>
 
                 <!-- Button show menu -->
@@ -116,7 +116,7 @@
             <div class="wrap-logo no-banner container">
                 <!-- Logo desktop -->
                 <div class="logo">
-                    <a href="/"><img src="{{ site.pic_url }}" alt="LOGO"></a>
+                    <a href="/"><img style="width: 300px; height: 100px;" src="{{ site.pic_url }}" alt="Logo_{{ site.pic_name }}_Desktop"></a>
                 </div>
             </div>
 
@@ -126,7 +126,7 @@
                     <!-- Menu desktop -->
                     <nav class="menu-desktop">
                         <a class="logo-stick" href="/">
-                            <img src="{{ site.pic_url }}" alt="LOGO">
+                            <img src="{{ site.pic_url }}" alt="Logo_{{ site.pic_name }}">
                         </a>
 
                         <ul class="main-menu justify-content-center">
@@ -134,6 +134,7 @@
                             <li class="">
 								<a href="/">Accueil</a>
 							</li>
+
                             {% for cc in category %}
                             {% if cc.count != 0 %}
                                 <li class="mega-menu-item">
@@ -141,6 +142,7 @@
                                 </li>
                             {% endif %}
                             {% endfor %}
+
                         </ul>
                     </nav>
                 </div>
