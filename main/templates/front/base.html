@@ -126,16 +126,16 @@
                     <!-- Menu desktop -->
                     <nav class="menu-desktop">
                         <a class="logo-stick" href="/">
-                            <img src="{{ site.pic_url }}" alt="Logo_{{ site.pic_name }}">
+                            <img src="{{ site.pic_url }}" alt="Logo_{{ site.pic_name }}_Desktop2">
                         </a>
 
                         <ul class="main-menu justify-content-center">
-<!--                            <li class="main-menu-active">-->
+                            <li class="main-menu-active">
                             <li class="">
 								<a href="/">Accueil</a>
 							</li>
 
-                            {% for cc in category %}
+                            {% for cc in cat %}
                             {% if cc.count != 0 %}
                                 <li class="mega-menu-item">
                                     <a href="/">{{ cc.name }}</a>

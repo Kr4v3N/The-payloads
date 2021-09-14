@@ -20,7 +20,7 @@ def home(request):
     return render(request, 'front/home.html', {
         'site': site,
         'articles': articles,
-        'category': cat,
+        'cat': cat,
         'lastarticles': lastarticles,
         'lastarticles2': lastarticles2,
         'subcat': subcat

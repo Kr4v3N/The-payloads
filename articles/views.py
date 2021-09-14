@@ -10,16 +10,22 @@ from django.core.files.storage import FileSystemStorage
 
 
 def article_detail(request, word):
+
     site = Main.objects.get(pk=4)
-    articles = Articles.objects.filter(name=word)
-    category = Category.objects.all()
+    articles = Articles.objects.all().order_by('-pk')
+    cat = Category.objects.all()
+    subcat = Subcategory.objects.all()
     lastarticles = Articles.objects.all().order_by('-pk')[:3]
 
+    showarticles = Articles.objects.filter(name=word)
+
     return render(request, 'front/article_detail.html', {
-        'articles': articles,
         'site': site,
-        'category': category,
+        'articles': articles,
+        'cat': cat,
         'lastarticles': lastarticles,
+        'subcat': subcat,
+        'showarticles': showarticles
     })
 
 
