@@ -16,8 +16,18 @@ def article_detail(request, word):
     cat = Category.objects.all()
     subcat = Subcategory.objects.all()
     lastarticles = Articles.objects.all().order_by('-pk')[:3]
+    poparticles = Articles.objects.order_by('-show')[:4]
+
 
     showarticles = Articles.objects.filter(name=word)
+
+    try:
+        mynews = Articles.objects.get(name=word)
+        mynews.show = mynews.show + 1
+        mynews.save()
+
+    except:
+        print("Can't add show")
 
     return render(request, 'front/article_detail.html', {
         'site': site,
@@ -25,7 +35,8 @@ def article_detail(request, word):
         'cat': cat,
         'lastarticles': lastarticles,
         'subcat': subcat,
-        'showarticles': showarticles
+        'showarticles': showarticles,
+        'poparticles': poparticles
     })
 
 
