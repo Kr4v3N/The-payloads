@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'^login/$', views.my_login, name='my_login'),
     url(r'^logout/$', views.my_logout, name='my_logout'),
     url(r'^panel/setting/$', views.site_setting, name='site_setting'),
-
+    url(r'^panel/about/setting/$', views.about_setting, name='about_setting'),
 ]

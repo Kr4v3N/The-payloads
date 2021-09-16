@@ -158,3 +158,32 @@ def site_setting(request):
     site = Main.objects.get(pk=4)
 
     return render(request, 'back/setting.html', {'site': site})
+
+
+def about_setting(request):
+
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    if request.method == 'POST':
+        txt = request.POST.get('txt')
+        if txt == "":
+            messages.error(request, "Tous les champs doivent être renseignés")
+            return redirect('about_setting')
+
+        b = Main.objects.get(pk=4)
+        b.about_page = txt
+        b.save()
+
+        messages.success(request, "Votre page à bien été modifié")
+        return redirect('about_setting')
+
+    about_page = Main.objects.get(pk=4).about_page
+
+    context = {
+        'about_page': about_page
+    }
+
+    return render(request, 'back/about_setting.html', context)

@@ -7,6 +7,7 @@ class Main(models.Model):
 
     name = models.CharField(max_length=50)
     about = models.TextField()
+    about_page = models.TextField(default="")
     linkedin = models.CharField(max_length=100, default="-")
     twitter = models.CharField(max_length=100, default="-")
     youtube = models.CharField(max_length=100, default="-")
