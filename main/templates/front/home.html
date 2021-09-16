@@ -284,7 +284,7 @@
 									<div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
 										{{forloop.counter}}
 									</div>
-									<a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+									<a href="{% url 'article_detail' word=pop.name %}" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
 										{{ pop.name }}
 									</a>
 								</li>

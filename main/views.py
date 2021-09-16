@@ -32,13 +32,21 @@ def home(request):
 def about(request):
 
     site = Main.objects.get(pk=4)
-    articles = Articles.objects.all()
     cat = Category.objects.all()
+    articles = Articles.objects.all().order_by('-pk')
+    lastarticles = Articles.objects.order_by('-pk')[:3]
+    lastarticles2 = Articles.objects.order_by('-pk')[:4]
+    subcat = Subcategory.objects.all()
+    poparticles = Articles.objects.order_by('-show')[:4]
 
     return render(request, 'front/about.html', {
         'site': site,
         'articles': articles,
-        'category': cat
+        'cat': cat,
+        'lastarticles': lastarticles,
+        'lastarticles2': lastarticles2,
+        'subcat': subcat,
+        'poparticles': poparticles,
     })
 
 

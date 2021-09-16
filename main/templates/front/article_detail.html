@@ -86,18 +86,22 @@
 
 							<!-- Tag -->
 							<div class="flex-s-s p-t-12 p-b-15">
-								<span class="f1-s-12 cl5 m-r-8">
-									Tags:
+								{% if tag|length <= 1 %}
+								<span class="f1-s-12 cl5 m-r-8">Étiquette:
 								</span>
-
+								{% else %}
+								<span class="f1-s-12 cl5 m-r-8">
+									Étiquettes:
+								</span>
+								{% endif %}
 								<div class="flex-wr-s-s size-w-0">
-									<a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-										Streetstyle
-									</a>
 
+									{% for tagname in tag %}
 									<a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">
-										Crafts
+										{{ tagname }}
 									</a>
+									{% endfor %}
+
 								</div>
 							</div>
 
@@ -298,13 +302,13 @@
 
 									<div class="size-w-11">
 										<h6 class="p-b-4">
-											<a href="#" class="f1-s-5 cl3 hov-cl10 trans-03">
+											<a href="{% url 'article_detail' word=a.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">
 												{{ a.name }}
 											</a>
 										</h6>
 
 										<span class="cl8 txt-center p-b-24">
-											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
+											<a class="f1-s-6 cl8 hov-cl10 trans-03">
 												{{ a.writer}}
 											</a>
 
