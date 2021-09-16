@@ -172,22 +172,14 @@
 									</h5>
 
 									<div class="cl8">
-										<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-											Par {{ article.writer }}
-										</a>
+										<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">Par {{ article.writer }}</a>
 
-										<span class="f1-s-3 m-rl-3">
-											-
-										</span>
+										<span class="f1-s-3 m-rl-3">-</span>
 
-										<span class="f1-s-3">
-											Posté le {{ article.date }}
-										</span>
+										<span class="f1-s-3">Posté le {{ article.date }}</span>
 									</div>
 
-									<p class="f1-s-1 cl6 p-b-8">
-										{{ article.short_txt | safe }}
-									</p>
+									<p class="f1-s-1 cl6 p-b-8">{{ article.short_txt | safe }}</p>
 
 									<a href="{% url 'article_detail' word=article.name %}" class="f1-s-1 cl9 hov-cl10 trans-03">
 										Continuer la lecture
@@ -222,13 +214,10 @@
 						<!-- Categories -->
                         <div class="p-b-23">
                             <div class="how2 how2-cl4 flex-s-c">
-                                <h3 class="f1-m-2 cl3 tab01-title">
-                                    Catégories
-                                </h3>
+                                <h3 class="f1-m-2 cl3 tab01-title">Catégories</h3>
                             </div>
 
                             {% for c in cat %}
-
                                 <ul class="p-t-20">
                                     <li class="flex-wr-sb-s">
                                         <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
@@ -238,16 +227,13 @@
                                             {{ c.name }}
                                         </a>
                                     </li>
-
                             {% endfor %}
 
                             </ul>
                         </div>
 						<!-- S'abonner -->
 						<div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-30">
-							<h5 class="f1-m-5 cl0 p-b-10">
-								S'abonner
-							</h5>
+							<h5 class="f1-m-5 cl0 p-b-10">S'abonner</h5>
 
 							<p class="f1-s-1 cl0 p-b-25">
 <!--
@@ -274,10 +260,9 @@
 						<!-- Les plus populaire -->
 						<div class="p-b-23 p-t-30">
 							<div class="how2 how2-cl4 flex-s-c">
-								<h3 class="f1-m-2 cl3 tab01-title">
-									Les plus populaires
-								</h3>
+								<h3 class="f1-m-2 cl3 tab01-title">Les articles plus populaires</h3>
 							</div>
+
 						{% for pop in poparticles %}
 							<ul class="p-t-20">
 								<li class="flex-wr-sb-s">

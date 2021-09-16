@@ -155,13 +155,10 @@
     <!-- Load and execute javascript code used only in this page -->
     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
     <script>$(function(){ TablesDatatables.init(); });</script>
-    <script>$(function(){ TablesDatatables.init(); });</script>
-        <script>$(function(){ TablesDatatables.init(); });</script>
-        <script>setTimeout(function(){
-            $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
-            $(this).remove();
-                });
-            }, 4000)
+    <script>setTimeout(function(){
+        $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+        $(this).remove();
+            });
+        }, 4000)
     </script>
-
 {% endblock %}
