@@ -210,3 +210,25 @@ def contact(request):
     }
 
     return render(request, 'front/contact.html', context)
+
+def contact(request):
+
+    site = Main.objects.get(pk=4)
+    articles = Articles.objects.all().order_by('-pk')
+    cat = Category.objects.all()
+    lastarticles = Articles.objects.order_by('-pk')[:3]
+    lastarticles2 = Articles.objects.order_by('-pk')[:4]
+    subcat = Subcategory.objects.all()
+    poparticles = Articles.objects.order_by('-show')[:4]
+
+    context = {
+        'site': site,
+        'articles': articles,
+        'cat': cat,
+        'lastarticles': lastarticles,
+        'lastarticles2': lastarticles2,
+        'subcat': subcat,
+        'poparticles': poparticles,
+    }
+
+    return render(request, 'front/contact.html', context)

@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('articles.urls')),
     path('', include('category.urls')),
     path('', include('subcategory.urls')),
+    path('', include('contactform.urls')),
 ]
 
 if settings.DEBUG:

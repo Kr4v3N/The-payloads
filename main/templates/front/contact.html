@@ -39,13 +39,13 @@
 				<div class="col-md-7 col-lg-8 p-b-80">
 					<div class="p-r-10 p-r-0-sr991">
 
-						<form action="" method="POST">
+						<form action="{% url 'contact_add' %}" method="POST">
                             {% csrf_token %}
-							<input class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Nom" required>
+							<input class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Nom" >
 
-							<input class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email" required>
+							<input class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email" >
 
-							<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Votre message"required></textarea>
+							<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Votre message"></textarea>
 
 							<button class="size-a-20 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-20" type="submit">Envoyer</button>
 						</form>
@@ -68,7 +68,7 @@
                                 {% for pop in poparticles %}
 								<li class="flex-wr-sb-s p-b-30">
 									<a href="{% url 'article_detail' word=pop.name %}" class="size-w-10 wrap-pic-w hov1 trans-03">
-										<img src="{{ pop.pic_url }}" alt="IMG">
+										<img src="{{ pop.pic_url }}" alt="{{ pop.name }}">
 									</a>
 
 									<div class="size-w-11">
@@ -103,3 +103,4 @@
 	</section>
 
 {%  endblock mainblock %}
+
