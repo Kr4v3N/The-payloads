@@ -60,7 +60,7 @@
                             <div class="btn-group">
                                 <a href="#" data-toggle="tooltip" title="answer"
                                    class="btn btn-xs btn-default">Répondre</a>
-                                <a href="#"
+                                <a href="{% url 'contact_delete' pk=msg.pk %}"
                                    data-confirm="Etes-vous certain de vouloir supprimer le massage ?"
                                    data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i
                                         class="fa fa-times"> Supprimer</i></a>
@@ -79,16 +79,15 @@
 
 
 
-{% block javascript %}
-
-    <!-- Load and execute javascript code used only in this page -->
-    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
-    <script>$(function () {TablesDatatables.init();});</script>
-    <script>setTimeout(function(){
+{% block footerblock %}
+<!-- Load and execute javascript code used only in this page -->
+<script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+<script>$(function(){ TablesDatatables.init(); });</script>
+<script>
+    setTimeout(function(){
         $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
         $(this).remove();
             });
         }, 4000)
-    </script>
-
+</script>
 {% endblock %}

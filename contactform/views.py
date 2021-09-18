@@ -92,3 +92,17 @@ def contact_list(request):
     msg = Contactform.objects.all()
 
     return render(request, 'back/contact_form.html', {'msg': msg})
+
+
+def contact_delete(request, pk):
+
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    b = Contactform.objects.filter(pk=pk)
+    b.delete()
+
+    messages.success(request, 'Le message a été supprimé avec succès')
+    return redirect('contact_list')
