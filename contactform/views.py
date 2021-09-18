@@ -80,3 +80,15 @@ def contact_add(request):
     }
 
     return render(request, 'front/msgbox.html', context)
+
+
+def contact_list(request):
+
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    msg = Contactform.objects.all()
+
+    return render(request, 'back/contact_form.html', {'msg': msg})

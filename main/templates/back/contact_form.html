@@ -1,0 +1,94 @@
+{% extends 'back/base.html' %}
+
+{% load static %}
+
+{% block mainblock %}
+
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Liste des contactes<br><small>Vous pouvez ajouter, modifier et supprimer vos
+                données !</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>contactes</li>
+        <li><a href="/panel/contactform">Liste</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Liste des contactes :</strong></h2>
+        </div>
+
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                {% if msg|length <= 1 %}
+                    <tr>
+                        <th class="text-center">Identifiant</th>
+                        <th class="text-center">Date</th>
+                        <th class="text-center">Nom</th>
+                        <th class="text-center">Émail</th>
+                        <th class="text-center">Message</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <th class="text-center">Identifiants</th>
+                        <th class="text-center">Dates</th>
+                        <th class="text-center">Noms</th>
+                        <th class="text-center">Émails</th>
+                        <th class="text-center">Messages</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                {% endif %}
+                </thead>
+                <tbody>
+                {% for msg in msg %}
+                    <tr>
+                        <td class="text-center">{{ msg.pk }}</td>
+                        <td class="text-center">{{ msg.date }} à {{ msg.time }}</td>
+                        <td class="text-center">{{ msg.name }}</td>
+                        <td class="text-center">{{ msg.email }}</td>
+                        <td class="text-center">{{ msg.msg }}</td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="#" data-toggle="tooltip" title="answer"
+                                   class="btn btn-xs btn-default">Répondre</a>
+                                <a href="#"
+                                   data-confirm="Etes-vous certain de vouloir supprimer le massage ?"
+                                   data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i
+                                        class="fa fa-times"> Supprimer</i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+
+{% endblock mainblock %}
+
+
+
+
+{% block javascript %}
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+    <script>$(function () {TablesDatatables.init();});</script>
+    <script>setTimeout(function(){
+        $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+        $(this).remove();
+            });
+        }, 4000)
+    </script>
+
+{% endblock %}
