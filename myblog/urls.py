@@ -26,6 +26,7 @@ urlpatterns = [
     path('', include('category.urls')),
     path('', include('subcategory.urls')),
     path('', include('contactform.urls')),
+    path('', include('trending.urls')),
 ]
 
 if settings.DEBUG:
