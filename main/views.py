@@ -1,25 +1,25 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 from category.models import Category
 from .models import Main
 from articles.models import Articles
 from subcategory.models import Subcategory
 from trending.models import Trending
-import random
 from random import randint
 
 
 def home(request):
 
     site = Main.objects.get(pk=4)
-    articles = Articles.objects.all().order_by('-pk')
+    articles = Articles.objects.filter(activated=1).order_by('-pk')
     cat = Category.objects.all()
-    lastarticles = Articles.objects.order_by('-pk')[:3]
-    lastarticles2 = Articles.objects.order_by('-pk')[:4]
+    lastarticles = Articles.objects.filter(activated=1).order_by('-pk')[:3]
+    lastarticles2 = Articles.objects.filter(activated=1).order_by('-pk')[:4]
     subcat = Subcategory.objects.all()
-    poparticles = Articles.objects.order_by('-show')[:4]
+    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:4]
     trending = Trending.objects.all().order_by('-pk')
 
     random_object = Trending.objects.all()[randint(0, len(trending) - 1)]
@@ -41,11 +41,11 @@ def about(request):
 
     site = Main.objects.get(pk=4)
     cat = Category.objects.all()
-    articles = Articles.objects.all().order_by('-pk')
-    lastarticles = Articles.objects.order_by('-pk')[:3]
-    lastarticles2 = Articles.objects.order_by('-pk')[:4]
+    articles = Articles.objects.filter(activated=1).order_by('-pk')
+    lastarticles = Articles.objects.filter(activated=1).order_by('-pk')[:3]
+    lastarticles2 = Articles.objects.filter(activated=1).order_by('-pk')[:4]
     subcat = Subcategory.objects.all()
-    poparticles = Articles.objects.order_by('-show')[:4]
+    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:4]
     trending = Trending.objects.all().order_by('-pk')
 
     return render(request, 'front/about.html', {
@@ -203,11 +203,11 @@ def contact(request):
 
     site = Main.objects.get(pk=4)
     cat = Category.objects.all()
-    articles = Articles.objects.all().order_by('-pk')
-    lastarticles = Articles.objects.order_by('-pk')[:3]
-    lastarticles2 = Articles.objects.order_by('-pk')[:4]
+    articles = Articles.objects.filter(activated=1).order_by('-pk')
+    lastarticles = Articles.objects.filter(activated=1).order_by('-pk')[:3]
+    lastarticles2 = Articles.objects.filter(activated=1).order_by('-pk')[:4]
     subcat = Subcategory.objects.all()
-    poparticles = Articles.objects.order_by('-show')[:4]
+    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:4]
     trending = Trending.objects.all().order_by('-pk')
 
     return render(request, 'front/contact.html', {
@@ -220,3 +220,68 @@ def contact(request):
         'poparticles': poparticles,
         'trending': trending,
     })
+
+
+def change_pass(request):
+
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    if request.method == 'POST':
+        old_pass = request.POST.get('old_pass')
+        new_pass = request.POST.get('new_pass')
+        new_pass_confirm = request.POST.get('new_pass_confirm')
+
+        if old_pass == "" or new_pass == "" or new_pass_confirm == "":
+            messages.error(request, 'Tous les champs sont requis')
+            return redirect('change_pass')
+
+        user = authenticate(username=request.user, password=old_pass)
+
+        if user is not None:
+
+            if new_pass != new_pass_confirm:
+                messages.error(request,
+                               "Le champ nouveau mot de passe doit être identique au champ confirmer nouveau mot de "
+                               "passe")
+                return redirect('change_pass')
+
+            if len(new_pass) < 8:
+                messages.error(
+                    request, "Votre mot de passe doit comporter plus de 8 caractères")
+                return redirect('change_pass')
+
+            count1 = 0
+            count2 = 0
+            count3 = 0
+
+            for i in new_pass:
+                if '0' < i < '9':
+                    count1 += 1
+                if 'A' < i < 'Z':
+                    count2 += 1
+                if 'a' < i < 'z':
+                    count3 += 1
+            # print(count1, count2, count3)
+
+            if count1 >= 1 and count2 >= 1 and count3 >= 1:
+                user = User.objects.get(username=request.user)
+                user.set_password(new_pass)
+                user.save()
+
+                messages.success(request, 'Votre mot de passe a été modifié avec succès')
+                return redirect('panel')
+
+            else:
+                messages.error(request, "Votre mot de passe doit comporter au moins 8 caractères avec des chiffres, "
+                                        "des lettres minuscules et majuscules")
+                return redirect('my_logout')
+
+        else:
+            messages.error(
+                request, "Votre ancien mot de passe n'est pas valide")
+            return redirect('change_pass')
+
+    return render(request, 'back/change_pass.html')

@@ -10,6 +10,7 @@ from django.core.files.storage import FileSystemStorage
 
 
 def article_detail(request, word):
+
     site = Main.objects.get(pk=4)
     articles = Articles.objects.all().order_by('-pk')
     cat = Category.objects.all()
@@ -43,6 +44,7 @@ def article_detail(request, word):
 
 
 def articles_list(request):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -57,13 +59,13 @@ def articles_list(request):
 
 
 def articles_add(request):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
     # Login check end
 
     now = datetime.datetime.now()
-
     year = now.year
     month = now.month
     day = now.day
@@ -160,6 +162,7 @@ def articles_add(request):
 
 
 def articles_delete(request, pk):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -190,6 +193,7 @@ def articles_delete(request, pk):
 
 
 def articles_edit(request, pk):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -244,6 +248,7 @@ def articles_edit(request, pk):
                     b.catname = articlename
                     b.catid = articleid
                     b.tag = tag
+                    b.activated = 0
 
                     b.save()
 
@@ -284,3 +289,17 @@ def articles_edit(request, pk):
         'articles': articles,
         'cat': cat,
     })
+
+
+def articles_publish(request, pk):
+
+    # Login check start
+    if not request.user.is_authenticated:
+        return redirect('login')
+    # Login check end
+
+    news = Articles.objects.get(pk=pk)
+    news.activated = 1
+    news.save()
+
+    return redirect('articles_list')

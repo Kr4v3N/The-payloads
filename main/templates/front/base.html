@@ -106,12 +106,24 @@
             </div>
 
             <!-- Menu Mobile -->
-            <div class="wrap-logo no-banner container">
-                <!-- Logo desktop -->
-                <div class="logo">
-                    <a href="/"><img style="width: 300px; height: 100px;" src="{{ site.pic_url }}" alt="Logo_{{ site.pic_name }}_Desktop"></a>
-                </div>
-            </div>
+<!--            <div class="wrap-logo no-banner container">-->
+<!--                &lt;!&ndash; Logo desktop &ndash;&gt;-->
+<!--                <div class="logo">-->
+<!--                    <a href="/"><img style="width: 300px; height: 100px;" src="{{ site.pic_url }}" alt="Logo_{{ site.pic_name }}_Desktop"></a>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="wrap-logo container">
+				<!-- Logo desktop -->
+				<div class="logo">
+					<a href="/"><img src="{{ site.pic_url }}" alt="Logo_{{ site.pic_name }}_Desktop"></a>
+				</div>
+
+				<!-- Banner -->
+				<div class="banner-header">
+					<a href="#"><img src="{% static 'front/images/icons/Banner11.jpg' %}" alt="IMG"></a>
+				</div>
+			</div>
 
             {% if messages %}
 

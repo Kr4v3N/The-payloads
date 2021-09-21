@@ -34,6 +34,7 @@
                         <th class="text-center">Date & Heure</th>
                         <th class="text-center">Catégorie</th>
                         <th class="text-center">Auteur</th>
+                        <th class="text-center">Status</th>
                         <th class="text-center">Vue</th>
                         <th class="text-center">Commentaire</th>
                         <th class="text-center">Action</th>
@@ -46,6 +47,7 @@
                         <th class="text-center">Dates & Heures</th>
                         <th class="text-center">Catégories</th>
                         <th class="text-center">Auteurs</th>
+                        <th class="text-center">Status</th>
                         <th class="text-center">Vues</th>
                         <th class="text-center">Commentaires</th>
                         <th class="text-center">Action</th>
@@ -61,14 +63,27 @@
                         <td class="text-center">{{ cc.date }} à {{ cc.time }}</td>
                         <td class="text-center">{{ cc.catname}}</td>
                         <td class="text-center">{{ cc.writer }}</td>
+                        {% if cc.activated == 0 %}
+                            <td class="text-center">En attente </td>
+                        {% elif cc.activated == 1 %}
+                            <td class="text-center">Confirmé</td>
+                        {% endif %}
                         <td class="text-center">{{ cc.show }}</td>
                         <td class="text-center">{{ cc.comments }}</td>
                         <td class="text-center">
                             <div class="btn-group">
+                                <a href="{% url 'articles_delete' pk=cc.pk %}" data-confirm="Etes-vous certain de vouloir supprimer l'article {{ articles.pk }} ?"
+                                   data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                                 <a href="{% url 'articles_edit' pk=cc.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Éditer</i></a>
-                                <a href="{% url 'articles_delete' pk=cc.pk %}"
-                                   data-confirm="Etes-vous certain de vouloir supprimer l'article {{ articles.pk }} ?"
-                                   data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>                            </div>
+                                {% if cc.activated == 0 %}
+                                <a href="{% url 'articles_publish' pk=cc.pk %}"
+
+                                            data-toggle="tooltip" title="Publié" class="btn btn-xs btn-primary"><i class="fa fa-play"> Publié</i></a>
+                                        {% else %}
+                                <a href="{% url 'articles_publish' pk=cc.pk %}" data-toggle="tooltip" title="En ligne" class="btn btn-xs btn-success">
+                                            <i class="fa fa-anchor"> En ligne</i></a>
+                                        {% endif %}
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}
