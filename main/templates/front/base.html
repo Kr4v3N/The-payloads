@@ -154,7 +154,7 @@
                             {% for cc in cat %}
                             {% if cc.count != 0 %}
                                 <li class="mega-menu-item">
-                                    <a href="/">{{ cc.name }}</a>
+                                    <a href="{% url 'category_show' word=cc.name %}">{{ cc.name }}</a>
                                 </li>
                             {% endif %}
                             {% endfor %}
@@ -227,17 +227,13 @@
                     <div class="col-lg-4 p-b-20">
                         <div class="size-h-3 flex-s-c">
                             <a href="/">
-                                <img class="max-s-full" src="{{ site.pic_url_footer }}" alt="LOGO">
+                                <img class="max-s-full" src="{{ site.pic_url_footer }}" alt="site.name">
                             </a>
                         </div>
 
                         <div>
                             <p class="f1-s-1 cl11 p-b-16">
                                 {{ site.about | safe }}
-                            </p>
-
-                            <p class="f1-s-1 cl11 p-b-16">
-                                Mobile: {{ site.phone  }}
                             </p>
 
                             <div class="p-t-15">
@@ -263,11 +259,8 @@
 
                     <div class="col-sm-6 col-lg-4 p-b-20">
                         <div class="size-h-3 flex-s-c">
-                            <h5 class="f1-m-7 cl0">
-                                Les articles les plus populaires
-                            </h5>
+                            <h5 class="f1-m-7 cl0">Les articles les plus populaires</h5>
                         </div>
-
                         <ul>
 							{% for art in poparticles %}
                             <li class="flex-wr-sb-s p-b-20">
@@ -293,18 +286,12 @@
                     </div>
 
                     <div class="col-sm-6 col-lg-4 p-b-20">
-                        <div class="size-h-3 flex-s-c">
-                            <h5 class="f1-m-7 cl0">
-                                Catégories
-                            </h5>
-                        </div>
-
+                        <div class="size-h-3 flex-s-c"><h5 class="f1-m-7 cl0">Catégories</h5></div>
                         <ul class="m-t--12">
-
                             {% for c in cat %}
                                 {% if c.count != 0 %}
                                     <li class="how-bor1 p-rl-5 p-tb-10">
-                                        <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                                        <a href="{% url 'category_show' word=c.name %}" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
                                             {{ c.name }} ({{ c.count }})
                                         </a>
                                     </li>

@@ -44,7 +44,7 @@
 			<div class="bg-img1 size-a-3 how1 pos-relative" style="background-image: url({{ ln.pic_url }});">
 				<a href="{% url 'article_detail' word=ln.name %}" class="dis-block how1-child1 trans-03"></a>
 				<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-					<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+					<a href="{% url 'category_show' word=ln.catname %}" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
 						{{ln.catname}}
 					</a>
 
@@ -83,7 +83,7 @@
 					<a href="{% url 'article_detail' word=ln.name %}" class="dis-block how1-child1 trans-03"></a>
 
 					<div class="flex-col-e-s s-full p-rl-25 p-tb-24">
-						<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+						<a href="{% url 'category_show' word=ln.catname %}" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
 						{{ln.catname}}
 						</a>
 						<h3 class="how1-child2 m-t-14">
@@ -104,7 +104,7 @@
 				<a href="{% url 'article_detail' word=ln.name %}" class="dis-block how1-child1 trans-03"></a>
 
 				<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-					<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+					<a href="{% url 'category_show' word=ln.catname %}" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
 						 {{ ln.catname }}
 					</a>
 
@@ -126,7 +126,7 @@
 				<a href="{% url 'article_detail' word=ln.name %}" class="dis-block how1-child1 trans-03"></a>
 
 				<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-					<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+					<a href="{% url 'category_show' word=ln.catname %}" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
 						 {{ ln.catname }}
 					</a>
 
@@ -150,7 +150,6 @@
 <div class="container p-t-50 ">
 	<!-- Post -->
 	<section class="bg0 p-b-55">
-		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-10 col-lg-8 p-b-80">
 					<div class="p-r-10 p-r-0-sr991">
@@ -222,7 +221,7 @@
                                         <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
                                             {{ forloop.counter }}
                                         </div>
-                                        <a href="" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                        <a href="{% url 'category_show' word=c.name %}" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
                                             {{ c.name }}
                                         </a>
                                     </li>
@@ -231,28 +230,34 @@
 
                             </ul>
                         </div>
-						<!-- S'abonner -->
-						                        <div class="how2 how2-cl4 flex-s-c m-b-30">
-								<h3 class="f1-m-2 cl3 tab01-title">
-									Souscrire
-								</h3>
+<!--					HACKTHEBOX-->
+						<div class="how2 how2-cl4 flex-s-c m-b-30">
+                                <h3 class="f1-m-2 cl3 tab01-title">Hack The Box</h3>
                         </div>
+						<div class="p-b-30">
+							<a href="https://app.hackthebox.eu/profile/319888"><img src="https://www.hackthebox.eu/badge/image/319888";
+																					alt="HackTheBox" style="height: 73px";></a>
+						</div>
 
-						<div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-55">
-							<h5 class="f1-m-5 cl0 p-b-10">
+						<!-- S'abonner -->
+						 <div class="how2 how2-cl4 flex-s-c m-b-30">
+                                <h3 class="f1-m-2 cl3 tab01-title">Souscrire</h3>
+                        </div>
+                        <div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-55">
+                            <h5 class="f1-m-5 cl0 p-b-10">
                                 Recevez tous les derniers contenus par mail plusieurs fois par mois.
-							</h5>
+                            </h5>
 
-                            <p class="f1-s-1 cl0 p-b-25">J’accepte de recevoir cette newsletter et je comprends
+                            <p class="f1-s-1 cl0 p-b-10">J’accepte de recevoir cette newsletter et je comprends
                             que je peux me désabonner facilement à tout moment.</p>
 
-							<p class="f1-s-1 cl0 p-b-25">
-								Votre email ne sera jamais partagé et restera anonyme.
-							</p>
+                            <p class="f1-s-1 cl0 p-b-15">
+                                Votre email ne sera jamais partagé et restera anonyme.
+                            </p>
 
 							<form action="{% url 'articles_letter' %}" method="post" class="size-a-9 pos-relative">
 								{% csrf_token %}
-                                <input class="s-full f1-m-6 cl6 plh9 p-l-20 p-r-55" type="text" id="register-email" name="register-email" placeholder="Votre email">
+                                <input class="s-full f1-m-6 cl6 plh9 p-l-20 p-r-55" type="text" id="register-email" name="register-email" placeholder="Votre e-mail">
 
 								<button class="size-a-10 flex-c-c ab-t-r fs-16 cl9 hov-cl10 trans-03">
 									<i class="fa fa-arrow-right"></i>
@@ -261,9 +266,9 @@
 						</div>
 
 						<!-- Les plus populaire -->
-						<div class="p-b-23 p-t-20">
+						<div class="p-b-23 p-b-10">
 							<div class="how2 how2-cl4 flex-s-c">
-								<h3 class="f1-m-2 cl3 tab01-title">Les articles plus populaires</h3>
+								<h3 class="f1-m-2 cl3 tab01-title">Les articles les plus populaires</h3>
 							</div>
 
 						{% for pop in poparticles %}
@@ -280,7 +285,7 @@
 							</ul>
 						{% endfor %}
 						</div>
-													<!-- Buy me coffee -->
+						<!-- Buy me coffee -->
 						<div class="">
 							<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button"
 									data-slug="kr4v3n" data-color="#17b978" data-emoji=""  data-font="Poppins" data-text="Buy me a coffee"
@@ -296,7 +301,7 @@
 						<div>
 							<div class="how2 how2-cl4 flex-s-c m-t-30 m-b-20">
 								<h3 class="f1-m-2 cl3 tab01-title">
-									Tags
+									Étiquettes
 								</h3>
 							</div>
 
@@ -419,8 +424,6 @@
                         </div>-->
 					</div>
 				</div>
-			</div>
-
     </section>
 </div>
 

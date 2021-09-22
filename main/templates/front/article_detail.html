@@ -45,10 +45,10 @@
 					<div class="p-r-10 p-r-0-sr991">
 						<!-- Blog Detail -->
 						<div class="p-b-70">
-							<a href="#" class="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
+			<!--				<a href="{% url 'category_show' word=article.name %}" class="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
 								{{ article.catname }}
 							</a>
-
+-->
 							<h3 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
                                 {{ article.name | safe }}
 							</h3>
@@ -167,17 +167,14 @@
 						<!-- Category -->
 						<div class="p-b-60">
 							<div class="how2 how2-cl4 flex-s-c">
-								<h3 class="f1-m-2 cl3 tab01-title">
-									Catégories
-								</h3>
-							</div>
+								<h3 class="f1-m-2 cl3 tab01-title">Catégories</h3></div>
 
 							<ul class="p-t-35">
 
 								{% for b in cat %}
 								{% if b.count != 0 %}
 								<li class="how-bor3 p-rl-4">
-									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+									<a href="{% url 'category_show' word=b.name %}" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
 										{{ b.name }} ({{ b.count }})
 									</a>
 								</li>
@@ -294,28 +291,33 @@
 <!--							</ul>-->
 <!--						</div>-->
 
+
+                        <!-- Hack The Box -->
+						<div class="how2 how2-cl4 flex-s-c m-b-30">
+                                <h3 class="f1-m-2 cl3 tab01-title">Hack The Box</h3>
+                        </div>
+						<div class="p-b-30">
+							<a href="https://app.hackthebox.eu/profile/319888">
+								<img src="https://www.hackthebox.eu/badge/image/319888"; alt="Hack The Box" style="height: 73px";></a>
+						</div>
+
 						<!-- Popular Posts -->
 						<div class="p-b-30">
 							<div class="how2 how2-cl4 flex-s-c">
-								<h3 class="f1-m-2 cl3 tab01-title">
-								Les articles les plus populaires
-									</h3>
+								<h3 class="f1-m-2 cl3 tab01-title">Les articles les plus populaires</h3>
 							</div>
-
 							<ul class="p-t-35">
 							{% for a in poparticles %}
 								<li class="flex-wr-sb-s p-b-30">
 									<a href="{% url 'article_detail' word=a.name %}" class="size-w-10 wrap-pic-w hov1 trans-03">
 										<img src="{{ a.pic_url }}" alt="{{ a.pic_name }">
 									</a>
-
 									<div class="size-w-11">
 										<h6 class="p-b-4">
 											<a href="{% url 'article_detail' word=a.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">
 												{{ a.name }}
 											</a>
 										</h6>
-
 										<span class="cl8 txt-center p-b-24">
 											<a class="f1-s-6 cl8 hov-cl10 trans-03">
 												{{ a.writer}}
