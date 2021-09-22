@@ -10,6 +10,5 @@ urlpatterns = [
     url(r'^panel/articles/add/$', views.articles_add, name='articles_add'),
     url(r'^panel/articles/del/(?P<pk>\d+)/$', views.articles_delete, name='articles_delete'),
     url(r'^panel/articles/edit/(?P<pk>\d+)/$', views.articles_edit, name='articles_edit'),
-    path('panel/news/publish/<int:pk>', views.articles_publish, name='articles_publish'),
-
+    url(r'^panel/articles/publish/(?P<pk>\d+)/$', views.articles_publish, name='articles_publish'),
 ]

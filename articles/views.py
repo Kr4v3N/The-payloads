@@ -1,9 +1,10 @@
 import datetime
 
 from django.contrib import messages
-from django.shortcuts import render, get_list_or_404, redirect
+from django.shortcuts import render, redirect
 from subcategory.models import Subcategory
 from category.models import Category
+from trending.models import Trending
 from .models import Articles
 from main.models import Main
 from django.core.files.storage import FileSystemStorage
@@ -22,6 +23,7 @@ def article_detail(request, word):
 
     tagname = Articles.objects.get(name=word).tag
     tag = tagname.split(',')
+    trending = Trending.objects.all().order_by('-pk')
 
     try:
         mynews = Articles.objects.get(name=word)
@@ -39,7 +41,8 @@ def article_detail(request, word):
         'subcat': subcat,
         'showarticles': showarticles,
         'poparticles': poparticles,
-        'tag': tag
+        'tag': tag,
+        'trending': trending
     })
 
 
@@ -101,16 +104,12 @@ def articles_add(request):
                 or articletxt == "":
             messages.error(request, "Tous les champs sont requis")
             return redirect('articles_add')
-
         try:
-
             myfile = request.FILES['myfile']
             fs = FileSystemStorage()
             filename = fs.save(myfile.name, myfile)
             url = fs.url(filename)
-
             if str(myfile.content_type).startswith("image"):
-
                 if myfile.size < 3000000:
 
                     articlesname = Subcategory.objects.get(pk=articleid).name
@@ -126,26 +125,20 @@ def articles_add(request):
                                  writer=request.user,
                                  catname=articlesname,
                                  catid=articleid,
-                                 comments=0,
                                  show=0,
                                  ocatid=ocatid,
                                  tag=tag
                                  )
-
                     b.save()
-
                     count = len(Articles.objects.filter(ocatid=ocatid))
-
                     b = Category.objects.get(pk=ocatid)
                     b.count = count
                     b.save()
-
                     messages.success(request, "Votre article a été ajouté avec succès")
                     return redirect('articles_list')
                 else:
                     fs = FileSystemStorage()
                     fs.delete(filename)
-
                     messages.error(request, "L'image ne doit pas dépasser 3 MB")
                     return redirect('articles_add')
             else:
@@ -155,6 +148,8 @@ def articles_add(request):
                 messages.error(request, "Le format de votre fichier n'est pas supporté")
                 return redirect('articles_add')
         except:
+            fs = FileSystemStorage()
+            fs.delete(filename)
             messages.error(request, "Vous devez ajouter une image")
             return redirect('articles_add')
 
@@ -193,7 +188,6 @@ def articles_delete(request, pk):
 
 
 def articles_edit(request, pk):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -292,7 +286,6 @@ def articles_edit(request, pk):
 
 
 def articles_publish(request, pk):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
