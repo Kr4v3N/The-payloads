@@ -12,14 +12,21 @@ def trending_add(request):
     # Login check end
 
     if request.method == 'POST':
+
         txt = request.POST.get('txt')
+        link = request.POST.get('link')
 
         if txt == "":
             messages.error(request, "Tous les champs doivent être renseignés")
             return redirect('trending_add')
 
-        b = Trending(txt=txt)
+        if link == "":
+            messages.error(request, "Tous les champs doivent être renseignés")
+            return redirect('trending_add')
+
+        b = Trending(txt=txt, link=link)
         b.save()
+
         messages.success(request, "La tendance a été ajouté avec succès ")
         return redirect('trending_add')
 
@@ -55,13 +62,19 @@ def trending_edit(request, pk):
     if request.method == 'POST':
 
         txt = request.POST.get('txt')
+        link = request.POST.get('link')
 
         if txt == "":
             messages.error(request, "Tous les champs doivent être renseignés")
             return redirect('trending_edit')
 
+        if link == "":
+            messages.error(request, "Tous les champs doivent être renseignés")
+            return redirect('trending_edit')
+
         b = Trending.objects.get(pk=pk)
         b.txt = txt
+        b.link = link
         b.save()
 
         messages.success(request, "La tendance a été modifiée avec succès ")

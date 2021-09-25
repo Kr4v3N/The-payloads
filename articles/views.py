@@ -2,6 +2,8 @@ import datetime
 
 from django.contrib import messages
 from django.shortcuts import render, redirect
+
+from comment.models import Comment
 from subcategory.models import Subcategory
 from category.models import Category
 from trending.models import Trending
@@ -33,6 +35,10 @@ def article_detail(request, word):
     except:
         print("Can't add show")
 
+    code = Articles.objects.get(name=word).pk
+    comment = Comment.objects.filter(article_id=code, status=1).order_by('-pk')[:6]
+    comment_count = len(comment)
+
     return render(request, 'front/article_detail.html', {
         'site': site,
         'articles': articles,
@@ -42,7 +48,10 @@ def article_detail(request, word):
         'showarticles': showarticles,
         'poparticles': poparticles,
         'tag': tag,
-        'trending': trending
+        'trending': trending,
+        'code': code,
+        'comment': comment,
+        'comment_count': comment_count,
     })
 
 

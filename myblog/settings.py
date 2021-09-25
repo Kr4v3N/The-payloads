@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'contactform',
     'trending',
     'newsletter',
+    'manager',
+    'comment',
 ]
 
 MIDDLEWARE = [

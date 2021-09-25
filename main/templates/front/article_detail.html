@@ -71,7 +71,11 @@
 								</span>
 
 								<a href="#" class="f1-s-3 cl8 hov-cl10 trans-03 m-r-15">
-									{{ article.comments }} commentaires
+                                    {% if comment|length <= 1 %}
+									{{comment_count}} Commentaire
+                                    {% else %}
+                                    {{comment_count}} Commentaires
+                                    {% endif %}
 								</a>
 							</div>
 
@@ -135,31 +139,72 @@
 							</div></div>
 
 						<!-- Leave a comment -->
+                        <div>
+
+                        {% if comment|length <= 1 %}
+							<div class="how2 how2-cl4 flex-s-c m-b-15">
+								<h1 class="f1-m-3 cl3 tab01-title">
+									Commentaire :
+								</h1>
+                            <br>
+                            </div>
+                            {% else%}
+                            	<div class="how2 how2-cl4 flex-s-c m-b-15">
+								<h1 class="f1-m-3 cl3 tab01-title">
+									Commentaires :
+								</h1>
+                            <br>
+                            </div>
+                        {% endif %}
+
+                            {% for cm in comment %}
+                            <h4 class="f1-m-3 cl3 tab01-title">{{ cm.name  }}</h4>
+                                <h5>Posté le {{ cm.date }} à {{ cm.time }}</h5>
+							    <p class="f1-m-7 cl8">{{ cm.content }}</p>
+                            <hr>
+                            {% endfor %}
+
+                        </div>
+                        <br>
+
 						<div>
-							<h4 class="f1-l-4 cl3 p-b-12">
-								Laissez un commentaire
-							</h4>
+                            <div class="">
+								<h3 class="f1-m-7 cl3 tab01-title">
+									Laissez un commentaire :
+								</h3>
+                            </div>
 
-							<p class="f1-s-13 cl8 p-b-40">
-								Votre adresse email ne sera pas publiée. les champs requis sont indiqués par un astérisque (*)
-							</p>
+                            {% if user.is_authenticated %}
+                                <p class="f1-m-1 cl8 p-b-20">Votre adresse e-mail ne sera pas publiée.</p>
 
-							<form>
-								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Soyer le premier à commenter !"></textarea>
+							<form action="{% url 'comments_add' pk=code %}" method="POST">
+                            {% csrf_token %}
+								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Rédiger votre commentaire..." required></textarea>
 
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Nom*">
-
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email*">
-
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="website" placeholder="Website">
-
-								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
-									Poster votre commentaire
-								</button>
+                                <button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">Soumettre votre commentaire</button>
 							</form>
+
+                            {% else %}
+                                <p class="f1-s-13 cl8 p-b-20">Votre adresse e-mail ne sera pas publiée. Les champs requis sont indiqués par un asterix</p>
+
+                            <form action="{% url 'comments_add' pk=code %}" method="POST">
+                                {% csrf_token %}
+								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Rédiger votre commentaire...*" required></textarea>
+
+								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" id="name" placeholder="Nom*" required>
+
+								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" id="email" placeholder="Email*" required>
+
+								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">Soumettre votre commentaire</button>
+							</form>
+                            {% endif %}
 						</div>
 					</div>
 				</div>
+
+
+				<!--TODO : Fonctionnalité Recapcha a ajouter-->
+
 
 				<!-- Sidebar -->
 				<div class="col-md-10 col-lg-4 p-b-30">
@@ -297,8 +342,8 @@
                                 <h3 class="f1-m-2 cl3 tab01-title">Hack The Box</h3>
                         </div>
 						<div class="p-b-30">
-							<a href="https://app.hackthebox.eu/profile/319888">
-								<img src="https://www.hackthebox.eu/badge/image/319888"; alt="Hack The Box" style="height: 73px";></a>
+							<a target="_blank" href="https://app.hackthebox.eu/profile/319888">
+								<img  src="https://www.hackthebox.eu/badge/image/319888"; alt="Hack The Box" style="height: 73px";></a>
 						</div>
 
 						<!-- Popular Posts -->

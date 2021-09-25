@@ -59,18 +59,13 @@ def category_add(request):
 
     if request.method == 'POST':
         name = request.POST.get('name')
-
         if name == "":
             messages.warning(request, "Vous devez ajouter une catégorie")
             return redirect('category_add')
-
         if len(Category.objects.filter(name=name)) != 0:
-
             messages.warning(request, "Cette catégorie existe déjà")
             return redirect('category_add')
-
         else:
-
             b = Category(name=name)
             b.save()
             messages.success(request, "La catégorie a bien été ajoutée")

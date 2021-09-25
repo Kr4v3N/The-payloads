@@ -76,13 +76,11 @@
                                    data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                                 <a href="{% url 'articles_edit' pk=cc.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Éditer</i></a>
                                 {% if cc.activated == 0 %}
-                                <a href="{% url 'articles_publish' pk=cc.pk %}"
-
-                                            data-toggle="tooltip" title="Publié" class="btn btn-xs btn-primary"><i class="fa fa-play"> Publié</i></a>
-                                        {% else %}
+                                <a href="{% url 'articles_publish' pk=cc.pk %}" data-toggle="tooltip" title="Publié" class="btn btn-xs btn-primary"><i class="fa fa-play"> Publié</i></a>
+                                {% else %}
                                 <a href="{% url 'articles_publish' pk=cc.pk %}" data-toggle="tooltip" title="En ligne" class="btn btn-xs btn-success">
                                             <i class="fa fa-anchor"> En ligne</i></a>
-                                        {% endif %}
+                                {% endif %}
                             </div>
                         </td>
                     </tr>

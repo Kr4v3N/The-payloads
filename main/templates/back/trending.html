@@ -47,14 +47,20 @@
                                 <input type="text" id="txt" name="txt" class="form-control"
                                        placeholder="Tendance actuelle ..."/>
                             </div>
-                            <div class="col-md-2">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <input type="text" id="link" name="link" class="form-control"
+                                       placeholder="Lien de l'article ..."/>
+                            </div>
+                            <div class="col-md-10">
                                 <button type="submit" class="btn btn-sm btn-primary"> Soumettre</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
     </div>
     <!-- END Datatables Content -->
 
@@ -68,17 +74,16 @@
         <div class="table-responsive">
             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                 <thead>
-
                 {% if trending|length <= 1 %}
                     <tr>
-                        <th>Identifiant</th>
-                        <th>Texte</th>
+                        <th class="text-center">Texte</th>
+                        <th class="text-center">Lien</th>
                         <th class="text-center">Action</th>
                     </tr>
                 {% else %}
                     <tr>
-                        <th>Identifiants</th>
-                        <th>Textes</th>
+                        <th class="text-center">Textes</th>
+                        <th class="text-center">Liens</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 {% endif %}
@@ -86,11 +91,10 @@
                 <tbody>
                 {% for tr in trending %}
                     <tr>
-                        <td class="text-center">{{ tr.pk }}</td>
-                        <td>{{ tr.txt }}</td>
+                        <td class="text-center">{{ tr.txt }}</td>
+                        <td class="text-center">{{ tr.link }}</td>
                         <td class="text-center">
                             <div class="btn-group">
-
                                 <a href="{% url 'trending_edit' pk=tr.pk %}" data-toggle="tooltip" title="Edit"
                                    class="btn btn-xs btn-default"><i class="fa fa-pencil"> Editer</i></a>
                                 <a href="{% url 'trending_delete' pk=tr.pk %}"

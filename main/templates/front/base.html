@@ -44,18 +44,17 @@
                     <div class="align-self-stretch size-w-0 pos-relative m-r-30">
                         <div class="f2-s-1 flex-wr-s-c s-full ab-t-l p-b-2">
                             <span class="text-uppercase cl0 p-r-8">
-                                Tendances actuelles:
+                                Dernières nouvelles:
                             </span>
                             <span class="dis-inline-block cl16 slide100-txt pos-relative size-w-0" data-in="fadeInDown" data-out="fadeOutDown">
-                                {% for trending in trending %}
+<!--                                {% for trending in trending %}-->
                                 <span class="dis-inline-block slide100-txt-item animated visible-false">
-                                    {{ trending.txt }}
+                                    <a target=_blank href="{{ trending.link }}">{{ trending.txt }}</a>
                                 </span>
-                                {% endfor %}
+<!--                                {% endfor %}-->
                             </span>
                         </div>
                     </div>
-
 
                     <div class="flex-wr-e-c">
                         <div class="left-topbar">
@@ -126,15 +125,13 @@
 			</div>
 
             {% if messages %}
-
             {% for message in messages %}
                 <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
                     <span style="font-weight: 700;">{{ message }}</span>
                 </div>
             {% endfor %}
-
-{% endif %}
+            {% endif %}
 
             <!--  -->
             <div class="wrap-main-nav">
@@ -213,11 +210,8 @@
         </div>
     </header>
 
-
-
     {% block mainblock %}
     {% endblock %}
-
 
     <!-- Footer -->
     <footer>

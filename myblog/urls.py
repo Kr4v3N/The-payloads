@@ -28,6 +28,8 @@ urlpatterns = [
     path('', include('contactform.urls')),
     path('', include('trending.urls')),
     path('', include('newsletter.urls')),
+    path('', include('manager.urls')),
+    path('', include('comment.urls')),
 ]
 
 if settings.DEBUG:
