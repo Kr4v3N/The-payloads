@@ -4,11 +4,13 @@ from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from category.models import Category
+from newsletter.models import Newsletter
 from .models import Main
 from articles.models import Articles
 from subcategory.models import Subcategory
 from trending.models import Trending
 from random import randint
+from comment.models import Comment
 
 
 def home(request):
@@ -67,7 +69,21 @@ def panel(request):
         return redirect('my_login')
     # Login check end
 
-    return render(request, 'back/home.html')
+    articles = Articles.objects.all()
+    articles_count = len(articles)
+    comment = Comment.objects.all()
+    comment_count = len(comment)
+    emails = Newsletter.objects.all()
+    emails_count = len(emails)
+    contacts = Main.objects.all()
+    contacts_count = len(contacts)
+
+    return render(request, 'back/home.html', {
+        'comment_count': comment_count,
+        'articles_count': articles_count,
+        'emails_count': emails_count,
+        'contacts_count': contacts_count
+    })
 
 
 def my_login(request):
