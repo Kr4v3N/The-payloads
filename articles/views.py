@@ -1,8 +1,6 @@
 import datetime
-
 from django.contrib import messages
 from django.shortcuts import render, redirect
-
 from comment.models import Comment
 from subcategory.models import Subcategory
 from category.models import Category

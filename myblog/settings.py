@@ -104,7 +104,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Maintenance
 # if True the maintenance-mode will be activated
 MAINTENANCE_MODE = None

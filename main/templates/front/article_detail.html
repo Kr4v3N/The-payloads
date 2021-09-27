@@ -10,7 +10,6 @@
 {% block mainblock %}
 
 {% for article in showarticles %}}
-
 	<!-- Breadcrumb -->
 	<div class="container" >
 		<div class="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
@@ -183,12 +182,18 @@
 									<form action="{% url 'comments_add' pk=code %}" method="POST">
 									{% csrf_token %}
 										<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Soyez le premier à commenter !" required></textarea>
+										<div class="input-group">
+											<div class="g-recaptcha" data-sitekey="6Ld3WZQcAAAAANQFkJJpy8AmD-briAXgFlL5Ri0T"></div>
+								 		</div>
 										<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">Soumettre votre commentaire</button>
 									</form>
 							    {% elif comment|length == 1 %}
 									<form action="{% url 'comments_add' pk=code %}" method="POST">
 									{% csrf_token %}
 										<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Rédiger un commentaire..." required></textarea>
+										<div class="input-group">
+											<div class="g-recaptcha" data-sitekey="6Ld3WZQcAAAAANQFkJJpy8AmD-briAXgFlL5Ri0T"></div>
+								 		</div>
 										<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">Soumettre votre commentaire</button>
 									</form>
 
@@ -197,6 +202,9 @@
 									<form action="{% url 'comments_add' pk=code %}" method="POST">
 									{% csrf_token %}
 										<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Rejoindre la discussion" required></textarea>
+										<div class="input-group">
+											<div class="g-recaptcha" data-sitekey="6Ld3WZQcAAAAANQFkJJpy8AmD-briAXgFlL5Ri0T"></div>
+								 		</div>
 										<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">Soumettre votre commentaire</button>
 									</form>
 
@@ -212,13 +220,18 @@
 								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" id="name" placeholder="Nom*" required>
 
 								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" id="email" placeholder="Email*" required>
-
+								<div class="input-group">
+									<div class="g-recaptcha" data-sitekey="6Ld3WZQcAAAAANQFkJJpy8AmD-briAXgFlL5Ri0T"></div>
+								</div>
 								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">Soumettre votre commentaire</button>
+
 							</form>
                             {% endif %}
 						</div>
 					</div>
+
 				</div>
+
 
 
 				<!--TODO : Fonctionnalité Recapcha a ajouter-->

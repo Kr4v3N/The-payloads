@@ -1,9 +1,16 @@
+import json
+import urllib.parse
+import urllib
+
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib.sites import requests
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from category.models import Category
+from contactform.models import Contactform
 from newsletter.models import Newsletter
 from .models import Main
 from articles.models import Articles
@@ -14,7 +21,6 @@ from comment.models import Comment
 
 
 def home(request):
-
     site = Main.objects.get(pk=4)
     articles = Articles.objects.filter(activated=1).order_by('-pk')
     cat = Category.objects.all()
@@ -40,7 +46,6 @@ def home(request):
 
 
 def about(request):
-
     site = Main.objects.get(pk=4)
     cat = Category.objects.all()
     articles = Articles.objects.filter(activated=1).order_by('-pk')
@@ -63,7 +68,6 @@ def about(request):
 
 
 def panel(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('my_login')
@@ -71,15 +75,18 @@ def panel(request):
 
     articles = Articles.objects.all()
     articles_count = len(articles)
-    comment = Comment.objects.all()
-    comment_count = len(comment)
+
+    comments = Comment.objects.all()
+    comments_count = len(comments)
+
     emails = Newsletter.objects.all()
     emails_count = len(emails)
-    contacts = Main.objects.all()
+
+    contacts = Contactform.objects.all()
     contacts_count = len(contacts)
 
     return render(request, 'back/home.html', {
-        'comment_count': comment_count,
+        'comments_count': comments_count,
         'articles_count': articles_count,
         'emails_count': emails_count,
         'contacts_count': contacts_count
@@ -92,6 +99,21 @@ def my_login(request):
         user_txt = request.POST.get('username')
         pass_txt = request.POST.get('password')
 
+        captcha_token = request.POST.get("g-recaptcha-response")
+        captcha_url = "https://www.google.com/recaptcha/api/siteverify"
+        values = {
+            'secret': settings.RECAPTCHA_PRIVATE_KEY,
+            'response': captcha_token
+        }
+        captcha_data = urllib.parse.urlencode(values).encode()
+        req = urllib.request.Request(captcha_url, data=captcha_data)
+        captcha_server_response = urllib.request.urlopen(req)
+        result = json.loads(captcha_server_response.read().decode())
+
+        if not result['success']:
+            messages.error(request, "Captcha invalide")
+            return redirect('my_login')
+
         if user_txt != "" and pass_txt != "":
             user = authenticate(username=user_txt, password=pass_txt)
 
@@ -103,7 +125,6 @@ def my_login(request):
 
 
 def my_logout(request):
-
     logout(request)
 
     return redirect('my_login')
@@ -187,7 +208,6 @@ def site_setting(request):
 
 
 def about_setting(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -216,7 +236,6 @@ def about_setting(request):
 
 
 def contact(request):
-
     site = Main.objects.get(pk=4)
     cat = Category.objects.all()
     articles = Articles.objects.filter(activated=1).order_by('-pk')
@@ -239,7 +258,6 @@ def contact(request):
 
 
 def change_pass(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')

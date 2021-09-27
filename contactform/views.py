@@ -1,3 +1,7 @@
+import json
+import urllib
+
+from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -36,6 +40,21 @@ def contact_add(request):
     time = str(hour) + 'H' + str(minute)
 
     if request.method == 'POST':
+
+        captcha_token = request.POST.get("g-recaptcha-response")
+        captcha_url = "https://www.google.com/recaptcha/api/siteverify"
+        values = {
+            'secret': settings.RECAPTCHA_PRIVATE_KEY,
+            'response': captcha_token
+        }
+        captcha_data = urllib.parse.urlencode(values).encode()
+        req = urllib.request.Request(captcha_url, data=captcha_data)
+        captcha_server_response = urllib.request.urlopen(req)
+        result = json.loads(captcha_server_response.read().decode())
+
+        if not result['success']:
+            messages.error(request, "Captcha invalide")
+            return redirect('contact_add')
 
         name = request.POST.get('name')
         email = request.POST.get('email')
