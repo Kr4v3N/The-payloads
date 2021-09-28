@@ -1,5 +1,6 @@
 import datetime
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
 from comment.models import Comment
 from subcategory.models import Subcategory
@@ -62,6 +63,18 @@ def articles_list(request):
 
     articles = Articles.objects.all()
     subcat = Subcategory.objects.all()
+
+    paginator = Paginator(articles, 2)
+    page = request.GET.get('page')
+
+    try:
+        articles = paginator.page(page)
+    except EmptyPage :
+        articles = paginator.page(paginator.num_pages)
+    except PageNotAnInteger :
+        articles = paginator.page(1)
+
+
     return render(request, 'back/articles_list.html', {
         'articles': articles,
         'subcat': subcat
