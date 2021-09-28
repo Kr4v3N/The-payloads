@@ -111,7 +111,7 @@ def my_login(request):
         result = json.loads(captcha_server_response.read().decode())
 
         if not result['success']:
-            messages.error(request, "Captcha invalide")
+            messages.error(request, "Captcha invalide, veuillez réessayer")
             return redirect('my_login')
 
         if user_txt != "" and pass_txt != "":

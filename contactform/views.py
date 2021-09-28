@@ -53,7 +53,7 @@ def contact_add(request):
         result = json.loads(captcha_server_response.read().decode())
 
         if not result['success']:
-            messages.error(request, "Captcha invalide")
+            messages.error(request, "Captcha invalide, veuillez réessayer")
             return redirect('contact_add')
 
         name = request.POST.get('name')

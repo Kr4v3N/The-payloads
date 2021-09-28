@@ -27,11 +27,11 @@ def comments_add(request, pk):
         req = urllib.request.Request(captcha_url, data=captcha_data)
         captcha_server_response = urllib.request.urlopen(req)
         result = json.loads(captcha_server_response.read().decode())
-        print(result)
+        # print(result)
         newsname2 = Articles.objects.get(pk=pk).name
 
         if not result['success']:
-            messages.error(request, "Captcha invalide")
+            messages.error(request, "Captcha invalide, veuillez réessayer")
             return redirect('article_detail', word=newsname2)
 
         now = datetime.datetime.now()

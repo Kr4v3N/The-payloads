@@ -177,6 +177,15 @@
 
 							<p class="f1-m-1 cl8 p-b-20">Votre adresse e-mail ne sera pas publiée.</p>
 
+							{% if messages %}
+								{% for message in messages %}
+									<div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+										<span style="font-weight: 700;">{{ message }}</span>
+									</div>
+								{% endfor %}
+							{% endif %}
+
 								{% if comment|length <= 0 %}
 
 									<form action="{% url 'comments_add' pk=code %}" method="POST">
