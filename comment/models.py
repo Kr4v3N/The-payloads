@@ -12,6 +12,8 @@ class Comment(models.Model):
     time = models.CharField(max_length=10)
     status = models.IntegerField(default=0)
     created = models.DateTimeField(default=timezone.now)
+    ip = models.GenericIPAddressField(default="")
+    country = models.CharField(max_length=60, default="")
 
     class Meta:
         verbose_name = 'Commentaire'

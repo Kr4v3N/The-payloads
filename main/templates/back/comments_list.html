@@ -34,6 +34,8 @@
                         <th class="text-center">Date</th>
                         <th class="text-center">E-mail</th>
                         <th class="text-center">Article Id</th>
+                        <th class="text-center">Pays</th>
+                        <th class="text-center">IP</th>
                         <th class="text-center">Commentaire</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">Actions</th>
@@ -44,6 +46,8 @@
                         <th class="text-center">Dates</th>
                         <th class="text-center">E-mails</th>
                         <th class="text-center">Articles Id</th>
+                        <th class="text-center">Pays</th>
+                        <th class="text-center">IPs</th>
                         <th class="text-center">Commentaires</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">Actions</th>
@@ -57,6 +61,8 @@
                         <td class="text-center">{{ cc.date }} à {{ cc.time }}</td>
                         <td class="text-center">{{ cc.email }}</td>
                         <td class="text-center">{{ cc.article_id }}</td>
+                        <td class="text-center">{{ cc.country }}</td>
+                        <td class="text-center">{{ cc.ip }}</td>
                         <td class="text-center">{{ cc.content }}</td>
                         {% if cc.status == 0 %}
                             <td class="text-center">En attente</td>

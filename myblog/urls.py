@@ -30,6 +30,7 @@ urlpatterns = [
     path('', include('newsletter.urls')),
     path('', include('manager.urls')),
     path('', include('comment.urls')),
+    path('', include('blacklist.urls')),
 ]
 
 if settings.DEBUG:

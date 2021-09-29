@@ -30,7 +30,8 @@
                 <thead>
                 {% if msg|length <= 1 %}
                     <tr>
-                        <th class="text-center">Identifiant</th>
+                        <th class="text-center">Ip</th>
+                        <th class="text-center">Pays</th>
                         <th class="text-center">Date</th>
                         <th class="text-center">Nom</th>
                         <th class="text-center">Émail</th>
@@ -39,7 +40,8 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <th class="text-center">Identifiants</th>
+                        <th class="text-center">Ips</th>
+                        <th class="text-center">Pays</th>
                         <th class="text-center">Dates</th>
                         <th class="text-center">Noms</th>
                         <th class="text-center">Émails</th>
@@ -51,7 +53,8 @@
                 <tbody>
                 {% for msg in msg %}
                     <tr>
-                        <td class="text-center">{{ msg.pk }}</td>
+                        <td class="text-center">{{ msg.ip }}</td>
+                        <td class="text-center">{{ msg.country }}</td>
                         <td class="text-center">{{ msg.date }} à {{ msg.time }}</td>
                         <td class="text-center">{{ msg.name }}</td>
                         <td class="text-center">{{ msg.email }}</td>

@@ -7,10 +7,12 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.db.models.functions import datetime
 from django.shortcuts import render, redirect
+from ipware import get_client_ip
 
 from articles.models import Articles
 from comment.models import Comment
 from manager.models import Manager
+from ip2geotools.databases.noncommercial import DbIpCity
 
 
 def comments_add(request, pk):
@@ -59,12 +61,26 @@ def comments_add(request, pk):
 
             manager = Manager.objects.get()
 
+            ip, is_routable = get_client_ip(request)
+
+            if ip is None:
+                ip = "0.0.0.0"
+
+            try:
+                response = DbIpCity.get(ip, api_key='free')
+                country = response.country + " | " + response.city
+
+            except:
+                country = " Inconnu"
+
             b = Comment(name=manager.name,
                         email=manager.email,
                         content=content,
                         article_id=pk,
                         date=today,
-                        time=time
+                        time=time,
+                        ip=ip,
+                        country=country
                         )
             b.save()
         else:
@@ -108,7 +124,7 @@ def comments_add(request, pk):
                         content=content,
                         article_id=pk,
                         date=today,
-                        time=time
+                        time=time,
                         )
             b.save()
 

@@ -9,6 +9,8 @@ from django.core.validators import validate_email
 from django.db.models.functions import datetime
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from ip2geotools.databases.noncommercial import DbIpCity
+from ipware import get_client_ip
 
 from articles.models import Articles
 from .models import Contactform
@@ -74,11 +76,29 @@ def contact_add(request):
             messages.error(request, 'Veuillez saisir une adresse mail valide !')
             return redirect('contact_add')
 
-        b = Contactform(name=name, email=email, msg=msg, date=today, time=time)
-        b.save()
+        ip, is_routable = get_client_ip(request)
 
+        if ip is None:
+            ip = "0.0.0.0"
+
+        try:
+            response = DbIpCity.get(ip, api_key='free')
+            country = response.country + " | " + response.city
+
+        except:
+            country = " Inconnu"
+
+        b = Contactform(name=name,
+                        email=email,
+                        msg=msg,
+                        date=today,
+                        time=time,
+                        ip=ip,
+                        country=country
+                        )
+        b.save()
         messages.success(request, 'Votre message a été envoyée avec succès')
-        return redirect('home')
+        return redirect('contact_add')
 
     site = Main.objects.get(pk=4)
     articles = Articles.objects.all().order_by('-pk')

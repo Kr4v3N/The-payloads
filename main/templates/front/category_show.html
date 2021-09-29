@@ -170,7 +170,6 @@
 								<a href="{% url 'article_detail' word=article.name %}" class="wrap-pic-w hov1 trans-03">
 									<img src="{{ article.pic_url }}" alt="IMG">
 								</a>
-
 								<div class="p-t-10">
 									<h5 class="p-b-5">
 										<a href="{% url 'article_detail' word=article.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">
@@ -198,11 +197,32 @@
 						{% endfor %}
                     </div>
 
+<!--TODO: A REFAIRE DEBUT-->
+
+                    	<a href="#" class="flex-c-c size-a-13 bo-all-1 bocl11 f1-m-6 cl6 hov-btn1 trans-03 m-t-50">
+							charger plus
+						</a>
+
+<!--TODO: A REFAIRE FIN-->
+
+
                     <!-- Pagination -->
-                    <div class="flex-wr-s-c m-rl--7 p-t-15">
-                        <a href="#" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active">1</a>
-                        <a href="#" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">2</a>
-                    </div>
+<!--                    <div class="flex-wr-s-c m-rl&#45;&#45;7 p-t-15">-->
+<!--							{%if articles.has_previous%}-->
+<!--            					<a href="?page={{articles.previous_page_number}}" data-toggle="tooltip" title="Précédent" class="btn btn-xs btn-outline-success">Précédent</a>-->
+<!--        					{%endif%}-->
+<!--							{%for i in articles.paginator.page_range%}-->
+<!--								{%if articles.number == i%}-->
+<!--								<a href="#" onclick="return false;" data-toggle="tooltip" title="{{ Disables }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active">{{ i }}</a>-->
+<!--								{%else%}-->
+<!--								<a href="?page={{i}}" data-toggle="tooltip" title="{{i}}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">{{i}}</a>-->
+<!--								{%endif%}-->
+<!--        					{%endfor%}-->
+
+<!--							{%if articles.has_next%}-->
+<!--                				<a href="?page={{articles.next_page_number}}" data-toggle="tooltip" title="Suivant" class="btn btn-xs btn-outline-success">Suivant</a>-->
+<!--            				{%endif%}-->
+<!--                    </div>-->
                 </div>
 
                 <div class="col-md-10 col-lg-4 p-b-80">

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'manager',
     'comment',
     'maintenance_mode',
+    'blacklist',
 ]
 
 MIDDLEWARE = [

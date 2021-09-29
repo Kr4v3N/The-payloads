@@ -10,6 +10,8 @@ class Contactform(models.Model):
     msg = models.TextField()
     date = models.CharField(max_length=12, default="")
     time = models.CharField(max_length=12, default="")
+    ip = models.TextField(default="")
+    country = models.CharField(max_length=60, default="")
 
     def __str__(self):
         return self.name
