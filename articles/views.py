@@ -316,3 +316,4 @@ def articles_publish(request, pk):
     news.save()
 
     return redirect('articles_list')
+

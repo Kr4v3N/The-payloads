@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>404</title>
+        <link rel="icon" type="image/png" href="{% static 'error/images/favicon.png' %}"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i">
+        <link rel="stylesheet" type="text/css" href="{% static 'error/css/style.css' %}">
+
+        <script>function goback() {window.history.back();}</script>
+
+    </head>
+
+    <body class="content">
+        <div class="container">
+            <div class="row">
+                <div class="main-content">
+                    <div class="logo">
+                        <h2 class="side-lines"><strong class="green">The</strong>payloads.com</h2>
+                    </div>
+                    <div class="title">
+                        <h1>404</h1>
+                        <h5>PAGE NON TROUVÉE</h5>
+                        <p>Désolé, mais la page que vous avez demandée n'existe pas.</p>
+                    </div>
+                    <div class="action-btn">
+                        <a class="green" onclick="goback()">Retourner là où vous étiez </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

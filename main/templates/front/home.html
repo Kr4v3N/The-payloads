@@ -36,7 +36,7 @@
 <!--		<div class="container">-->
 		<div class="row m-rl--1">
 
-		{% for ln in lastarticles2 %}
+		{% for ln in poparticles %}
 		{% if forloop.counter == 1 %}
 		<div class="col-md-6 p-rl-1 p-b-2">
 			<div class="bg-img1 size-a-3 how1 pos-relative" style="background-image: url({{ ln.pic_url }});">
@@ -74,18 +74,18 @@
 		<div class="col-md-6 p-rl-1">
 		<div class="row m-rl--1">
 
-		{% for ln in lastarticles2 %}
+		{% for ln in poparticles %}
 		{% if forloop.counter == 2 %}
 		<div class="col-12 p-rl-1 p-b-2">
-				<div class="bg-img1 size-a-4 how1 pos-relative" style="background-image: url({{ ln.pic_url }});">
-					<a href="{% url 'article_detail' word=ln.name %}" class="dis-block how1-child1 trans-03"></a>
+				<div class="bg-img1 size-a-4 how1 pos-relative" style="background-image: url({{ln.pic_url}});">
+					<a href="{%url 'article_detail' word=ln.name%}" class="dis-block how1-child1 trans-03"></a>
 
 					<div class="flex-col-e-s s-full p-rl-25 p-tb-24">
-						<a href="{% url 'category_show' word=ln.catname %}" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+						<a href="{%url 'category_show' word=ln.catname%}" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
 						{{ln.catname}}
 						</a>
 						<h3 class="how1-child2 m-t-14">
-							<a href="{% url 'article_detail' word=ln.name %}" class="how-txt1 size-a-7 f1-l-2 cl0 hov-cl10 trans-03">
+							<a href="{%url 'article_detail' word=ln.name%}" class="how-txt1 size-a-7 f1-l-2 cl0 hov-cl10 trans-03">
 							{{ln.name}}
 							</a>
 						</h3>
@@ -95,10 +95,10 @@
 		{% endif %}
 		{% endfor %}
 
-		{% for ln in lastarticles2 %}
+		{% for ln in poparticles %}
 		{% if forloop.counter == 3 %}
 		<div class="col-sm-6 p-rl-1 p-b-2">
-			<div class="bg-img1 size-a-5 how1 pos-relative" style="background-image: url({{ ln.pic_url }});">
+			<div class="bg-img1 size-a-5 how1 pos-relative" style="background-image: url({{ln.pic_url}});">
 				<a href="{% url 'article_detail' word=ln.name %}" class="dis-block how1-child1 trans-03"></a>
 
 				<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
@@ -117,7 +117,7 @@
 		{% endif %}
 		{% endfor %}
 
-		{% for ln in lastarticles2 %}
+		{% for ln in poparticles %}
 		{% if forloop.counter == 4 %}
 		<div class="col-sm-6 p-rl-1 p-b-2">
 			<div class="bg-img1 size-a-5 how1 pos-relative" style="background-image: url({{ ln.pic_url }});">
