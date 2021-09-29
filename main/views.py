@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.sites import requests
 from django.core.files.storage import FileSystemStorage
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
 from category.models import Category
 from contactform.models import Contactform
@@ -18,6 +19,7 @@ from subcategory.models import Subcategory
 from trending.models import Trending
 from random import randint
 from comment.models import Comment
+from ipware import get_client_ip
 
 
 def home(request):
@@ -32,6 +34,16 @@ def home(request):
 
     random_object = Trending.objects.all()[randint(0, len(trending) - 1)]
     print(random_object)
+
+    paginator = Paginator(articles, 6)
+    page = request.GET.get('page')
+
+    try:
+        articles = paginator.page(page)
+    except EmptyPage:
+        articles = paginator.page(paginator.num_pages)
+    except PageNotAnInteger:
+        articles = paginator.page(1)
 
     return render(request, 'front/home.html', {
         'site': site,
@@ -91,7 +103,6 @@ def panel(request):
         'emails_count': emails_count,
         'contacts_count': contacts_count
     })
-
 
 def my_login(request):
 

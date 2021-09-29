@@ -187,7 +187,6 @@
 							{% endif %}
 
 								{% if comment|length <= 0 %}
-
 									<form action="{% url 'comments_add' pk=code %}" method="POST">
 									{% csrf_token %}
 										<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Soyez le premier à commenter !" required></textarea>

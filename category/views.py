@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
 
 from articles.models import Articles
@@ -21,6 +22,16 @@ def category_show(request, word):
     poparticles = Articles.objects.filter(activated=1).order_by('-show')[:4]
     trending = Trending.objects.all().order_by('-pk')
 
+    # paginator = Paginator(articles, 8)
+    # page = request.GET.get('page')
+    #
+    # try:
+    #     articles = paginator.page(page)
+    # except EmptyPage:
+    #     articles = paginator.page(paginator.num_pages)
+    # except PageNotAnInteger:
+    #     articles = paginator.page(1)
+
     context = {
         'site': site,
         'articles': articles,
@@ -39,7 +50,6 @@ def category_show(request, word):
 
 
 def category_list(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -51,7 +61,6 @@ def category_list(request):
 
 
 def category_add(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -75,7 +84,6 @@ def category_add(request):
 
 
 def category_delete(request, pk):
-
     b = Category.objects.filter(pk=pk)
     b.delete()
 

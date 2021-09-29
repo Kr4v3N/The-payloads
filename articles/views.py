@@ -64,7 +64,7 @@ def articles_list(request):
     articles = Articles.objects.all()
     subcat = Subcategory.objects.all()
 
-    paginator = Paginator(articles, 2)
+    paginator = Paginator(articles, 10)
     page = request.GET.get('page')
 
     try:

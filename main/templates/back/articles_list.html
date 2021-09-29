@@ -90,8 +90,8 @@
             Page {{ articles.number }} sur {{ articles.paginator.num_pages }}
             <br>
             <br>
-        {% if news.has_previous %}
-            <a href="?page={{articles.previous_page_number}}" data-toggle="tooltip" title="Précédent" class="btn btn-xs btn-default">Précédent</i></a>
+        {% if articles.has_previous %}
+            <a href="?page={{articles.previous_page_number}}" data-toggle="tooltip" title="Précédent" class="btn btn-xs btn-default">Précédent</a>
         {% endif %}
 
         {% for i in articles.paginator.page_range %}
@@ -103,7 +103,7 @@
         {% endfor %}
 
             {% if articles.has_next %}
-                <a href="?page={{ news.next_page_number }}" data-toggle="tooltip" title="Suivant" class="btn btn-xs btn-default">Suivant</i></a>
+                <a href="?page={{ news.next_page_number }}" data-toggle="tooltip" title="Suivant" class="btn btn-xs btn-default">Suivant</a>
             {% endif %}
         </div>
     </div>
