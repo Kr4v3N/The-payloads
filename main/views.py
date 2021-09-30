@@ -345,10 +345,20 @@ def answer_cmt(request,pk):
 
         to_email = Contactform.objects.get(pk=pk).email
 
-        subject = 'answer form'
-        message = txt
-        email_from = settings.EMAIL_HOST_USER
-        emails = [to_email]
-        send_mail(subject, message, email_from, emails)
+        # subject = 'Réponse de '
+        # message = txt
+        # email_from = settings.EMAIL_HOST_USER
+        # emails = [to_email]
+        # send_mail(subject, message, email_from, emails)
+
+        send_mail(
+            'sender number 2',
+            txt,
+            'sender@thepayloads.com',
+            [to_email],
+            fail_silently=False,
+        )
+        messages.success(request, 'Votre message a été transmis avec succès')
+        return redirect('contact_list')
 
     return render(request, 'back/answer_cmt.html', {'pk': pk})
