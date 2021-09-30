@@ -334,4 +334,14 @@ def change_pass(request):
 
 def answer_cmt(request, pk):
 
+    if request.method == 'POST':
+
+        txt = request.POST.get('txt')
+
+        if txt == "":
+            messages.error(request, 'Rédiger votre réponse')
+            return redirect('anwser_cmt')
+
+    print(txt)
+
     return render(request, 'back/answer_cmt.html', {'pk': pk})

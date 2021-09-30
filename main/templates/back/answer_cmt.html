@@ -27,10 +27,10 @@
                 <!-- Basic Form Elements Title -->
                 <div class="block-title">
                     <h2><strong>Réponse au commentaire :</strong></h2>
-                </div>-->
+                </div>
+                <!-- END Form Elements Title -->
 
-                <!-- END Form Elements Title
-                <!-- Basic Form Elements Content -->
+                 <!-- Basic Form Elements Content -->
                 <form action="{% url 'answer_cmt' pk=pk  %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
 
                     {% csrf_token %}
@@ -47,7 +47,7 @@
                         </div>
                     </div>
             </form>
-                <!-- END Basic Form Elements Content -->
+            <!-- END Basic Form Elements Content -->
             </div>
             <!-- END Basic Form Elements Block -->
     </div>
