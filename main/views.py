@@ -20,6 +20,8 @@ from trending.models import Trending
 from random import randint
 from comment.models import Comment
 from ipware import get_client_ip
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def home(request):
@@ -104,8 +106,8 @@ def panel(request):
         'contacts_count': contacts_count
     })
 
-def my_login(request):
 
+def my_login(request):
     if request.method == 'POST':
         user_txt = request.POST.get('username')
         pass_txt = request.POST.get('password')
@@ -142,7 +144,6 @@ def my_logout(request):
 
 
 def site_setting(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -332,7 +333,7 @@ def change_pass(request):
     return render(request, 'back/change_pass.html')
 
 
-def answer_cmt(request, pk):
+def answer_cmt(request,pk):
 
     if request.method == 'POST':
 
@@ -340,8 +341,14 @@ def answer_cmt(request, pk):
 
         if txt == "":
             messages.error(request, 'Rédiger votre réponse')
-            return redirect('anwser_cmt')
+            return redirect('answer_cmt')
 
-    print(txt)
+        to_email = Contactform.objects.get(pk=pk).email
+
+        subject = 'answer form'
+        message = txt
+        email_from = settings.EMAIL_HOST_USER
+        emails = [to_email]
+        send_mail(subject, message, email_from, emails)
 
     return render(request, 'back/answer_cmt.html', {'pk': pk})
