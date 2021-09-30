@@ -333,7 +333,7 @@ def change_pass(request):
     return render(request, 'back/change_pass.html')
 
 
-def answer_cmt(request,pk):
+def answer_cmt(request, pk):
 
     if request.method == 'POST':
 
@@ -345,19 +345,23 @@ def answer_cmt(request,pk):
 
         to_email = Contactform.objects.get(pk=pk).email
 
-        # subject = 'Réponse de '
-        # message = txt
-        # email_from = settings.EMAIL_HOST_USER
-        # emails = [to_email]
-        # send_mail(subject, message, email_from, emails)
+        # Send email with settting #
+        subject = 'Réponse '
+        message = txt
+        email_from = settings.EMAIL_HOST_USER
+        emails = [to_email]
+        send_mail(subject, message, email_from, emails)
 
-        send_mail(
-            'sender number 2',
-            txt,
-            'sender@thepayloads.com',
-            [to_email],
-            fail_silently=False,
-        )
+        # Send email without settting #
+
+        # send_mail(
+        #     'sender number 2',
+        #     txt,
+        #     'sender@thepayloads.com',
+        #     [to_email],
+        #     fail_silently=False,
+        # )
+
         messages.success(request, 'Votre message a été transmis avec succès')
         return redirect('contact_list')
 
