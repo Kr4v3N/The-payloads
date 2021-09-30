@@ -61,7 +61,7 @@
                         <td class="text-center">{{ msg.msg }}</td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="#" data-toggle="tooltip" title="answer"
+                                <a href="{% url 'answer_cmt' pk=msg.pk %}" data-toggle="tooltip" title="answer"
                                    class="btn btn-xs btn-default">Répondre</a>
                                 <a href="{% url 'contact_delete' pk=msg.pk %}"
                                    data-confirm="Etes-vous certain de vouloir supprimer le massage ?"
@@ -78,9 +78,6 @@
     <!-- END Datatables Content -->
 
 {% endblock mainblock %}
-
-
-
 
 {% block footerblock %}
 <!-- Load and execute javascript code used only in this page -->

@@ -330,3 +330,8 @@ def change_pass(request):
             return redirect('change_pass')
 
     return render(request, 'back/change_pass.html')
+
+
+def answer_cmt(request, pk):
+
+    return render(request, 'back/answer_cmt.html', {'pk': pk})
