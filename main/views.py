@@ -338,31 +338,31 @@ def answer_cmt(request, pk):
     if request.method == 'POST':
 
         txt = request.POST.get('txt')
+        sub = request.POST.get('subject')
 
         if txt == "":
-            messages.error(request, 'Rédiger votre réponse')
-            return redirect('answer_cmt')
+            messages.error(request, 'Rédiger votre réponse !')
+        else:
+            to_email = Contactform.objects.get(pk=pk).email
 
-        to_email = Contactform.objects.get(pk=pk).email
+            # Send email with settting #
+            subject = sub
+            message = txt
+            email_from = settings.EMAIL_HOST_USER
+            emails = [to_email]
+            send_mail(subject, message, email_from, emails)
 
-        # Send email with settting #
-        subject = 'Réponse '
-        message = txt
-        email_from = settings.EMAIL_HOST_USER
-        emails = [to_email]
-        send_mail(subject, message, email_from, emails)
+            # Send email without settting #
 
-        # Send email without settting #
+            # send_mail(
+            #     'sender number 2',
+            #     txt,
+            #     'sender@thepayloads.com',
+            #     [to_email],
+            #     fail_silently=False,
+            # )
 
-        # send_mail(
-        #     'sender number 2',
-        #     txt,
-        #     'sender@thepayloads.com',
-        #     [to_email],
-        #     fail_silently=False,
-        # )
-
-        messages.success(request, 'Votre message a été transmis avec succès')
-        return redirect('contact_list')
+            messages.success(request, 'Votre message a été transmis avec succès')
+            return redirect('contact_list')
 
     return render(request, 'back/answer_cmt.html', {'pk': pk})

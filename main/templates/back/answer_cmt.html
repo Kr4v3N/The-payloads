@@ -17,15 +17,18 @@
     <!-- Datatables Content -->
     <div class="block full">
         <div class="block-title">
-            <h2><strong>Réponse aux messages :</strong></h2>
+            <h2><strong>Réponse au message  :</strong></h2>
         </div>
             <!-- Basic Form Elements Block -->
             <div class="block">
             <!-- END Form Elements Title -->
                  <!-- Basic Form Elements Content -->
-                <form action="{% url 'answer_cmt' pk=pk  %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                <form action="{% url 'answer_cmt' pk=pk %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
                     {% csrf_token %}
                     <div class="form-group">
+                        <div class="col-md-12">
+                            <textarea type="text" rows="2" id="subject" name="subject" class="form-control" placeholder="Sujet"></textarea>
+                        </div>
                         <div class="col-md-12">
                             <textarea type="text" rows="10" id="txt" name="txt" class="form-control" placeholder="Votre réponse"></textarea>
                         </div>

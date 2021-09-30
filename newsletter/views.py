@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
 from django.core.validators import validate_email
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -35,6 +37,7 @@ def articles_letter(request):
     except ValidationError:
         messages.error(request, 'Veuillez saisir une adresse mail valide !')
         return redirect('home')
+
     b = Newsletter(email=email,
                    status=1,
                    date=today,
@@ -68,4 +71,27 @@ def articles_emails_delete(request, pk):
     b.delete()
 
     messages.success(request, "Le courriel a été supprimé avec succès")
+    return redirect('articles_emails')
+
+
+def send_email(request):
+
+    if request.method == 'POST':
+
+        txt = request.POST.get('txt')
+        sub = request.POST.get('subject')
+
+        a = []
+        for i in Newsletter.objects.all():
+            a.append(Newsletter.objects.get(pk=i.pk).txt)
+        # print(a)
+        subject = sub
+        message = txt
+        email_from = settings.EMAIL_HOST_USER
+        emails = a
+        send_mail(subject, message, email_from, emails)
+
+        messages.success(request, 'Vos messages ont été distribué avec succès')
+        return redirect('contact_list')
+
     return redirect('articles_emails')
