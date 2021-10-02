@@ -10,6 +10,7 @@ from .models import Category
 
 
 def category_show(request, word):
+
     site = Main.objects.get(pk=4)
     articles = Articles.objects.filter(activated=1).order_by('-pk')
     categories = Category.objects.filter(name=word)
@@ -22,15 +23,20 @@ def category_show(request, word):
     poparticles = Articles.objects.filter(activated=1).order_by('-show')[:4]
     trending = Trending.objects.all().order_by('-pk')
 
-    # paginator = Paginator(articles, 8)
+    # articless = Articles.objects.all()
+    # # Slice pages
+    # paginator = Paginator(articless, 4)
+    # # Get current page number
     # page = request.GET.get('page')
     #
     # try:
-    #     articles = paginator.page(page)
+    #     # Return only this page albums and not others
+    #     news = paginator.page(page)
     # except EmptyPage:
-    #     articles = paginator.page(paginator.num_pages)
+    #     # If page is out of range (e.g. 9999), deliver last page of results.
+    #     news = paginator.page(paginator.num_pages)
     # except PageNotAnInteger:
-    #     articles = paginator.page(1)
+    #     news = paginator.page(1)
 
     context = {
         'site': site,
@@ -44,6 +50,8 @@ def category_show(request, word):
         'poparticles': poparticles,
         'trending': trending,
         'cat': cat,
+        'paginate': True,
+        # 'news': news
     }
 
     return render(request, 'front/category_show.html', context)

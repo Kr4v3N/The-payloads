@@ -1,0 +1,94 @@
+{% extends 'front/base.html' %}
+
+{% load static %}
+
+
+{% block headblock %}
+<title>{{site.name}} | Search</title>
+{% endblock %}
+
+
+{% block mainblock %}
+
+<!-- Headline -->
+<div class="container p-t-40">
+    <div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
+        <div class="f2-s-1 p-r-30 size-w-0 m-tb-6 flex-wr-s-c">
+            <span class="text-uppercase cl2 p-r-8">
+                Lorem ipsum ......
+            </span>
+        </div>
+
+        <div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-4">
+			<form action="{% url 'all_articles_search' %}" method="post" class="f1-s-1 cl6 plh9 s-full p-r-45">
+				{% csrf_token %}
+				<input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" onkeypress="return Num(event);" name="txt" placeholder="Rechercher">
+				<button class="flex-c-c size-a-1 ab-t-r fs-20 cl8 hov-cl10 trans-03"><i class="fa fa-search" aria-hidden="true"></i></button>
+			</form>
+        </div>
+    </div>
+</div>
+<!-- Latest -->
+<section class="bg0 p-b-40">
+	<div class="container">
+
+		<div class="row p-t-35">
+
+			{% for i in allnews %}
+			<div class="col-sm-6 col-md-4">
+				<!-- Item latest -->	
+				<div class="m-b-45">
+					<a href="{% url 'article_detail' word=i.name %}" class="wrap-pic-w hov1 trans-03">
+						<img style="display: inline-block; width:330px; height:240px;" src="{{i.pic_url}}" alt="IMG">
+					</a>
+
+					<div class="p-t-16">
+						<h5 class="p-b-5">
+							<a href="{%url 'article_detail' word=i.name %}" class="f1-m-3 cl2 hov-cl10 trans-03">
+								{{i.name}} 
+							</a>
+						</h5>
+
+						<p>{{i.short_txt|safe}}</p>
+						<br/>
+
+						<span class="cl8">
+							<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+								by {{i.writer}}
+							</a>
+
+							<span class="f1-s-3 m-rl-3">
+								-
+							</span>
+
+							<span class="f1-s-3">
+								{{i.date}}
+							</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+								<!-- Pagination -->
+						<div class="flex-wr-s-c m-rl--7 p-t-15 ">
+							{% if allnews.has_previous %}
+            					<a href="?page={{allnews.previous_page_number}}" data-toggle="tooltip" title="Précédent" class="btn btn-xs btn-outline-success">Précédent</a>
+        					{% endif %}
+							{% for i in allnews.paginator.page_range %}
+								{% if allnews.number == i %}
+								<a href="#" onclick="return false"; data-toggle="tooltip" title="{{ Disables }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active">{{ i }}</a>
+								{% else %}
+								<a href="?page={{ i }}" data-toggle="tooltip" title="{{ i }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">{{ i }}</a>
+								{% endif %}
+        					{% endfor %}
+
+							{% if allnews.has_next %}
+                				<a href="?page={{ articles.next_page_number }}" data-toggle="tooltip" title="Suivant" class="btn btn-xs btn-outline-success">Suivant</a>
+            				{% endif %}
+						</div>
+	</div>
+							<!-- Pagination -->
+</section>
+
+{% endblock %}

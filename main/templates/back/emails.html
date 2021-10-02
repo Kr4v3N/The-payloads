@@ -61,6 +61,7 @@
                 <thead>
                 {% if emails|length <= 1 %}
                     <tr>
+                        <th class="text-center">&nbsp</th>
                         <th class="text-center">Identifiant</th>
                         <th class="text-center">Email</th>
                         <th class="text-center">Date d'inscription</th>
@@ -68,6 +69,7 @@
                     </tr>
                 {% else %}
                     <tr>
+                        <th class="text-center">&nbsp</th>
                         <th class="text-center">Identifiants</th>
                         <th class="text-center">Emails</th>
                         <th class="text-center">Dates d'inscription</th>
@@ -79,6 +81,7 @@
                 <tbody>
                 {% for email in emails %}
                     <tr>
+                        <td class="text-center"><input type="checkbox" name="{{email.pk}}" id="check"></td>
                         <td class="text-center">{{ email.pk }}</td>
                         <td class="text-center">{{ email.txt }}</td>
                         <td class="text-center">{{ email.date }} à {{ email.time }}</td>

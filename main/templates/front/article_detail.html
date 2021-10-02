@@ -28,10 +28,11 @@
 			</div>
 
 			<div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
-				<input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Rechercher">
-				<button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
-					<i class="zmdi zmdi-search"></i>
-				</button>
+				<form action="{% url 'all_articles_search' %}" method="post" class="f1-s-1 cl6 plh9 s-full p-r-45">
+					{% csrf_token %}
+					<input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="txt" placeholder="Rechercher">
+					<button class="flex-c-c size-a-1 ab-t-r fs-20 cl8 hov-cl10 trans-03"><i class="fa fa-search" aria-hidden="true"></i></button>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -190,6 +191,7 @@
 									<form action="{% url 'comments_add' pk=code %}" method="POST">
 									{% csrf_token %}
 										<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Soyez le premier à commenter !" required></textarea>
+										<span class="">Confirmez que vous êtes humain</span>
 										<div class="input-group">
 											<div class="g-recaptcha" data-sitekey="6Ld3WZQcAAAAANQFkJJpy8AmD-briAXgFlL5Ri0T"></div>
 								 		</div>
@@ -199,6 +201,7 @@
 									<form action="{% url 'comments_add' pk=code %}" method="POST">
 									{% csrf_token %}
 										<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Rédiger un commentaire..." required></textarea>
+										<span class="">Confirmez que vous êtes humain</span>
 										<div class="input-group">
 											<div class="g-recaptcha" data-sitekey="6Ld3WZQcAAAAANQFkJJpy8AmD-briAXgFlL5Ri0T"></div>
 								 		</div>
@@ -210,6 +213,7 @@
 									<form action="{% url 'comments_add' pk=code %}" method="POST">
 									{% csrf_token %}
 										<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Rejoindre la discussion" required></textarea>
+										<span class="">Confirmez que vous êtes humain</span>
 										<div class="input-group">
 											<div class="g-recaptcha" data-sitekey="6Ld3WZQcAAAAANQFkJJpy8AmD-briAXgFlL5Ri0T"></div>
 								 		</div>
@@ -228,6 +232,7 @@
 								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" id="name" placeholder="Nom*" required>
 
 								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" id="email" placeholder="Email*" required>
+								<span class="">Confirmez que vous êtes humain</span>
 								<div class="input-group">
 									<div class="g-recaptcha" data-sitekey="6Ld3WZQcAAAAANQFkJJpy8AmD-briAXgFlL5Ri0T"></div>
 								</div>

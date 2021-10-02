@@ -25,6 +25,7 @@ from django.conf import settings
 
 
 def home(request):
+
     site = Main.objects.get(pk=4)
     articles = Articles.objects.filter(activated=1).order_by('-pk')
     cat = Category.objects.all()
@@ -248,6 +249,7 @@ def about_setting(request):
 
 
 def contact(request):
+
     site = Main.objects.get(pk=4)
     cat = Category.objects.all()
     articles = Articles.objects.filter(activated=1).order_by('-pk')

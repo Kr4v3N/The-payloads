@@ -72,7 +72,7 @@
                         <td class="text-center">{{ cc.comments }}</td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="{% url 'articles_delete' pk=cc.pk %}" data-confirm="Etes-vous certain de vouloir supprimer l'article {{ articles.pk }} ?"
+                                <a href="{% url 'articles_delete' pk=cc.pk %}" data-confirm="Etes-vous certain de vouloir supprimer l'article '{{ cc.name }}' ?"
                                    data-toggle="tooltip" title="Supprimer" class="btn btn-xs btn-danger"><i class="fa fa-times"> Supprimer</i></a>
                                 <a href="{% url 'articles_edit' pk=cc.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"> Éditer</i></a>
                                 {% if cc.activated == 0 %}

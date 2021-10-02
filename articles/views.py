@@ -9,10 +9,13 @@ from trending.models import Trending
 from .models import Articles
 from main.models import Main
 from django.core.files.storage import FileSystemStorage
+from itertools import chain
+
+
+mysearch = ""
 
 
 def article_detail(request, word):
-
     site = Main.objects.get(pk=4)
     articles = Articles.objects.all().order_by('-pk')
     cat = Category.objects.all()
@@ -55,7 +58,6 @@ def article_detail(request, word):
 
 
 def articles_list(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -69,11 +71,10 @@ def articles_list(request):
 
     try:
         articles = paginator.page(page)
-    except EmptyPage :
+    except EmptyPage:
         articles = paginator.page(paginator.num_pages)
-    except PageNotAnInteger :
+    except PageNotAnInteger:
         articles = paginator.page(1)
-
 
     return render(request, 'back/articles_list.html', {
         'articles': articles,
@@ -82,7 +83,6 @@ def articles_list(request):
 
 
 def articles_add(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -154,7 +154,7 @@ def articles_add(request):
                     b = Category.objects.get(pk=ocatid)
                     b.count = count
                     b.save()
-                    messages.success(request, "Votre article a été ajouté avec succès")
+                    messages.success(request, "Votre article '{}' a été ajouté avec succès".format(filename))
                     return redirect('articles_list')
                 else:
                     fs = FileSystemStorage()
@@ -199,7 +199,7 @@ def articles_delete(request, pk):
 
         m.save()
 
-        messages.success(request, "L'articles a bien été supprimé")
+        messages.success(request, "L'articles {} a bien été supprimé".format(b))
         return redirect('articles_list')
 
     except:
@@ -208,6 +208,7 @@ def articles_delete(request, pk):
 
 
 def articles_edit(request, pk):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -317,3 +318,97 @@ def articles_publish(request, pk):
 
     return redirect('articles_list')
 
+
+def all_articles(request):
+
+    allnews = Articles.objects.all()
+
+    site = Main.objects.get(pk=4)
+    news = Articles.objects.filter(activated=1).order_by('-pk')
+    cat = Category.objects.all()
+    subcat = Subcategory.objects.all()
+    lastnews = Articles.objects.filter(activated=1).order_by('-pk')[:3]
+    popnews = Articles.objects.filter(activated=1).order_by('-show')
+    popnews2 = Articles.objects.filter(activated=1).order_by('-show')[:3]
+    trending = Trending.objects.all().order_by('-pk')[:5]
+    lastnews2 = Articles.objects.filter(activated=1).order_by('-pk')[:4]
+
+    paginator = Paginator(allnews, 12)
+    page = request.GET.get('page')
+
+    try:
+        allnews = paginator.page(page)
+    except EmptyPage:
+        allnews = paginator.page(paginator.num_pages)
+    except PageNotAnInteger:
+        allnews = paginator.page(1)
+
+    return render(request, 'front/all_articles.html', {
+        'site': site,
+        'news': news,
+        'cat': cat,
+        'subcat': subcat,
+        'lastnews': lastnews,
+        'popnews': popnews,
+        'popnews2': popnews2,
+        'trending': trending,
+        'lastnews2': lastnews2,
+        'allnews': allnews,
+    })
+
+
+def all_articles_search(request):
+
+    if request.method == 'POST':
+
+        txt = request.POST.get('txt')
+
+        a = Articles.objects.filter(name__contains=txt)
+        b = Articles.objects.filter(short_txt__contains=txt)
+        c = Articles.objects.filter(body_txt__contains=txt)
+
+        allnewss = list(chain(a, b))
+        allnewss = list(dict.fromkeys(allnewss))
+
+    else:
+
+        a = Articles.objects.filter(name__contains=mysearch)
+        b = Articles.objects.filter(short_txt__contains=mysearch)
+        c = Articles.objects.filter(body_txt__contains=mysearch)
+
+        allnewss = list(chain(a, b))
+        allnewss = list(dict.fromkeys(allnewss))
+
+    site = Main.objects.get(pk=4)
+    news = Articles.objects.filter(activated=1).order_by('-pk')
+    cat = Category.objects.all()
+    subcat = Subcategory.objects.all()
+    lastnews = Articles.objects.filter(activated=1).order_by('-pk')[:3]
+    popnews = Articles.objects.filter(activated=1).order_by('-show')
+    popnews2 = Articles.objects.filter(activated=1).order_by('-show')[:3]
+    trending = Trending.objects.all().order_by('-pk')[:5]
+    lastnews2 = Articles.objects.filter(activated=1).order_by('-pk')[:4]
+
+    paginator = Paginator(allnewss, 12)
+    page = request.GET.get('page')
+
+    try:
+        allnews = paginator.page(page)
+    except EmptyPage:
+        allnews = paginator.page(paginator.num_pages)
+    except PageNotAnInteger:
+        allnews = paginator.page(1)
+
+    return render(request, 'front/all_articles.html', {
+        'site': site,
+        'news': news,
+        'cat': cat,
+        'subcat': subcat,
+        'lastnews': lastnews,
+        'popnews': popnews,
+        'popnews2': popnews2,
+        'trending': trending,
+        'lastnews2': lastnews2,
+        'allnews': allnews,
+
+    })

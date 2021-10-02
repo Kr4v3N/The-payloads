@@ -26,11 +26,12 @@
                 </span>
             </div>
 
-            <div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
-                <input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Rechercher">
-                <button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
-                    <i class="zmdi zmdi-search"></i>
-                </button>
+            <div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-4">
+                <form action="{% url 'all_articles_search' %}" method="post" class="f1-s-1 cl6 plh9 s-full p-r-45">
+                    {% csrf_token %}
+                    <input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" onkeypress="return Num(event);" name="txt" placeholder="Rechercher">
+                    <button class="flex-c-c size-a-1 ab-t-r fs-20 cl8 hov-cl10 trans-03"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </form>
             </div>
         </div>
     </div>
@@ -84,30 +85,31 @@
 
 <!--TODO: A REFAIRE DEBUT-->
 
-                    	<a href="#" class="flex-c-c size-a-13 bo-all-1 bocl11 f1-m-6 cl6 hov-btn1 trans-03 m-t-50">
-							charger plus
-						</a>
+<!--                    	<a href="#" class="flex-c-c size-a-13 bo-all-1 bocl11 f1-m-6 cl6 hov-btn1 trans-03 m-t-50">-->
+<!--							charger plus-->
+<!--						</a>-->
 
 <!--TODO: A REFAIRE FIN-->
 
+<!--                    {% if paginate %}
+                    &lt;!&ndash; Pagination &ndash;&gt;
+                    <div class="flex-wr-s-c m-rl&#45;&#45;7 p-t-15">
+							{%if news.has_previous%}
+            					<a href="?page={{news.previous_page_number}}" data-toggle="tooltip" title="Précédent" class="btn btn-xs btn-outline-success">Précédent</a>
+        					{%endif%}
+							{%for i in news.paginator.page_range%}
+								{%if articles.number == i%}
+								<a href="#" onclick="return false;" data-toggle="tooltip" title="{{ Disables }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active">{{ i }}</a>
+								{%else%}
+								<a href="?page={{i}}" data-toggle="tooltip" title="{{i}}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">{{i}}</a>
+								{%endif%}
+        					{%endfor%}
 
-                    <!-- Pagination -->
-<!--                    <div class="flex-wr-s-c m-rl&#45;&#45;7 p-t-15">-->
-<!--							{%if articles.has_previous%}-->
-<!--            					<a href="?page={{articles.previous_page_number}}" data-toggle="tooltip" title="Précédent" class="btn btn-xs btn-outline-success">Précédent</a>-->
-<!--        					{%endif%}-->
-<!--							{%for i in articles.paginator.page_range%}-->
-<!--								{%if articles.number == i%}-->
-<!--								<a href="#" onclick="return false;" data-toggle="tooltip" title="{{ Disables }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active">{{ i }}</a>-->
-<!--								{%else%}-->
-<!--								<a href="?page={{i}}" data-toggle="tooltip" title="{{i}}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">{{i}}</a>-->
-<!--								{%endif%}-->
-<!--        					{%endfor%}-->
-
-<!--							{%if articles.has_next%}-->
-<!--                				<a href="?page={{articles.next_page_number}}" data-toggle="tooltip" title="Suivant" class="btn btn-xs btn-outline-success">Suivant</a>-->
-<!--            				{%endif%}-->
-<!--                    </div>-->
+							{%if news.has_next%}
+                				<a href="?page={{news.next_page_number}}" data-toggle="tooltip" title="Suivant" class="btn btn-xs btn-outline-success">Suivant</a>
+            				{%endif%}
+                    </div>
+                    {%endif%}-->
                 </div>
 
                 <div class="col-md-10 col-lg-4 p-b-80">

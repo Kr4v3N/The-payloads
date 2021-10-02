@@ -33,6 +33,20 @@
 <!--===============================================================================================-->
 </head>
 
+<script >
+	function Num(x) {
+		let key;
+		if (window.event) {
+			key = window.event.keyCode;}
+		else if (x)  {key = x.which;}
+		else {return true;}
+		const keychar = String.fromCharCode(key);
+		keychar.toLowerCase();
+		if(key === (0 || 8 || 13 || 27) || ("abcdefghijklmnopqrstvxyzwçABCDEFGHIJKLMNOPQRSTVWXYZÇâîû").indexOf(keychar) > -1) {return true;}
+		return key === ("9").indexOf(keychar) > -1;
+	}
+</script>
+
 <body class="animsition anim">
 
     <!-- Header -->

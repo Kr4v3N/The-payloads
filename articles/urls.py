@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^panel/articles/del/(?P<pk>\d+)/$', views.articles_delete, name='articles_delete'),
     url(r'^panel/articles/edit/(?P<pk>\d+)/$', views.articles_edit, name='articles_edit'),
     url(r'^panel/articles/publish/(?P<pk>\d+)/$', views.articles_publish, name='articles_publish'),
+    url(r'^articles/all/$', views.all_articles, name='all_articles'),
+    url(r'^articles/all/search$', views.all_articles_search, name='all_articles_search'),
 ]
