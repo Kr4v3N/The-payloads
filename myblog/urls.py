@@ -19,10 +19,20 @@ from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
+from django.contrib.sitemaps.views import sitemap
+from main.sitemap import MyArticlesSiteMap
+
+sitemaps = {
+
+    'articles': MyArticlesSiteMap(),
+}
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
 
+    path('admin/', admin.site.urls),
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+
+    url(r'^admin/', serve, {'document_root': settings.MEDIA_ROOT}),
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 

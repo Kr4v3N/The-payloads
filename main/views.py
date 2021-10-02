@@ -145,12 +145,14 @@ def my_logout(request):
 
 
 def site_setting(request):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
     # Login check end
 
     if request.method == 'POST':
+
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         facebook = request.POST.get('facebook')
@@ -159,6 +161,8 @@ def site_setting(request):
         youtube = request.POST.get('youtube')
         link = request.POST.get('link')
         about = request.POST.get('about')
+        seo_txt = request.POST.get('seotxt')
+        seo_keywords = request.POST.get('seokeyword')
 
         if facebook == "": facebook == "#"
         if twitter == "": twitter == "#"
@@ -206,12 +210,18 @@ def site_setting(request):
         b.youtube = youtube
         b.link = link
         b.about = about
+
+        b.seo_txt = seo_txt
+        b.seo_keywords = seo_keywords
+
+
         if pic_url != "-": b.pic_url = pic_url
         if pic_name != "-": b.pic_name = pic_name
         if pic_url_footer != "-": b.pic_url_footer = pic_url_footer
         if pic_name_footer != "-": b.pic_name_footer = pic_name_footer
 
         b.save()
+
         messages.success(request, "Votre ou vos paramètres ont été modifiés avec succès")
         return redirect('site_setting')
 
@@ -221,6 +231,7 @@ def site_setting(request):
 
 
 def about_setting(request):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')

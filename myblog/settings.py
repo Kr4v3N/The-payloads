@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'comment',
     'maintenance_mode',
     'blacklist',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [

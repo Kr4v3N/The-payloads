@@ -11,7 +11,6 @@ from main.models import Main
 from django.core.files.storage import FileSystemStorage
 from itertools import chain
 
-
 mysearch = ""
 
 
@@ -54,6 +53,7 @@ def article_detail(request, word):
         'code': code,
         'comment': comment,
         'comment_count': comment_count,
+        'tagname': tagname
     })
 
 
@@ -177,7 +177,6 @@ def articles_add(request):
 
 
 def articles_delete(request, pk):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -208,7 +207,6 @@ def articles_delete(request, pk):
 
 
 def articles_edit(request, pk):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -320,7 +318,6 @@ def articles_publish(request, pk):
 
 
 def all_articles(request):
-
     allnews = Articles.objects.all()
 
     site = Main.objects.get(pk=4)
@@ -358,25 +355,29 @@ def all_articles(request):
 
 
 def all_articles_search(request):
-
     if request.method == 'POST':
 
         txt = request.POST.get('txt')
+
+        # if len(Articles.objects.filter(name__contains=txt)) != 0:
+        #     # return redirect('all_articles_search')
 
         a = Articles.objects.filter(name__contains=txt)
         b = Articles.objects.filter(short_txt__contains=txt)
         c = Articles.objects.filter(body_txt__contains=txt)
 
-        allnewss = list(chain(a, b))
+        allnewss = list(chain(a, b, c))
         allnewss = list(dict.fromkeys(allnewss))
 
+        if allnewss == "":
+            messages.error(request, "Titre non trouvé")
     else:
 
         a = Articles.objects.filter(name__contains=mysearch)
         b = Articles.objects.filter(short_txt__contains=mysearch)
         c = Articles.objects.filter(body_txt__contains=mysearch)
 
-        allnewss = list(chain(a, b))
+        allnewss = list(chain(a, b, c))
         allnewss = list(dict.fromkeys(allnewss))
 
     site = Main.objects.get(pk=4)

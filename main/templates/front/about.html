@@ -4,6 +4,26 @@
 
 {% block headblock %}
 <title>{{ site.name }} | À propos</title>
+ <!-- Required meta tags -->
+<meta name="description" content="{{site.seo_txt}}"/>
+<meta name="keywords" content="{{ site.seo_keywords}}"/>
+
+<!-- Open Graph meta -->
+<meta property="og:title" content="the payloads"/>
+<meta property="og:type" content="Partez en balade avec Mathieu"/>
+<meta property="og:url" content="https://thepayloads"/>
+<meta property="og:image" content="https://www.belle-balade.fr/medias/Portrait-mathieu.png"/>
+<meta property="og:description" content="Avec Mathieu, votre guide diplômé, vous allez pouvoir découvrir la nature et le patrimoine français en Ardèche, Bresse et Bourgogne."/>
+<meta property="author" content="Kr4v3n"/>
+
+<!-- Twitter Card meta -->
+<meta name="twitter:site" content="@mathieu">
+<meta name="twitter:title" content="Belle balade">
+<meta name="twitter:description" content="Avec Mathieu, votre guide diplômé, vous allez pouvoir découvrir la nature et le patrimoine français en Ardèche, Bresse et Bourgogne.">
+<meta name="twitter:creator" content="@mathieu">
+<meta name="twitter:url" content="https://www.belle-balade.fr" />
+<meta name="twitter:domain" content="https://www.belle-balade.fr" />
+<meta name="twitter:image:src" content="https://www.belle-balade.fr/medias/Portrait-mathieu.png">
 {% endblock %}
 
 {% block mainblock %}

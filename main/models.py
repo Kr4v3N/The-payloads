@@ -15,6 +15,9 @@ class Main(models.Model):
     phone = models.CharField(max_length=100, default="-")
     link_footer = models.CharField(max_length=100, default="-")
 
+    seo_txt = models.CharField(max_length=200, default="-")
+    seo_keywords = models.TextField(default="-")
+
     set_name = models.CharField(max_length=20, default="-")
 
     pic_url = models.TextField(default="")

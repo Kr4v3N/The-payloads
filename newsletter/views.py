@@ -37,7 +37,7 @@ def articles_letter(request):
         messages.error(request, 'Veuillez saisir une adresse mail valide !')
         return redirect('home')
 
-    b = Newsletter(email=email,
+    b = Newsletter(txt=email,
                    status=1,
                    date=today,
                    time=time,
