@@ -10,7 +10,6 @@ from .models import Newsletter
 
 
 def articles_letter(request):
-
     now = datetime.datetime.now()
     year = now.year
     month = now.month
@@ -49,7 +48,6 @@ def articles_letter(request):
 
 
 def articles_emails(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -61,7 +59,6 @@ def articles_emails(request):
 
 
 def articles_emails_delete(request, pk):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -75,7 +72,6 @@ def articles_emails_delete(request, pk):
 
 
 def send_email(request):
-
     if request.method == 'POST':
 
         txt = request.POST.get('txt')
@@ -93,5 +89,24 @@ def send_email(request):
 
         messages.success(request, 'Vos messages ont été distribué avec succès')
         return redirect('contact_list')
+
+    return redirect('articles_emails')
+
+
+def check_mychecklist(request):
+
+    # for i in Newsletter.objects.filter(status=1):
+    #
+    #     if request.method == 'POST':
+    #         x = request.POST.get(str(i.pk))
+    #         print(x)
+    #         if str(x) == 'on':
+    #             b = Newsletter.objects.get(pk=i.pk)
+    #             b.delete()
+    check = request.POST.getlist('checks[]')
+    print(check)
+    for i in check:
+        b = Newsletter.objects.get(pk=i)
+        b.delete()
 
     return redirect('articles_emails')
