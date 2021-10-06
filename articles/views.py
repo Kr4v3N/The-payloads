@@ -58,6 +58,7 @@ def article_detail(request, word):
 
 
 def articles_list(request):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -83,6 +84,7 @@ def articles_list(request):
 
 
 def articles_add(request):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -207,6 +209,7 @@ def articles_delete(request, pk):
 
 
 def articles_edit(request, pk):
+    
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')

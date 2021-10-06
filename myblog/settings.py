@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 #
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -106,25 +106,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# SSL
-
-SECURE_HSTS_SECONDS = 3600
-SECURE_HSTS_INCLUDE_SUBDOMAIN = True
-SECURE_HSTS_PRELOAD = True
-
-CSRF_COOKIE_SAMESITE = 'strict'
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SECURE = True
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_SSL_REDIRECT = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-CSRF_TRUSTED_ORIGINS = ['thepayloads.com']
-
-
 # Maintenance
 # if True the maintenance-mode will be activated
 MAINTENANCE_MODE = None
@@ -170,7 +151,7 @@ MAINTENANCE_MODE_RETRY_AFTER = 3600 # 1 hour
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'fr'
+LANGUAGE_CODE = 'fr-FR'
 
 TIME_ZONE = 'Europe/Paris'
 

@@ -4,7 +4,6 @@
 
 <html lang="fr">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,7 +29,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'front/css/util.min.css'%}">
 <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{% static 'front/css/main.css' %}">
-<!--===============================================================================================-->
+    <title></title>
+    <!--===============================================================================================-->
 </head>
 
 <script >
@@ -285,7 +285,11 @@
                     </div>
 
                     <div class="col-sm-6 col-lg-4 p-b-20">
+                        {% if cat.count <= 1 %}
+                        <div class="size-h-3 flex-s-c"><h5 class="f1-m-7 cl0">Catégorie</h5></div>
+                        {%else%}
                         <div class="size-h-3 flex-s-c"><h5 class="f1-m-7 cl0">Catégories</h5></div>
+                        {%endif%}
                         <ul class="m-t--12">
                             {% for c in cat %}
                                 {% if c.count != 0 %}

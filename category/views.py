@@ -50,7 +50,7 @@ def category_show(request, word):
         'poparticles': poparticles,
         'trending': trending,
         'cat': cat,
-        'paginate': True,
+        # 'paginate': True,
         # 'news': news
     }
 
@@ -58,6 +58,7 @@ def category_show(request, word):
 
 
 def category_list(request):
+
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
