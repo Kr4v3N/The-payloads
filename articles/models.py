@@ -1,10 +1,12 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.template.defaultfilters import slugify
 
 
 class Articles(models.Model):
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=150, verbose_name='Titre')
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     short_txt = models.TextField()
     body_txt = models.TextField()
     date = models.CharField(max_length=12)
@@ -19,9 +21,17 @@ class Articles(models.Model):
     tag = models.TextField(default="")
     activated = models.IntegerField(default=0)
 
+    class Meta:
+        ordering = ['-date']
+        verbose_name = 'Article'
+        verbose_name_plural = 'Articles'
+
     def __str__(self):
         return self.name
 
-    class Meta:
-        verbose_name = 'Article'
-        verbose_name_plural = 'Articles'
+    def save(self, *args, **kwargs):
+
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+        super().save(*args, **kwargs)
