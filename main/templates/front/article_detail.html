@@ -67,10 +67,10 @@
 					<div class="p-r-10 p-r-0-sr991">
 						<!-- Blog Detail -->
 						<div class="p-b-70">
-			<!--				<a href="{% url 'category_show' word=article.name %}" class="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
+						<a href="{% url 'category_show' word=article.name|slugify %}" class="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
 								{{ article.catname }}
 							</a>
--->
+
 							<h3 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
                                 {{ article.name | safe }}
 							</h3>
@@ -278,7 +278,7 @@
 								{% for b in cat %}
 								{% if b.count != 0 %}
 								<li class="how-bor3 p-rl-4">
-									<a href="{% url 'category_show' word=b.name %}" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+									<a href="{% url 'category_show' word=b.name|slugify %}" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
 										{{ b.name }} ({{ b.count }})
 									</a>
 								</li>

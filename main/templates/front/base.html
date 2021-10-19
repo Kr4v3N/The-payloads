@@ -156,7 +156,7 @@
                             {% for cc in cat %}
                             {% if cc.count != 0 %}
                                 <li class="mega-menu-item">
-                                    <a href="{% url 'category_show' word=cc.name %}">{{ cc.name }}</a>
+                                    <a href="{% url 'category_show' word=cc.name|slugify %}">{{ cc.name }}</a>
                                 </li>
                             {% endif %}
                             {% endfor %}
@@ -294,7 +294,7 @@
                             {% for c in cat %}
                                 {% if c.count != 0 %}
                                     <li class="how-bor1 p-rl-5 p-tb-10">
-                                        <a href="{% url 'category_show' word=c.name %}" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                                        <a href="{% url 'category_show' word=c.name|slugify %}" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
                                             {{ c.name }} ({{ c.count }})
                                         </a>
                                     </li>

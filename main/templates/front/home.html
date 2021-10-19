@@ -65,7 +65,7 @@
 			<div class="bg-img1 size-a-3 how1 pos-relative" style="background-image: url({{ ln.pic_url }});">
 				<a href="{% url 'article_detail' word=ln.name %}" class="dis-block how1-child1 trans-03"></a>
 				<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-					<a href="{% url 'category_show' word=ln.catname %}" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+					<a href="{% url 'category_show' word=ln.catname|slugify %}" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
 						{{ln.catname}}
 					</a>
 
@@ -104,7 +104,7 @@
 					<a href="{%url 'article_detail' word=ln.name%}" class="dis-block how1-child1 trans-03"></a>
 
 					<div class="flex-col-e-s s-full p-rl-25 p-tb-24">
-						<a href="{%url 'category_show' word=ln.catname%}" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+						<a href="{%url 'category_show' word=ln.catname|slugify %}" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
 						{{ln.catname}}
 						</a>
 						<h3 class="how1-child2 m-t-14">
@@ -125,7 +125,7 @@
 				<a href="{% url 'article_detail' word=ln.name %}" class="dis-block how1-child1 trans-03"></a>
 
 				<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-					<a href="{% url 'category_show' word=ln.catname %}" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+					<a href="{% url 'category_show' word=ln.catname|slugify %}" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
 						 {{ ln.catname }}
 					</a>
 
@@ -147,7 +147,7 @@
 				<a href="{% url 'article_detail' word=ln.name %}" class="dis-block how1-child1 trans-03"></a>
 
 				<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-					<a href="{% url 'category_show' word=ln.catname %}" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
+					<a href="{% url 'category_show' word=ln.catname|slugify  %}" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
 						 {{ ln.catname }}
 					</a>
 
@@ -250,7 +250,7 @@
                                         <div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
                                             {{ forloop.counter }}
                                         </div>
-                                        <a href="{% url 'category_show' word=c.name %}" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                        <a href="{% url 'category_show' word=c.name|slugify %}" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
                                             {{ c.name }}
                                         </a>
                                     </li>
