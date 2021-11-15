@@ -30,12 +30,14 @@
                     <tr>
                         <th class="text-center">Identifiant</th>
                         <th class="text-center">Catégorie</th>
+                        <th class="text-center">Slug</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 {% else %}
                     <tr>
                         <th class="text-center">Identifiants</th>
                         <th class="text-center">Catégories</th>
+                        <th class="text-center">Slugs</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 {% endif %}
@@ -45,6 +47,7 @@
                     <tr>
                         <td>{{ cat.pk }}</td>
                         <td>{{ cat.name }}</td>
+                        <td>{{ cat.slug }}</td>
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="{% url 'category_delete' pk=cat.pk %}"

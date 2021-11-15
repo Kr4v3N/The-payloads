@@ -10,17 +10,17 @@
     <div class="col-sm-6 col-lg-3">
         <!-- Widget -->
         <a href="/panel/articles/list/" class="widget widget-hover-effect1">
-            <div class="widget-simple">
+            <div class="widget-simple" style="height: 150px">
                 <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
                     <i class="fa fa-file-text"></i>
                 </div>
-                <h3 class="widget-content text-right animation-pullDown">
+                <h3 class="widget-content text-right animation-pullDown" >
                      {% if articles_count <= 1 %}
-                    {{ articles_count }} <strong>Article</strong><br>
-                    <small>Lorem ipsum</small>
+                    {{ articles_count }} <strong >Article</strong><br>
+<!--                    <small>Lorem ipsum</small>-->
                     {% else %}
                     {{ articles_count }} <strong>Articles</strong><br>
-                    <small>Lorem ipsum</small>
+<!--                    <small>Lorem ipsum</small>-->
                     {% endif %}
                 </h3>
             </div>
@@ -30,17 +30,17 @@
     <div class="col-sm-6 col-lg-3">
         <!-- Widget -->
         <a href="/comments/list/" class="widget widget-hover-effect1">
-            <div class="widget-simple">
+            <div class="widget-simple" style="height: 150px">
                 <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
                     <i class="gi gi-comments"></i>
                 </div>
                 <h3 class="widget-content text-right animation-pullDown">
                     {% if comments_count <= 1 %}
                         {{ comments_count }} <strong>Commentaire</strong><br>
-                        <small>Sales Today</small>
+<!--                        <small>Sales Today</small>-->
                         {% else%}
                         {{ comments_count }} <strong>Commentaires</strong><br>
-                        <small>Sales Today</small>
+<!--                        <small>Sales Today</small>-->
                     {% endif %}
                 </h3
             </div>
@@ -50,17 +50,17 @@
     <div class="col-sm-6 col-lg-3">
         <!-- Widget -->
         <a href="/panel/contactform/" class="widget widget-hover-effect1">
-            <div class="widget-simple">
+            <div class="widget-simple" style="height: 150px">
                 <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
                     <i class="gi gi-envelope"></i>
                 </div>
                 <h3 class="widget-content text-right animation-pullDown">
                     {% if contacts_count <= 1 %}
                         {{ contacts_count }} <strong>Message</strong>
-                        <small>Support Center</small>
+<!--                        <small>Support Center</small>-->
                         {% else %}
                         {{ contacts_count }} <strong>Messages</strong>
-                        <small>Support Center</small>
+<!--                        <small>Support Center</small>-->
                     {% endif %}
                 </h3>
             </div>
@@ -70,17 +70,17 @@
     <div class="col-sm-6 col-lg-3">
         <!-- Widget -->
         <a href="/panel/newsletter/emails" class="widget widget-hover-effect1">
-            <div class="widget-simple">
+            <div class="widget-simple" style="height: 150px">
                 <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
                     <i class="gi gi-chat"></i>
                 </div>
                 <h3 class="widget-content text-right animation-pullDown">
                     {% if emails_count <= 1 %}
                         {{ emails_count }} <strong>Courriel</strong>
-                        <small>Gallery</small>
+<!--                        <small>Gallery</small>-->
                         {% else %}
                           {{ emails_count }} <strong>Courriels</strong>
-                        <small>Gallery</small>
+<!--                        <small>Gallery</small>-->
                     {% endif %}
                 </h3>
             </div>

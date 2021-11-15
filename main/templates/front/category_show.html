@@ -16,7 +16,7 @@
                 <a href="/" class="breadcrumb-item f1-s-3 cl9">
                     Accueil
                 </a>
-                <a href="#" class="breadcrumb-item f1-s-3 cl9">
+                <a href="" class="breadcrumb-item f1-s-3 cl9">
                     Catégorie
                 </a>
                 <span class="breadcrumb-item f1-s-3 cl9">
@@ -34,7 +34,7 @@
     </div>
     <!-- Page heading -->
     <div class="container p-t-15 p-b-15">
-       <h2 class="f1-l-1 cl2"> CATÉGORIE :  {{ cat.name }}</h2>
+       <h2 class="f1-l-1 cl2"> Catégorie :  {{ cat.name }}</h2>
     </div>
     <!-- Post -->
     <section class="bg0 p-t-35">
@@ -47,12 +47,12 @@
 						<div class="col-6">
 							<!-- Item post -->
 							<div>
-								<a href="{% url 'article_detail' word=article.name %}" class="wrap-pic-w hov1 trans-03">
+								<a href="{% url 'article_detail' slug=article.slug %}" class="wrap-pic-w hov1 trans-03">
 									<img src="{{ article.pic_url }}" alt="IMG">
 								</a>
 								<div class="p-t-10">
 									<h5 class="p-b-5">
-										<a href="{% url 'article_detail' word=article.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">
+										<a href="{% url 'article_detail' slug=article.slug %}" class="f1-s-5 cl3 hov-cl10 trans-03">
 											{{ article.short_txt | safe }}
 										</a>
 									</h5>
@@ -87,9 +87,9 @@
                                 {% for cat in category1 %}
                                 {%  if cat.count != 0 %}
                                 <li class="how-bor3 p-rl-4">
-                                    <a href="{% url 'category_show' word=cat.name|slugify %}"
+                                    <a href="{% url 'category_show' slug=cat.slug %}"
                                        class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-                                        {{ cat.name }} ({{ cat.count }})
+                                        {{ cat.name }}
                                     </a>
                                 </li>
                                 {%  endif %}
@@ -114,12 +114,12 @@
                             <ul class="p-t-35">
                                 {%  for popular in poparticles %}
                                         <li class="flex-wr-sb-s p-b-30">
-                                            <a href="{% url 'article_detail' word=popular.name %}" class="size-w-10 wrap-pic-w hov1 trans-03">
+                                            <a href="{% url 'article_detail' slug=popular.slug %}" class="size-w-10 wrap-pic-w hov1 trans-03">
                                                 <img src="{{ popular.pic_url }}" alt="{{ popular.name }}">
                                             </a>
                                             <div class="size-w-11">
                                                 <h6 class="p-b-4">
-                                                    <a href="{% url 'article_detail' word=popular.name %}" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                    <a href="{% url 'article_detail' slug=popular.slug %}" class="f1-s-5 cl3 hov-cl10 trans-03">
                                                         {{ popular.name }}
                                                     </a>
                                                 </h6>
@@ -143,7 +143,7 @@
                         <div>
                             <div class="how2 how2-cl4 flex-s-c m-b-30">
                                 <h3 class="f1-m-2 cl3 tab01-title">
-                                    Étiquettes
+                                    Tags
                                 </h3>
                             </div>
                             <div class="flex-wr-s-s m-rl--5">

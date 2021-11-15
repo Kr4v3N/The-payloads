@@ -47,13 +47,15 @@
                     {% csrf_token %}
 
                     <div class="form-group">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <input type="text" id="articletitle" name="articletitle" class="form-control" placeholder="Titre de l'article">
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <input type="text" id="articleslug" name="articleslug" class="form-control" placeholder="Slug">
+                        </div>
 
-                            <div class="col-md-6">
+                        <div class="col-md-4">
                                 <select id="articlecat" name="articlecat" class="select-chosen" data-placeholder="Choisissez une catégorie.." style="width: 250px;">
                                     <option></option><!-- for data-placeholder attribute to work with Chosen plugin -->
 
@@ -62,7 +64,6 @@
                                         {% endfor %}
 
                                 </select>
-                            </div>
                         </div>
                     </div>
 

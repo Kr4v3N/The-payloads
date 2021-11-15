@@ -9,18 +9,20 @@ from trending.models import Trending
 from .models import Category
 
 
-def category_show(request, word):
+def category_show(request, slug):
 
     site = Main.objects.get(pk=4)
     articles = Articles.objects.filter(activated=1).order_by('-pk')
-    categories = Category.objects.filter(name=word)
+    categories = Category.objects.filter(slug=slug)
+
+    showarticles = Articles.objects.filter(slug=slug)
     category1 = Category.objects.all()
     category = Category.objects.all()
     cat = Category.objects.all()
     lastarticles = Articles.objects.filter(activated=1).order_by('-pk')[:3]
     lastarticles2 = Articles.objects.filter(activated=1).order_by('-pk')[:4]
     subcat = Subcategory.objects.all()
-    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:4]
+    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:3]
     trending = Trending.objects.all().order_by('-pk')
 
     # articless = Articles.objects.all()
@@ -41,6 +43,7 @@ def category_show(request, word):
     context = {
         'site': site,
         'articles': articles,
+        'showarticles': showarticles,
         'categories': categories,
         'lastarticles': lastarticles,
         'lastarticles2': lastarticles2,

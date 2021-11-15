@@ -32,7 +32,7 @@ def home(request):
     lastarticles = Articles.objects.filter(activated=1).order_by('-pk')[:3]
     lastarticles2 = Articles.objects.filter(activated=1).order_by('-pk')[:4]
     subcat = Subcategory.objects.all()
-    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:4]
+    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:3]
     trending = Trending.objects.all().order_by('-pk')
 
     random_object = Trending.objects.all()[randint(0, len(trending) - 1)]
@@ -61,13 +61,14 @@ def home(request):
 
 
 def about(request):
+
     site = Main.objects.get(pk=4)
     cat = Category.objects.all()
     articles = Articles.objects.filter(activated=1).order_by('-pk')
     lastarticles = Articles.objects.filter(activated=1).order_by('-pk')[:3]
     lastarticles2 = Articles.objects.filter(activated=1).order_by('-pk')[:4]
     subcat = Subcategory.objects.all()
-    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:4]
+    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:3]
     trending = Trending.objects.all().order_by('-pk')
 
     return render(request, 'front/about.html', {
@@ -109,6 +110,7 @@ def panel(request):
 
 
 def my_login(request):
+
     if request.method == 'POST':
         user_txt = request.POST.get('username')
         pass_txt = request.POST.get('password')
@@ -139,6 +141,7 @@ def my_login(request):
 
 
 def my_logout(request):
+
     logout(request)
 
     return redirect('my_login')
@@ -267,7 +270,7 @@ def contact(request):
     lastarticles = Articles.objects.filter(activated=1).order_by('-pk')[:3]
     lastarticles2 = Articles.objects.filter(activated=1).order_by('-pk')[:4]
     subcat = Subcategory.objects.all()
-    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:4]
+    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:3]
     trending = Trending.objects.all().order_by('-pk')
 
     return render(request, 'front/contact.html', {

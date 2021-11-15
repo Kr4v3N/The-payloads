@@ -14,46 +14,41 @@ from itertools import chain
 mysearch = ""
 
 
-def article_detail(request, word):
+def article_detail(request, slug):
     site = Main.objects.get(pk=4)
-    articles = Articles.objects.all().order_by('-pk')
     cat = Category.objects.all()
     subcat = Subcategory.objects.all()
-    lastarticles = Articles.objects.all().order_by('-pk')[:3]
-    poparticles = Articles.objects.order_by('-show')[:4]
+    poparticles = Articles.objects.order_by('-show')[:5]
 
-    showarticles = Articles.objects.filter(name=word)
+    showarticles = Articles.objects.filter(slug=slug)
 
-    tagname = Articles.objects.get(name=word).tag
+    tagname = Articles.objects.get(slug=slug).tag
     tag = tagname.split(',')
     trending = Trending.objects.all().order_by('-pk')
 
     try:
-        mynews = Articles.objects.get(name=word)
+        mynews = Articles.objects.get(slug=slug)
         mynews.show = mynews.show + 1
         mynews.save()
-
     except:
         print("Can't add show")
 
-    code = Articles.objects.get(name=word).pk
+    code = Articles.objects.get(slug=slug).pk
     comment = Comment.objects.filter(article_id=code, status=1).order_by('-pk')[:6]
     comment_count = len(comment)
 
     return render(request, 'front/article_detail.html', {
         'site': site,
-        'articles': articles,
         'cat': cat,
-        'lastarticles': lastarticles,
         'subcat': subcat,
         'showarticles': showarticles,
         'poparticles': poparticles,
+        'tagname': tagname,
         'tag': tag,
         'trending': trending,
         'code': code,
         'comment': comment,
         'comment_count': comment_count,
-        'tagname': tagname
     })
 
 
@@ -392,6 +387,7 @@ def all_articles_search(request):
     popnews2 = Articles.objects.filter(activated=1).order_by('-show')[:3]
     trending = Trending.objects.all().order_by('-pk')[:5]
     lastnews2 = Articles.objects.filter(activated=1).order_by('-pk')[:4]
+    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:3]
 
     paginator = Paginator(allnewss, 12)
     page = request.GET.get('page')
@@ -414,5 +410,6 @@ def all_articles_search(request):
         'trending': trending,
         'lastnews2': lastnews2,
         'allnews': allnews,
+        'poparticles': poparticles,
 
     })

@@ -33,19 +33,7 @@
     <!--===============================================================================================-->
 </head>
 
-<script >
-	function Num(x) {
-		let key;
-		if (window.event) {
-			key = window.event.keyCode;}
-		else if (x)  {key = x.which;}
-		else {return true;}
-		const keychar = String.fromCharCode(key);
-		keychar.toLowerCase();
-		if(key === (0 || 8 || 13 || 27) || ("abcdefghijklmnopqrstvxyzwçABCDEFGHIJKLMNOPQRSTVWXYZÇâîû").indexOf(keychar) > -1) {return true;}
-		return key === ("9").indexOf(keychar) > -1;
-	}
-</script>
+
 
 <body class="animsition anim">
 
@@ -152,11 +140,10 @@
                             <li class="">
 								<a href="/">Accueil</a>
 							</li>
-
                             {% for cc in cat %}
                             {% if cc.count != 0 %}
                                 <li class="mega-menu-item">
-                                    <a href="{% url 'category_show' word=cc.name|slugify %}">{{ cc.name }}</a>
+                                    <a href="{% url 'category_show' slug=cc.slug %}">{{ cc.name }}</a>
                                 </li>
                             {% endif %}
                             {% endfor %}
@@ -263,13 +250,13 @@
                         <ul>
 							{% for art in poparticles %}
                             <li class="flex-wr-sb-s p-b-20">
-                                <a href="{% url 'article_detail' word=art.name %}" class="size-w-4 wrap-pic-w hov1 trans-03">
+                                <a href="{% url 'article_detail' slug=art.slug %}" class="size-w-4 wrap-pic-w hov1 trans-03">
                                     <img src="{{ art.pic_url }}" alt="IMG">
                                 </a>
 
                                 <div class="size-w-5">
                                     <h6 class="p-b-5">
-                                        <a href="{% url 'article_detail' word=art.name %}" class="f1-s-5 cl11 hov-cl10 trans-03">
+                                        <a href="{% url 'article_detail' slug=art.slug %}" class="f1-s-5 cl11 hov-cl10 trans-03">
 											{{ art.name }}
                                         </a>
                                     </h6>
@@ -294,7 +281,7 @@
                             {% for c in cat %}
                                 {% if c.count != 0 %}
                                     <li class="how-bor1 p-rl-5 p-tb-10">
-                                        <a href="{% url 'category_show' word=c.name|slugify %}" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                                        <a href="{% url 'category_show' slug=c.slug %}" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
                                             {{ c.name }} ({{ c.count }})
                                         </a>
                                     </li>
