@@ -30,11 +30,11 @@ def comments_add(request, pk):
         captcha_server_response = urllib.request.urlopen(req)
         result = json.loads(captcha_server_response.read().decode())
         # print(result)
-        newsname2 = Articles.objects.get(pk=pk).name
+        newsname2 = Articles.objects.get(pk=pk).slug
 
         if not result['success']:
             messages.error(request, "Captcha invalide, veuillez réessayer")
-            return redirect('article_detail', word=newsname2)
+            return redirect('article_detail', slug=newsname2)
 
         now = datetime.datetime.now()
         year = now.year
@@ -57,21 +57,30 @@ def comments_add(request, pk):
 
         content = request.POST.get('msg')
 
+        manager = Manager.objects.get()
+
+        ip, is_routable = get_client_ip(request)
+
+        if ip is None:
+            ip = "0.0.0.0"
+
+        try:
+            response = DbIpCity.get(ip, api_key='free')
+            country = response.country + " | " + response.city
+
+        except:
+            country = " Inconnu"
+
         if request.user.is_authenticated:
 
-            manager = Manager.objects.get()
+            if content == "":
+                messages.error(request, "Vous devez saisir un commentaire")
+                return redirect('article_detail', slug=newsname2)
 
-            ip, is_routable = get_client_ip(request)
-
-            if ip is None:
-                ip = "0.0.0.0"
-
-            try:
-                response = DbIpCity.get(ip, api_key='free')
-                country = response.country + " | " + response.city
-
-            except:
-                country = " Inconnu"
+            if len(content) <= 10:
+                messages.error(
+                    request, "Le commentaire doit comporter au moins 10 caractères")
+                return redirect('article_detail', slug=newsname2)
 
             b = Comment(name=manager.name,
                         email=manager.email,
@@ -83,9 +92,10 @@ def comments_add(request, pk):
                         country=country
                         )
             b.save()
+
         else:
 
-            newsname1 = Articles.objects.get(pk=pk).name
+            newsname1 = Articles.objects.get(pk=pk).slug
 
             name = request.POST.get('name')
             email = request.POST.get('email')
@@ -93,31 +103,31 @@ def comments_add(request, pk):
             if name == "":
                 messages.error(
                     request, "Vous devez saisir un nom d'utilisateur")
-                return redirect('article_detail', word=newsname1)
+                return redirect('article_detail', slug=newsname1)
 
             if len(name) < 3:
                 messages.error(
                     request, "Le nom doit comporter au moins 3 caractères")
-                return redirect('article_detail', word=newsname1)
+                return redirect('article_detail', slug=newsname1)
 
             if email == "":
                 messages.error(request, "Vous devez saisir une adresse mail")
-                return redirect('article_detail', word=newsname1)
+                return redirect('article_detail', slug=newsname1)
+
+            if content == "":
+                messages.error(request, "Vous devez saisir un commentaire")
+                return redirect('article_detail', slug=newsname1)
+
+            if len(content) <= 10:
+                messages.error(
+                    request, "Le commentaire doit comporter au moins 10 caractères")
+                return redirect('article_detail', slug=newsname1)
 
             try:
                 validate_email(request.POST.get("email"))
             except ValidationError:
                 messages.error(request, 'Entrez une adresse mail valide')
-                return redirect('article_detail', word=newsname1)
-
-            if content == "":
-                messages.error(request, "Vous devez saisir un commentaire")
-                return redirect('article_detail', word=newsname1)
-
-            if len(content) < 10:
-                messages.error(
-                    request, "Le commentaire doit comporter au moins 10 caractères")
-                return redirect('article_detail', word=newsname1)
+                return redirect('article_detail', slug=newsname1)
 
             b = Comment(name=name,
                         email=email,
@@ -125,13 +135,15 @@ def comments_add(request, pk):
                         article_id=pk,
                         date=today,
                         time=time,
+                        ip=ip,
+                        country=country
                         )
             b.save()
 
-    newsname = Articles.objects.get(pk=pk).name
+        newsname = Articles.objects.get(pk=pk).slug
 
-    messages.success(request, "Votre commentaire a été soumis avec succès")
-    return redirect('article_detail', word=newsname)
+        messages.success(request, "Votre commentaire a été soumis avec succès")
+        return redirect('article_detail', slug=newsname)
 
 
 def comments_list(request):

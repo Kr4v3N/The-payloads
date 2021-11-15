@@ -21,6 +21,7 @@ from subcategory.models import Subcategory
 
 
 def contact_add(request):
+
     now = datetime.datetime.now()
     year = now.year
     month = now.month
@@ -96,6 +97,7 @@ def contact_add(request):
                         country=country
                         )
         b.save()
+
         messages.success(request, 'Votre message a été envoyée avec succès')
         return redirect('contact_add')
 
@@ -105,7 +107,7 @@ def contact_add(request):
     lastarticles = Articles.objects.order_by('-pk')[:3]
     lastarticles2 = Articles.objects.order_by('-pk')[:4]
     subcat = Subcategory.objects.all()
-    poparticles = Articles.objects.order_by('-show')[:4]
+    poparticles = Articles.objects.order_by('-show')[:3]
 
     context = {
         'site': site,

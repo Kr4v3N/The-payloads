@@ -46,25 +46,23 @@
                     {% csrf_token %}
                     <div class="form-group">
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <input type="text" id="articletitle" value="{{ articles.name }}"  name="articletitle" class="form-control" placeholder="Titre de l'article">
                         </div>
+                       <div class="col-md-4">
+                            <input type="text" id="articleslug" value="{{ articles.slug }}"  name="articleslug" class="form-control" placeholder="Slug">
+                        </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <select id="articlecat" name="articlecat" class="select-chosen" data-placeholder="" style="width: 250px;">
 
-                            <div class="col-md-6">
+                            <option value="{{ articles.catid }}">{{ articles.catname }}</option>
 
-                                <select id="articlecat" name="articlecat" class="select-chosen" data-placeholder="" style="width: 250px;">
+                                {% for i in cat %}
+                                    <option value="{{ i.pk }}">{{ i.catname}} | {{ i.name }}</option>
+                                {% endfor %}
 
-                                <option value="{{ articles.catid }}">{{ articles.catname }}</option>
-
-                                    {% for i in cat %}
-                                        <option value="{{ i.pk }}">{{ i.catname}} | {{ i.name }}</option>
-                                    {% endfor %}
-
-                                </select>
-
-                            </div>
+                            </select>
                         </div>
                     </div>
 

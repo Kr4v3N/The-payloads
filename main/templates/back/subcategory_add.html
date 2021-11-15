@@ -31,13 +31,19 @@
                           class="form-horizontal form-bordered">
                         {% csrf_token %}
                         <div class="form-group">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label  class="text-info">Sous-catégorie :</label>
                                 <input type="text" id="name" name="name" class="form-control"
                                        placeholder="Nom de la sous-catégorie">
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <label  class="text-info">Slug :</label>
+                                <input type="text" id="nameslug" name="nameslug" class="form-control"
+                                       placeholder="Slug">
+                            </div>
+
+                            <div class="col-md-4">
                                 <label class="text-info">Catégorie :</label>
                                 <select id="cat" name="cat" class="select-chosen" data-placeholder="Choisissez une catégorie.." style="width: 250px;">
                                     <option></option><!-- for data-placeholder attribute to work with Chosen plugin -->
