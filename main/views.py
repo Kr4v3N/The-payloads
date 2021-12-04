@@ -38,7 +38,7 @@ def home(request):
     random_object = Trending.objects.all()[randint(0, len(trending) - 1)]
     print(random_object)
 
-    paginator = Paginator(articles, 6)
+    paginator = Paginator(articles, 5)
     page = request.GET.get('page')
 
     try:

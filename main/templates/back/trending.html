@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <div class="col-md-10">
                                 <input type="text" id="txt" name="txt" class="form-control"
-                                       placeholder="Tendance actuelle ..."/>
+                                       placeholder="Titre ..."/>
                             </div>
                         </div>
 
@@ -91,8 +91,8 @@
                 <tbody>
                 {% for tr in trending %}
                     <tr>
-                        <td class="text-center">{{ tr.txt }}</td>
-                        <td class="text-center">{{ tr.link }}</td>
+                        <td class="text-center">{{ tr.txt | truncatechars:150 }}</td>
+                        <td class="text-center">{{ tr.link | truncatechars:120 }}</td>
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="{% url 'trending_edit' pk=tr.pk %}" data-toggle="tooltip" title="Edit"

@@ -18,7 +18,8 @@ def article_detail(request, slug):
     site = Main.objects.get(pk=4)
     cat = Category.objects.all()
     subcat = Subcategory.objects.all()
-    poparticles = Articles.objects.order_by('-show')[:5]
+    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:3]
+
 
     showarticles = Articles.objects.filter(slug=slug)
 

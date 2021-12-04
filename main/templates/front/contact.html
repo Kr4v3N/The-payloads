@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block headblock %}
-<title> {{ site.name }} | Nous contacter </title>
+<title> {{ site.name }} | Me contacter </title>
  <!-- Required meta tags -->
 <meta name="description" content="{{site.seo_txt}}"/>
 <meta name="keywords" content="{{ site.seo_keywords}}"/>
@@ -33,7 +33,7 @@
 			<div class="f2-s-1 p-r-30 m-tb-6">
 				<a href="/" class="breadcrumb-item f1-s-3 cl9">Accueil</a>
 
-				<span class="breadcrumb-item f1-s-3 cl9">Nous contacter</span>
+				<span class="breadcrumb-item f1-s-3 cl9">Me contacter</span>
 			</div>
 
 		<!--TODO Ajouter fonction recherche-->
@@ -50,7 +50,7 @@
 
 	<!-- Page heading -->
 	<div class="container p-t-4 p-b-40">
-		<h2 class="f1-l-1 cl2">Nous contacter</h2>
+		<h2 class="f1-l-1 cl2">Me contacter</h2>
 	</div>
 
 	<!-- Content -->
@@ -64,9 +64,9 @@
 
 						<form action="{% url 'contact_add' %}" method="POST">
                             {% csrf_token %}
-							<input class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Nom" required >
+							<input class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Prénom Nom" required >
 
-							<input class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email" required>
+							<input class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Votre E-mail" required>
 
 							<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Votre message" required></textarea>
 							<span class="">Confirmez que vous êtes humain</span>

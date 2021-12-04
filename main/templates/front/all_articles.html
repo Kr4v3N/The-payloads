@@ -34,8 +34,9 @@
 <div class="container p-t-40">
     <div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
         <div class="f2-s-1 p-r-30 size-w-0 m-tb-6 flex-wr-s-c">
-            <span class="text-uppercase cl2 p-r-8">
-                Lorem ipsum ......
+            <span style="font-weight: bold; color: #17b978">
+                Dans la vie, tu as deux choix le matin: soit tu te recouches pour poursuivre ton rêve.
+                Soit tu te lèves pour le réalser.
             </span>
         </div>
 
@@ -74,15 +75,11 @@
 
 						<span class="cl8">
 							<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-								by {{i.writer}}
+								Par {{i.writer}}
 							</a>
 
 							<span class="f1-s-3 m-rl-3">
-								-
-							</span>
-
-							<span class="f1-s-3">
-								{{i.date}}
+								- Le {{i.date}}
 							</span>
 						</span>
 					</div>
@@ -90,25 +87,26 @@
 			</div>
 			{% endfor %}
 		</div>
-								<!-- Pagination -->
-						<div class="flex-wr-s-c m-rl--7 p-t-15 ">
-							{% if allnews.has_previous %}
-            					<a href="?page={{allnews.previous_page_number}}" data-toggle="tooltip" title="Précédent" class="btn btn-xs btn-outline-success">Précédent</a>
-        					{% endif %}
-							{% for i in allnews.paginator.page_range %}
-								{% if allnews.number == i %}
-								<a href="#" onclick="return false"; data-toggle="tooltip" title="{{ Disables }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active">{{ i }}</a>
-								{% else %}
-								<a href="?page={{ i }}" data-toggle="tooltip" title="{{ i }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">{{ i }}</a>
-								{% endif %}
-        					{% endfor %}
+		<!-- Pagination -->
+		<div class="flex-wr-s-c m-rl--7 p-t-15 ">
+			{% if allnews.has_previous %}
+				<a href="?page={{allnews.previous_page_number}}" data-toggle="tooltip" title="Précédent" class="btn btn-xs btn-outline-success">Précédent</a>
+			{% endif %}
+			{% for i in allnews.paginator.page_range %}
+				{% if allnews.number == i %}
+				<a href="#" onclick="return false;" data-toggle="tooltip" title="{{ Disables }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active">{{ i }}</a>
+				{% else %}
+				<a href="?page={{ i }}" data-toggle="tooltip" title="{{ i }}" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">{{ i }}</a>
+				{% endif %}
+			{% endfor %}
 
-							{% if allnews.has_next %}
-                				<a href="?page={{ articles.next_page_number }}" data-toggle="tooltip" title="Suivant" class="btn btn-xs btn-outline-success">Suivant</a>
-            				{% endif %}
-						</div>
+			{% if allnews.has_next %}
+				<a href="?page={{ articles.next_page_number }}" data-toggle="tooltip" title="Suivant" class="btn btn-xs btn-outline-success">Suivant</a>
+			{% endif %}
+		</div>
+		<!-- Pagination -->
 	</div>
-							<!-- Pagination -->
+
 </section>
 
 {% endblock %}
