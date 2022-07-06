@@ -33,7 +33,7 @@ isort==5.9.3
 jeepney==0.7.1
 keyring==23.2.1
 lazy-object-proxy==1.6.0
-lxml==4.6.3
+lxml==4.9.1
 maxminddb==2.2.0
 mccabe==0.6.1
 multidict==5.1.0
