@@ -18,7 +18,6 @@ class Articles(models.Model):
     catid = models.IntegerField(default=0)
     ocatid = models.IntegerField(default=0)
     show = models.IntegerField(default=0)
-    tag = models.TextField(default="")
     activated = models.IntegerField(default=0)
 
     class Meta:

@@ -20,11 +20,11 @@ def article_detail(request, slug):
     subcat = Subcategory.objects.all()
     poparticles = Articles.objects.filter(activated=1).order_by('-show')[:3]
 
-
     showarticles = Articles.objects.filter(slug=slug)
 
-    tagname = Articles.objects.get(slug=slug).tag
-    tag = tagname.split(',')
+    # tagname = Articles.objects.get(slug=slug).tag
+    # tag = tagname.split(',')
+
     trending = Trending.objects.all().order_by('-pk')
 
     try:
@@ -44,8 +44,8 @@ def article_detail(request, slug):
         'subcat': subcat,
         'showarticles': showarticles,
         'poparticles': poparticles,
-        'tagname': tagname,
-        'tag': tag,
+        # 'tagname': tagname,
+        # 'tag': tag,
         'trending': trending,
         'code': code,
         'comment': comment,
@@ -54,7 +54,6 @@ def article_detail(request, slug):
 
 
 def articles_list(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -80,7 +79,6 @@ def articles_list(request):
 
 
 def articles_add(request):
-
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
@@ -205,7 +203,6 @@ def articles_delete(request, pk):
 
 
 def articles_edit(request, pk):
-    
     # Login check start
     if not request.user.is_authenticated:
         return redirect('login')
