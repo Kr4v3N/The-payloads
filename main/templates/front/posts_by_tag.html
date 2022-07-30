@@ -3,29 +3,20 @@
 {% load static %}
 
 {% block headblock %}
-	<title> {{ site.name }} | Catégorie </title>
+	<title> {{ site.name }} | Étiquettes </title>
 {% endblock %}}
 
 {% block mainblock %}
-    {% for cat in categories %}
-	{% if cat.count != 0 %}
     <!-- Breadcrumb -->
     <div class="container">
         <div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
             <div class="f2-s-1 p-r-30 m-tb-6">
-                <a href="/" class="breadcrumb-item f1-s-3 cl9">
-                    Accueil
-                </a>
-                <a href="" class="breadcrumb-item f1-s-3 cl9">
-                    Catégorie
-                </a>
-                <span class="breadcrumb-item f1-s-3 cl9">
-                   {{ cat.name }}
-                </span>
+                <a href="#" class=" f1-s-3 cl9"></a>
+                <span class=" f1-s-3 cl9"></span>
             </div>
             <div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-4">
-                <form action="{% url 'all_articles_search' %}" method="post" content='text/html; charset=UTF-8' class="f1-s-1 cl6 plh9 s-full p-r-45">
-                    {% csrf_token %}
+                <form action="" method="post" content='text/html; charset=UTF-8' class="f1-s-1 cl6 plh9 s-full p-r-45">
+
                     <input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" onkeypress="return Num(event);" name="txt" placeholder="Rechercher">
                     <button class="flex-c-c size-a-1 ab-t-r fs-20 cl8 hov-cl10 trans-03"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
@@ -34,16 +25,15 @@
     </div>
     <!-- Page heading -->
     <div class="container p-t-4 p-b-40">
-       <h2 class="f1-l-1 cl2">{{ cat.name }}</h2>
+       <h2 class="f1-l-1 cl2"> Étiquettes : {{ tag.name }} </h2>
     </div>
-    <!-- Post -->
+    <!-- Post by tags -->
     <section class="bg0">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-8 p-b-80">
                     <div class="row">
                         {% for article in articles %}
-						  {% if cat.pk == article.ocatid %}
 						<div class="col-6">
 							<!-- Item post -->
 							<div>
@@ -54,7 +44,6 @@
 									<h5 class="p-b-5">
 										<a href="{% url 'article_detail' slug=article.slug %}" class="f1-s-5 cl3 hov-cl10 trans-03">
 											{{ article.short_txt | safe }}
-										</a>
 									</h5>
 									<span class="cl8">
 										<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
@@ -70,8 +59,8 @@
 								</div>
 							</div>
 						</div>
-						{% endif %}
-						{% endfor %}
+                        {% endfor %}
+
                     </div>
                 </div>
                 <div class="col-md-10 col-lg-4 p-b-80">
@@ -84,14 +73,13 @@
                                 </h3>
                             </div>
                             <ul class="p-t-35">
-                                {% for cat in category1 %}
+                                {% for cat in category %}
                                 {%  if cat.count != 0 %}
-                                <li class="how-bor3 p-rl-4">
-                                    <a href="{% url 'category_show' slug=cat.slug %}"
-                                       class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-                                        {{ cat.name }}
-                                    </a>
-                                </li>
+                                    <li class="how-bor3 p-rl-4">
+                                        <a href="{% url 'category_show' slug=cat.slug %}" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+                                            {{ cat.name }} ({{ cat.count }})
+                                        </a>
+                                    </li>
                                 {%  endif %}
                                 {% endfor %}
                             </ul>
@@ -113,7 +101,7 @@
                                 </h3>
                             </div>
                             <ul class="p-t-35">
-                                {%  for popular in poparticles %}
+                                 {%  for popular in poparticles %}
                                         <li class="flex-wr-sb-s p-b-30">
                                             <a href="{% url 'article_detail' slug=popular.slug %}" class="size-w-10 wrap-pic-w hov1 trans-03">
                                                 <img src="{{ popular.pic_url }}" alt="{{ popular.name }}">
@@ -140,27 +128,24 @@
                                 {% endfor %}
                             </ul>
                         </div>
-
                         <!-- Tags -->
-						<div>
-							<div class="how2 how2-cl4 flex-s-c m-b-30">
-								<h3 class="f1-m-2 cl3 tab01-title">
-									Étiquettes
-								</h3>
-							</div>
-							<div class="flex-wr-s-s m-rl--5">
-								{% for tag in tags %}
-									<a href="{% url 'articles_by_tag' tag.id %}" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-										{{ tag }}
-									</a>
+                        <div>
+                            <div class="how2 how2-cl4 flex-s-c m-b-30">
+                                <h3 class="f1-m-2 cl3 tab01-title">
+                                    Étiquettes
+                                </h3>
+                            </div>
+                            <div class="flex-wr-s-s m-rl--5">
+                                 {% for tag in all_tags %}
+								<a href="{% url 'articles_by_tag' tag.id %}" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									{{tag.name}}
+								</a>
 								{% endfor %}
-							</div>
-						</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-        {% endif %}
-    {%  endfor %}
-{% endblock %}
+{% endblock mainblock %}

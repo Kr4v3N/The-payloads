@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.template.defaultfilters import slugify
+from taggit.managers import TaggableManager
 
 
 class Articles(models.Model):
@@ -18,6 +19,7 @@ class Articles(models.Model):
     catid = models.IntegerField(default=0)
     ocatid = models.IntegerField(default=0)
     show = models.IntegerField(default=0)
+    tag = TaggableManager()
     activated = models.IntegerField(default=0)
 
     class Meta:

@@ -1,7 +1,9 @@
 import datetime
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from taggit.models import Tag
+
 from comment.models import Comment
 from subcategory.models import Subcategory
 from category.models import Category
@@ -19,6 +21,8 @@ def article_detail(request, slug):
     cat = Category.objects.all()
     subcat = Subcategory.objects.all()
     poparticles = Articles.objects.filter(activated=1).order_by('-show')[:3]
+    # all_tags = Tag.objects.all()
+    tags = Tag.objects.all()[:10]
 
     showarticles = Articles.objects.filter(slug=slug)
 
@@ -45,11 +49,12 @@ def article_detail(request, slug):
         'showarticles': showarticles,
         'poparticles': poparticles,
         # 'tagname': tagname,
-        # 'tag': tag,
+        'tags': tags,
         'trending': trending,
         'code': code,
         'comment': comment,
         'comment_count': comment_count,
+        # 'all_tags': all_tags,
     })
 
 
@@ -143,9 +148,17 @@ def articles_add(request):
                                  catid=articleid,
                                  show=0,
                                  ocatid=ocatid,
-                                 tag=tag
+                                 # tag=tag
                                  )
                     b.save()
+
+                    # to save tag
+                    tags = tag.split(",")
+                    for n_tag in tags:
+                        print(n_tag)
+                        b.tag.add(n_tag)
+
+
                     count = len(Articles.objects.filter(ocatid=ocatid))
                     b = Category.objects.get(pk=ocatid)
                     b.count = count
@@ -222,7 +235,7 @@ def articles_edit(request, pk):
         articletxtshort = request.POST.get('articletxtshort')
         articletxt = request.POST.get('articletxt')
         articleid = request.POST.get('articlecat')
-        tag = request.POST.get('tag')
+        tags = request.POST.get('tag')
 
         if articletitle == "" \
                 or articlecat == "" \
@@ -256,8 +269,20 @@ def articles_edit(request, pk):
                     b.pic_url = url
                     b.catname = articlename
                     b.catid = articleid
-                    b.tag = tag
+                    # b.tag = tag
                     b.activated = 0
+
+                    # si vous enregistrer de cette manière il vous faudra enregistrer les tags
+                    # de cette manière d'abord
+                    # retirer les anciennes tags
+                    for old_tags in b.tag.all():
+                        b.tag.remove(tags)
+
+                    new_tags = tags.split(",")
+
+                    # et insérer les nouvelles
+                    for tag in new_tags:
+                        b.tag.add(tag)
 
                     b.save()
 
@@ -286,7 +311,20 @@ def articles_edit(request, pk):
             b.body_txt = articletxt
             b.catname = articlename
             b.catid = articleid
-            b.tag = tag
+            # b.tag = tag
+
+
+            # si vous enregistrer de cette manière il vous faudra enregistrer les tags
+            # de cette manière d'abord
+            # retirer les anciennes tags
+            for old_tags in b.tag.all():
+                b.tag.remove(old_tags)
+
+            new_tags = tags.split(",")
+
+            # et insérer les nouvelles
+            for tag_n in new_tags:
+                b.tag.add(tag_n)
 
             b.save()
 
@@ -411,3 +449,24 @@ def all_articles_search(request):
         'poparticles': poparticles,
 
     })
+
+
+def articles_by_tag(request, pk):
+    print(pk)
+    tag = get_object_or_404(Tag, pk=pk)
+    articles = Articles.objects.filter(tag=tag).order_by('-show')
+    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:3]
+    cat = Category.objects.all()
+    site = Main.objects.get(pk=4)
+    category = Category.objects.all()
+
+    context = {
+        'tag': tag,
+        'articles': articles,
+        'all_tags': Tag.objects.all(),
+        'poparticles': poparticles,
+        'cat': cat,
+        'site': site,
+        'category': category,
+    }
+    return render(request, 'front/posts_by_tag.html', context)

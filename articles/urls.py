@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^panel/articles/publish/(?P<pk>\d+)/$', views.articles_publish, name='articles_publish'),
     url(r'^articles/all/$', views.all_articles, name='all_articles'),
     url(r'^articles/all/search$', views.all_articles_search, name='all_articles_search'),
+    url(r'^tag/(?P<pk>\d+)/articles/$', views.articles_by_tag, name='articles_by_tag'),
 ]

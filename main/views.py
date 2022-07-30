@@ -10,6 +10,8 @@ from django.contrib.sites import requests
 from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
+from taggit.models import Tag
+
 from category.models import Category
 from contactform.models import Contactform
 from newsletter.models import Newsletter
@@ -34,6 +36,7 @@ def home(request):
     subcat = Subcategory.objects.all()
     poparticles = Articles.objects.filter(activated=1).order_by('-show')[:3]
     trending = Trending.objects.all().order_by('-pk')
+    tags = Tag.objects.all()[:10]
 
     random_object = Trending.objects.all()[randint(0, len(trending) - 1)]
     print(random_object)
@@ -57,6 +60,7 @@ def home(request):
         'subcat': subcat,
         'poparticles': poparticles,
         'trending': trending,
+        'tags': tags,
     })
 
 

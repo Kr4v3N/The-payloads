@@ -67,7 +67,7 @@
 					<div class="p-r-10 p-r-0-sr991">
 						<!-- Blog Detail -->
 						<div class="p-b-70">
-						<a href="{% url 'category_show' slug=article.slug %}" class="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
+						    <a href="{% url 'category_show' slug=article.slug %}" class="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
 								{{ article.catname }}
 							</a>
 
@@ -99,16 +99,19 @@
                                     {{comment_count}} Commentaires
                                     {% endif %}
 								</a>
+                                <span class="f1-s-4 cl8 hov-cl10 trans-03">
+
+									Temps de lecture estimé à 9 minutes
+								</span>
 							</div>
 
 							<div class="wrap-pic-max-w p-b-30">
 								<img src="{{ article.pic_url }}" alt="{{ article.name }}">
 							</div>
 
-							<p align="justify" class="f1-s-11 cl6 p-b-25">
+							<p align="justify" class="article-body" class="f1-s-11 cl6 p-b-25">
                                 {{ article.body_txt | safe }}
 							</p>
-
 
 							<!-- Tags -->
 							<div class="flex-s-s p-t-12 p-b-15">
@@ -117,40 +120,27 @@
                                     Mots-clés:
                                 </span>
 								<div class="flex-wr-s-s size-w-0">
-									<a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">tag1</a>
-									<a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">tag2</a>
-									<a href="#" class="f1-s-12 cl8 hov-link1 m-r-15">tag3</a>
+									{% for tag in article.tag.all %}
+										<a href="{% url 'articles_by_tag' tag.id %}" class="f1-s-12 cl8 hov-link1 m-r-15">
+											{{ tag }}
+										</a>
+									{% endfor %}
 								</div>
 							</div>
 
-							<!-- Share -->
-							<div class="flex-s-s">
-								<span class="f1-s-12 cl5 p-t-1 m-r-15">
-									Partager:
-								</span>
+                        <!-- Share -->
+                            <div class="flex-s-s">
+                               <span class="f1-s-12 cl5 p-t-1 m-r-15">Partager:</span>
 
-								<div class="flex-wr-s-s size-w-0">
-									<a href="#" class="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-facebook-f m-r-7"></i>
-										Facebook
-									</a>
+                               <div class="flex-wr-s-s size-w-0">
 
-									<a href="#" class="dis-block f1-s-13 cl0 bg-twitter borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-twitter m-r-7"></i>
-										Twitter
-									</a>
-
-									<a href="#" class="dis-block f1-s-13 cl0 bg-google borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-google-plus-g m-r-7"></i>
-										Google+
-									</a>
-
-									<a href="#" class="dis-block f1-s-13 cl0 bg-pinterest borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-										<i class="fab fa-pinterest-p m-r-7"></i>
-										Pinterest
-									</a>
-								</div>
-							</div></div>
+                               <!-- ShareThis BEGIN -->
+                               <div class="sharethis-inline-share-buttons"></div>
+                               <!-- ShareThis END -->
+                               </div>
+                            </div>
+                        <!-- End Share -->
+                        </div>
 
 						<!-- Leave a comment -->
                         <div>
@@ -280,115 +270,116 @@
 						</div>
 
 						<!-- Archive -->
-<!--						<div class="p-b-37">-->
-<!--							<div class="how2 how2-cl4 flex-s-c">-->
-<!--								<h3 class="f1-m-2 cl3 tab01-title">-->
-<!--									Archive-->
-<!--								</h3>-->
-<!--							</div>-->
+                        <div class="p-b-37">
+							<div class="how2 how2-cl4 flex-s-c">
+								<h3 class="f1-m-2 cl3 tab01-title">
+									Archive
+								</h3>
+							</div>
 
-<!--							<ul class="p-t-32">-->
-<!--								<li class="p-rl-4 p-b-19">-->
-<!--									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">-->
-<!--										<span>-->
-<!--											July 2018-->
-<!--										</span>-->
+							<ul class="p-t-32">
+								<li class="p-rl-4 p-b-19">
+									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
+										<span>
+											July 2018
+										</span>
 
-<!--										<span>-->
-<!--											(9)-->
-<!--										</span>-->
-<!--									</a>-->
-<!--								</li>-->
+										<span>
+											(9)
+										</span>
+									</a>
+								</li>
 
-<!--								<li class="p-rl-4 p-b-19">-->
-<!--									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">-->
-<!--										<span>-->
-<!--											June 2018-->
-<!--										</span>-->
+								<li class="p-rl-4 p-b-19">
+									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
+										<span>
+											June 2018
+										</span>
 
-<!--										<span>-->
-<!--											(39)-->
-<!--										</span>-->
-<!--									</a>-->
-<!--								</li>-->
+										<span>
+											(39)
+										</span>
+									</a>
+								</li>
 
-<!--								<li class="p-rl-4 p-b-19">-->
-<!--									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">-->
-<!--										<span>-->
-<!--											May 2018-->
-<!--										</span>-->
+								<li class="p-rl-4 p-b-19">
+									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
+										<span>
+											May 2018
+										</span>
 
-<!--										<span>-->
-<!--											(29)-->
-<!--										</span>-->
-<!--									</a>-->
-<!--								</li>-->
+										<span>
+											(29)
+										</span>
+									</a>
+								</li>
 
-<!--								<li class="p-rl-4 p-b-19">-->
-<!--									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">-->
-<!--										<span>-->
-<!--											April  2018-->
-<!--										</span>-->
+								<li class="p-rl-4 p-b-19">
+									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
+										<span>
+											April  2018
+										</span>
 
-<!--										<span>-->
-<!--											(35)-->
-<!--										</span>-->
-<!--									</a>-->
-<!--								</li>-->
+										<span>
+											(35)
+										</span>
+									</a>
+								</li>
 
-<!--								<li class="p-rl-4 p-b-19">-->
-<!--									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">-->
-<!--										<span>-->
-<!--											March 2018-->
-<!--										</span>-->
+								<li class="p-rl-4 p-b-19">
+									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
+										<span>
+											March 2018
+										</span>
 
-<!--										<span>-->
-<!--											(22)-->
-<!--										</span>-->
-<!--									</a>-->
-<!--								</li>-->
+										<span>
+											(22)
+										</span>
+									</a>
+								</li>
 
-<!--								<li class="p-rl-4 p-b-19">-->
-<!--									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">-->
-<!--										<span>-->
-<!--											February 2018-->
-<!--										</span>-->
+								<li class="p-rl-4 p-b-19">
+									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
+										<span>
+											February 2018
+										</span>
 
-<!--										<span>-->
-<!--											(32)-->
-<!--										</span>-->
-<!--									</a>-->
-<!--								</li>-->
+										<span>
+											(32)
+										</span>
+									</a>
+								</li>
 
-<!--								<li class="p-rl-4 p-b-19">-->
-<!--									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">-->
-<!--										<span>-->
-<!--											January 2018-->
-<!--										</span>-->
+								<li class="p-rl-4 p-b-19">
+									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
+										<span>
+											January 2018
+										</span>
 
-<!--										<span>-->
-<!--											(21)-->
-<!--										</span>-->
-<!--									</a>-->
-<!--								</li>-->
+										<span>
+											(21)
+										</span>
+									</a>
+								</li>
 
-<!--								<li class="p-rl-4 p-b-19">-->
-<!--									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">-->
-<!--										<span>-->
-<!--											December 2017-->
-<!--										</span>-->
+								<li class="p-rl-4 p-b-19">
+									<a href="#" class="flex-wr-sb-c f1-s-10 text-uppercase cl2 hov-cl10 trans-03">
+										<span>
+											December 2017
+										</span>
 
-<!--										<span>-->
-<!--											(26)-->
-<!--										</span>-->
-<!--									</a>-->
-<!--								</li>-->
-<!--							</ul>-->
-<!--						</div>-->
+										<span>
+											(26)
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						</div>
 
                         <!-- Hackthebox -->
 						<div class="how2 how2-cl4 flex-s-c m-tb-30">
-                            <h3 class="f1-m-2 cl3 tab01-title">Hackthebox</h3>
+                            <h3 class="f1-m-2 cl3 tab01-title">Hack The Box</h3>
                         </div>
 						<div class="p-b-30">
 							<a target="_blank" href="https://app.hackthebox.eu/profile/319888">
@@ -404,7 +395,7 @@
 							{% for a in poparticles %}
 								<li class="flex-wr-sb-s p-b-30">
 									<a href="{% url 'article_detail' slug=a.slug %}" class="size-w-10 wrap-pic-w hov1 trans-03">
-										<img src="{{ a.pic_url }}" alt="{{ a.pic_name }">
+										<img src="{{ a.pic_url }}" alt="{{ a.pic_name }}">
 									</a>
 									<div class="size-w-11">
 										<h6 class="p-b-4">
@@ -435,42 +426,15 @@
 						<div>
 							<div class="how2 how2-cl4 flex-s-c m-b-30">
 								<h3 class="f1-m-2 cl3 tab01-title">
-									Tags
+									Étiquettes
 								</h3>
 							</div>
 							<div class="flex-wr-s-s m-rl--5">
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Fashion
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Lifestyle
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									testeur
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Life
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Fashion
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Lifestyle
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									test
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Life
-								</a>
-
+								{% for tag in tags %}
+									<a href="{% url 'articles_by_tag' tag.id %}" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+										{{ tag }}
+									</a>
+								{% endfor %}
 							</div>
 						</div>
 					</div>

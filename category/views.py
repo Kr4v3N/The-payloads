@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
+from taggit.models import Tag
 
 from articles.models import Articles
 from main.models import Main
@@ -24,6 +25,7 @@ def category_show(request, slug):
     subcat = Subcategory.objects.all()
     poparticles = Articles.objects.filter(activated=1).order_by('-show')[:3]
     trending = Trending.objects.all().order_by('-pk')
+    tags = Tag.objects.all()[:10]
 
     # articless = Articles.objects.all()
     # # Slice pages
@@ -53,6 +55,7 @@ def category_show(request, slug):
         'poparticles': poparticles,
         'trending': trending,
         'cat': cat,
+        'tags': tags,
         # 'paginate': True,
         # 'news': news
     }
