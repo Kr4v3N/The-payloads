@@ -16,6 +16,71 @@ from itertools import chain
 mysearch = ""
 
 
+# fonction pour les archives
+# il ressort les mois et années présente dans la database
+# et le nombre de post qui a été effectué dans le mois
+def archives():
+    archive_by_date = []
+
+    all_articles = Articles.objects.order_by('-date')
+
+    for article in all_articles:
+
+        # ajouter à une liste les mois, années en lettre et en entier
+        # ajouter le mois en texte pour l'afficher au niveau de la page
+        if (int(str(article.date)[3:5])) == 1:
+            month_in_text = 'Janvier ' + (str(article.date)[6:10])
+        elif (int(str(article.date)[3:5])) == 2:
+            month_in_text = 'Février ' + (str(article.date)[6:10])
+        elif (int(str(article.date)[3:5])) == 3:
+            month_in_text = 'Mars ' + (str(article.date)[6:10])
+        elif (int(str(article.date)[3:5])) == 4:
+            month_in_text = 'Avril ' + (str(article.date)[6:10])
+        elif (int(str(article.date)[3:5])) == 5:
+            month_in_text = 'Mai ' + (str(article.date)[6:10])
+        elif (int(str(article.date)[3:5])) == 6:
+            month_in_text = 'Juin ' + (str(article.date)[6:10])
+        elif (int(str(article.date)[3:5])) == 7:
+            month_in_text = 'Juillet ' + (str(article.date)[6:10])
+        elif (int(str(article.date)[3:5])) == 8:
+            month_in_text = 'Août ' + (str(article.date)[6:10])
+        elif (int(str(article.date)[3:5])) == 9:
+            month_in_text = 'Septembre ' + (str(article.date)[6:10])
+        elif (int(str(article.date)[3:5])) == 10:
+            month_in_text = 'Octobre ' + (str(article.date)[6:10])
+        elif (int(str(article.date)[3:5])) == 11:
+            month_in_text = 'Novembre ' + (str(article.date)[6:10])
+        elif (int(str(article.date)[3:5])) == 12:
+            month_in_text = 'Décembre ' + (str(article.date)[6:10])
+
+        # enregistrer les éléments dans une liste
+        archive_by_date.append({
+            'month_in_text': (month_in_text),
+            'month': (str(article.date)[3:5]),
+            'year': (str(article.date)[6:10]),
+            'count': 1,
+        })
+
+    # supprimer les doublons de date
+    # present dans la liste des années,mois en entier et en lettre
+    seen = set()
+    archive_dates = []
+    count_archive_date = []
+    i = 0
+    for d in archive_by_date:
+        t = tuple(d.items())
+        if t not in seen:
+            seen.add(t)
+            archive_dates.append(d)
+        else:
+            # enregistrer les count des articles, nombre d'article dans un mois spécifique
+            for archive_date in archive_dates:
+                if t[0][1] == archive_date['month_in_text']:
+                    archive_date['count'] += 1
+
+    return archive_dates
+
+
 def article_detail(request, slug):
     site = Main.objects.get(pk=4)
     cat = Category.objects.all()
@@ -54,6 +119,7 @@ def article_detail(request, slug):
         'code': code,
         'comment': comment,
         'comment_count': comment_count,
+        'archives': archives(),
         # 'all_tags': all_tags,
     })
 
@@ -157,7 +223,6 @@ def articles_add(request):
                     for n_tag in tags:
                         print(n_tag)
                         b.tag.add(n_tag)
-
 
                     count = len(Articles.objects.filter(ocatid=ocatid))
                     b = Category.objects.get(pk=ocatid)
@@ -313,7 +378,6 @@ def articles_edit(request, pk):
             b.catid = articleid
             # b.tag = tag
 
-
             # si vous enregistrer de cette manière il vous faudra enregistrer les tags
             # de cette manière d'abord
             # retirer les anciennes tags
@@ -468,5 +532,27 @@ def articles_by_tag(request, pk):
         'cat': cat,
         'site': site,
         'category': category,
+        'archives': archives(),
     }
     return render(request, 'front/posts_by_tag.html', context)
+
+
+# article par archive
+def articles_by_archive(request, year, month):
+    articles = Articles.objects.filter(date__contains=month + "/" + year).order_by('-show')
+    poparticles = Articles.objects.filter(activated=1).order_by('-show')[:3]
+    cat = Category.objects.all()
+    site = Main.objects.get(pk=4)
+    category = Category.objects.all()
+
+    context = {
+        'articles': articles,
+        'all_tags': Tag.objects.all(),
+        'poparticles': poparticles,
+        'site': site,
+        'cat': cat,
+        'category': category,
+        'archives': archives(),
+    }
+
+    return render(request, 'front/posts_by_archive.html', context)

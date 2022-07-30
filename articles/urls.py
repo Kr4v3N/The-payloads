@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^articles/all/$', views.all_articles, name='all_articles'),
     url(r'^articles/all/search$', views.all_articles_search, name='all_articles_search'),
     url(r'^tag/(?P<pk>\d+)/articles/$', views.articles_by_tag, name='articles_by_tag'),
+    url(r'^archives/(?P<year>[0-9]{4})/(?P<month>[0-9]{1,2})/articles/$', views.articles_by_archive, name='articles_by_archive'),
 ]
