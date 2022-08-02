@@ -523,6 +523,7 @@ def articles_by_tag(request, pk):
     cat = Category.objects.all()
     site = Main.objects.get(pk=4)
     category = Category.objects.all()
+    trending = Trending.objects.all().order_by('-pk')[:5]
 
     context = {
         'tag': tag,
@@ -532,6 +533,7 @@ def articles_by_tag(request, pk):
         'cat': cat,
         'site': site,
         'category': category,
+        'trending': trending,
         'archives': archives(),
     }
     return render(request, 'front/posts_by_tag.html', context)
@@ -544,6 +546,7 @@ def articles_by_archive(request, year, month):
     cat = Category.objects.all()
     site = Main.objects.get(pk=4)
     category = Category.objects.all()
+    trending = Trending.objects.all().order_by('-pk')[:5]
 
     context = {
         'articles': articles,
@@ -552,6 +555,7 @@ def articles_by_archive(request, year, month):
         'site': site,
         'cat': cat,
         'category': category,
+        'trending': trending,
         'archives': archives(),
     }
 
